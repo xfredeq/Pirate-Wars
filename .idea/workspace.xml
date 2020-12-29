@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="">
+    <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
+      <change afterPath="$PROJECT_DIR$/src/GUI/Home.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Login.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Sign.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Sign.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Start.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Window.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +42,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1mHqfwc7GgL9LkCVIJPVxeVvWtN" />
   <component name="ProjectLevelVcsManager">
@@ -100,6 +112,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager">
@@ -128,6 +143,14 @@
       <option name="presentableId" value="Default" />
       <updated>1609160971156</updated>
     </task>
+    <task id="LOCAL-00001" summary="2.1">
+      <created>1609246117142</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609246117142</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -153,5 +176,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.1" />
   </component>
 </project>
