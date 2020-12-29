@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 
 public class Home {
-    private JButton playButton;
+    private JButton PLAYButton;
     private JButton gameSettingsButton;
     private JButton generalSettingsButton;
     private JButton creditsButton;
