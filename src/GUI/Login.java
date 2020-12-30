@@ -9,7 +9,7 @@ public class Login {
     private JPanel LoginPanel;
 
 
-    public JPanel getLoginPanel ( )
+    public JPanel getPanel ( )
     {
         return LoginPanel;
     }

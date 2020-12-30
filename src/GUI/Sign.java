@@ -10,7 +10,7 @@ public class Sign {
     private JButton signInButton;
 
 
-    public JPanel getSignPanel ( )
+    public JPanel getPanel ( )
     {
         return SignPanel;
     }

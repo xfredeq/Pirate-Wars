@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Start
 {
-    public JPanel getStartPanel ( )
+    public JPanel getPanel ( )
     {
         return StartPanel;
     }
@@ -16,9 +16,5 @@ public class Start
     private JButton playAsGuestButton;
 
 
-    public Start ( )
-    {
-
-    }
 
 }

@@ -19,7 +19,7 @@ public class Pirate_Wars extends JFrame
     private void setWindow ( )
     {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(panel.getHomePanel());
+        this.add(panel.getPanel());
         this.setSize(1280, 720);
         Dimension windowSize = getSize();
         GraphicsEnvironment screen = GraphicsEnvironment.getLocalGraphicsEnvironment();

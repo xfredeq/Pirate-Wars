@@ -11,7 +11,7 @@ public class Home {
     private JPanel HomePanel;
 
 
-    public JPanel getHomePanel ( )
+    public JPanel getPanel ( )
     {
         return HomePanel;
     }
