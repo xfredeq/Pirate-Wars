@@ -2,27 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
-      <change afterPath="$PROJECT_DIR$/src/GUI/Pic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/Vecteezy-License-Information.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/Vintage Compass Background.eps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/Vintage Compass Background.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/vector-vintage-compass-background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Pirate_Wars.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Pirate_Wars.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Home.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Login.form" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Sign.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Sign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Sign.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Start.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Pic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Pic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Start.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +35,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1mHqfwc7GgL9LkCVIJPVxeVvWtN" />
   <component name="ProjectLevelVcsManager">

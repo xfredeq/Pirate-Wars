@@ -1,29 +1,38 @@
 package GUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
-import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Pic extends JPanel
 {
-    public BufferedImage image;
+    private BufferedImage image;
     public JButton b1=new JButton("button1");
     public JButton b2=new JButton("button2");
+    public JButton b3=new JButton("button3");
+    private JLabel title=new JLabel("Pirate Wars");
 
     public Pic ( )
     {
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         b1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(b1);
-
         b2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        b3.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Verdana",Font.PLAIN,36));
+        add(Box.createVerticalGlue());
+        add(title);
+        add(Box.createVerticalGlue());
+        add(b1);
+        add(Box.createVerticalGlue());
         add(b2);
+        add(Box.createVerticalGlue());
+        add(b3);
+        add(Box.createVerticalGlue());
 
 
         File imageFile = new File("graphics\\bg.jpg");

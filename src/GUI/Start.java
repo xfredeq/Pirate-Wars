@@ -1,21 +1,59 @@
 package GUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Start extends JPanel
 {
-    public Start()
+    public BufferedImage image;
+    public JButton login=new JButton("Log In");
+    public JButton signin=new JButton("Sign In");
+    public JButton guest=new JButton("Play as Guest");
+    private JLabel title=new JLabel("Pirate Wars");
+
+    public Start ( )
     {
-        add(logInButton);
-        add(signInButton);
-        add(playAsGuestButton);
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
+        login.setAlignmentX(Component.CENTER_ALIGNMENT);
+        signin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        guest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Verdana",Font.PLAIN,36));
+        add(Box.createVerticalGlue());
+        add(title);
+        add(Box.createVerticalGlue());
+        add(login);
+        add(Box.createVerticalGlue());
+        add(signin);
+        add(Box.createVerticalGlue());
+        add(guest);
+        add(Box.createVerticalGlue());
+
+
+        File imageFile = new File("graphics\\bg.jpg");
+        try
+        {
+            image = ImageIO.read(imageFile);
+        }
+        catch (IOException e)
+        {
+            System.err.println("Blad odczytu obrazka");
+            e.printStackTrace();
+        }
+        Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
+        setPreferredSize(dimension);
     }
-    public JButton logInButton = new JButton("dc");
 
-    private JButton signInButton=new JButton("dc");
-    private JButton playAsGuestButton=new JButton("dc");
+    @Override
+    public void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(image, 0, 0, this);
+    }
 
 
 
