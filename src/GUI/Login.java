@@ -12,8 +12,8 @@ public class Login extends JPanel
     private BufferedImage image;
     private JLabel loginLabel=new JLabel("login:");
     private JLabel passLabel=new JLabel("password:");
-    private JTextField loginField = new JTextField();
-    private JPasswordField passField = new JPasswordField();
+    public JTextField loginField = new JTextField();
+    public JPasswordField passField = new JPasswordField();
     public JButton login=new JButton("Log In");
     public JButton back=new JButton("back");
     private JLabel title=new JLabel("Pirate Wars");
@@ -21,7 +21,12 @@ public class Login extends JPanel
     public Login ( )
     {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setComponents();
+        addComponents();
+    }
 
+    private void setComponents ( )
+    {
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -30,25 +35,8 @@ public class Login extends JPanel
         loginField.setMaximumSize(new Dimension(200,1));
         passField.setMaximumSize(new Dimension(200,1));
         title.setFont(new Font("Verdana",Font.PLAIN,36));
-        add(Box.createVerticalGlue());
-        add(title);
-        add(Box.createVerticalGlue());
-        add(loginLabel);
-        //add(Box.createVerticalGlue());
-        add(loginField);
-        add(Box.createVerticalGlue());
-        add(passLabel);
-        //add(Box.createVerticalGlue());
-        add(passField);
-        add(Box.createVerticalGlue());
 
-        add(login);
-        add(Box.createVerticalGlue());
-        add(back);
-        add(Box.createVerticalGlue());
-
-
-        File imageFile = new File("graphics\\bg.jpg");
+        File imageFile = new File("graphics\\bg1.jpg");
         try
         {
             image = ImageIO.read(imageFile);
@@ -60,6 +48,23 @@ public class Login extends JPanel
         }
         Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
         setPreferredSize(dimension);
+    }
+
+    private void addComponents ( )
+    {
+        add(Box.createVerticalGlue());
+        add(title);
+        add(Box.createVerticalGlue());
+        add(loginLabel);
+        add(loginField);
+        add(Box.createVerticalGlue());
+        add(passLabel);
+        add(passField);
+        add(Box.createVerticalGlue());
+        add(login);
+        add(Box.createVerticalGlue());
+        add(back);
+        add(Box.createVerticalGlue());
     }
 
     @Override

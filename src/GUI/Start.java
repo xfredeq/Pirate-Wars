@@ -18,12 +18,21 @@ public class Start extends JPanel
     public Start ( )
     {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setComponents();
+        addComponents();
+    }
 
+    private void setComponents ( )
+    {
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
         signin.setAlignmentX(Component.CENTER_ALIGNMENT);
         guest.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Verdana",Font.PLAIN,36));
+    }
+
+    private void addComponents ( )
+    {
         add(Box.createVerticalGlue());
         add(title);
         add(Box.createVerticalGlue());
@@ -34,8 +43,7 @@ public class Start extends JPanel
         add(guest);
         add(Box.createVerticalGlue());
 
-
-        File imageFile = new File("graphics\\bg.jpg");
+        File imageFile = new File("graphics\\bg3.jpg");
         try
         {
             image = ImageIO.read(imageFile);
@@ -48,6 +56,8 @@ public class Start extends JPanel
         Dimension dimension = new Dimension(image.getWidth(), image.getHeight());
         setPreferredSize(dimension);
     }
+
+
 
     @Override
     public void paintComponent(Graphics g) {

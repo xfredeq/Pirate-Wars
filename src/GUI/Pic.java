@@ -35,7 +35,7 @@ public class Pic extends JPanel
         add(Box.createVerticalGlue());
 
 
-        File imageFile = new File("graphics\\bg.jpg");
+        File imageFile = new File("graphics\\bg2.jpg");
         try
         {
             image = ImageIO.read(imageFile);
