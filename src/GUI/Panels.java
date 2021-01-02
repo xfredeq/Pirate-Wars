@@ -137,7 +137,6 @@ public class Panels extends JFrame implements ActionListener {
         {
             settingsPane.setSettings();
             cards.show(cardPane, "Home Pane");
-            System.out.println(settingsPane.getFieldSize());
         }
 
     }

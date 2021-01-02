@@ -11,25 +11,24 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Settings extends JPanel implements ChangeListener, ActionListener
-{
+public class Settings extends JPanel implements ChangeListener, ActionListener {
     private int fieldSize;
     private int shipSurface;
     private int biggestShip;
     private int maxShipSurface;
     private BufferedImage image;
-    public JButton dft=new JButton("Restore Default");
-    public JButton back=new JButton("back");
-    public JSlider field=new JSlider(JSlider.HORIZONTAL,5,15,10);
-    public JSlider ships=new JSlider(JSlider.HORIZONTAL);
-    private JLabel fieldLabel=new JLabel("Field Size(NxN): ");
-    private JLabel shipsLabel=new JLabel("Ship surface: ");
-    private JLabel title=new JLabel("Pirate Wars");
+    public JButton dft = new JButton("Restore Default");
+    public JButton back = new JButton("back");
+    public JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
+    public JSlider ships = new JSlider(JSlider.HORIZONTAL);
+    private JLabel fieldLabel = new JLabel("Field Size(NxN): ");
+    private JLabel shipsLabel = new JLabel("Ship surface: ");
+    private JLabel title = new JLabel("Pirate Wars");
 
     public Settings ( )
     {
         setDefault();
-        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents();
         addComponents();
         field.addChangeListener(this);
@@ -45,30 +44,29 @@ public class Settings extends JPanel implements ChangeListener, ActionListener
         shipsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Verdana",Font.PLAIN,36));
+        title.setFont(new Font("Verdana", Font.PLAIN, 36));
 
         field.setAlignmentX(Component.CENTER_ALIGNMENT);
         field.setMajorTickSpacing(1);
         field.setPaintTicks(true);
         field.setPaintLabels(true);
-        field.setMaximumSize(new Dimension(1000,80));
+        field.setMaximumSize(new Dimension(1000, 80));
+
+        setDefault();
 
         ships.setAlignmentX(Component.CENTER_ALIGNMENT);
-        ships.setMinimum((int) (field.getValue()*0.8));
-        ships.setMaximum(maxShipSurface);
-        ships.setValue(maxShipSurface*4/5);
+        ships.setMinimum(8);
+        ships.setMaximum(25);
+        ships.setValue(20);
         ships.setMajorTickSpacing(1);
         ships.setPaintTicks(true);
         ships.setPaintLabels(true);
-        ships.setMaximumSize(new Dimension(1000,80));
+        ships.setMaximumSize(new Dimension(1000, 80));
 
         File imageFile = new File("graphics\\bg1.jpg");
-        try
-        {
+        try {
             image = ImageIO.read(imageFile);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.err.println("Blad odczytu obrazka");
             e.printStackTrace();
         }
@@ -94,55 +92,49 @@ public class Settings extends JPanel implements ChangeListener, ActionListener
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent (Graphics g)
+    {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, 0, 0, this);
     }
 
-    private void adjustSettings()
+    private void adjustSettings ( )
     {
-        biggestShip = (int) (fieldSize*0.4);
-        maxShipSurface = (int) (fieldSize*fieldSize*0.25);
+        biggestShip = (int) (fieldSize * 0.4);
+        maxShipSurface = (int) (fieldSize * fieldSize * 0.25);
     }
 
-    public void setDefault()
+    public void setDefault ( )
     {
         field.setValue(10);
         ships.setValue(20);
         adjustSettings();
     }
 
-    public void setSettings()
+    public void setSettings ( )
     {
-        fieldSize=field.getValue();
-        shipSurface=ships.getValue();
+        fieldSize = field.getValue();
+        shipSurface = ships.getValue();
         adjustSettings();
-    }
-
-
-    public int getFieldSize ( )
-    {
-        return fieldSize;
     }
 
     @Override
     public void stateChanged (ChangeEvent e)
     {
         Object source = e.getSource();
-        if (source == field)
-        {
-            fieldSize=field.getValue();
+        if (source == field) {
+            fieldSize = field.getValue();
             adjustSettings();
-            ships.setMinimum((int) (field.getValue()*0.8));
+            ships.setMinimum((int) (field.getValue() * 0.8));
             ships.setMaximum(maxShipSurface);
-            ships.setValue(maxShipSurface*4/5);
+            ships.setValue(maxShipSurface * 4 / 5);
         }
     }
 
     @Override
-    public void actionPerformed (ActionEvent e)
+    public void actionPerformed (ActionEvent ev)
     {
-        Object source = e.getSource();
+        Object source = ev.getSource();
         if (source == dft)
             setDefault();
 
