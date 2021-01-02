@@ -6,6 +6,7 @@ public class Users {
     private ArrayList<String> users;
     private ArrayList<String> passes;
     private String currentUsername;
+    private String secondUsername;
 
     public Users ( )
     {
@@ -33,14 +34,17 @@ public class Users {
             pass += password[j];
 
         if (i >= 0 && passes.get(i).equals(pass)) {
-            currentUsername = name;
+            if (currentUsername.equals(""))
+                currentUsername = name;
+            else
+                secondUsername = name;
             return true;
         }
 
         return false;
     }
 
-    public void addUser(String name, String password)
+    public void addUser (String name, String password)
     {
         users.add(name);
         passes.add(password);
@@ -56,15 +60,14 @@ public class Users {
         for (int j = 0; j < password2.length; j++)
             pass2 += password2[j];
 
-        if(!pass1.equals(pass2))
+        if (!pass1.equals(pass2))
             return false;
-        else if (isUser(name)>=0)
+        else if (isUser(name) >= 0)
             return false;
-        else if(name.length()==0)
+        else if (name.length() == 0)
             return false;
-        else
-        {
-            addUser(name,pass1);
+        else {
+            addUser(name, pass1);
             currentUsername = name;
             return true;
         }

@@ -18,7 +18,7 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
     private int maxShipSurface;
     private BufferedImage image;
     public JButton dft = new JButton("Restore Default");
-    public JButton back = new JButton("back");
+    public JButton back = new JButton("Save and back");
     public JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
     public JSlider ships = new JSlider(JSlider.HORIZONTAL);
     private JLabel fieldLabel = new JLabel("Field Size(NxN): ");

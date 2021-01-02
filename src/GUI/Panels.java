@@ -15,6 +15,8 @@ public class Panels extends JFrame implements ActionListener {
     private Sign signPane = new Sign();
     private Home homePane = new Home();
     private Settings settingsPane = new Settings();
+    private Play playPane = new Play();
+    private Ships shipsPane = new Ships();
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
@@ -36,6 +38,9 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(signPane, "Sign Pane");
         cardPane.add(homePane, "Home Pane");
         cardPane.add(settingsPane,"Settings Pane");
+        cardPane.add(playPane, "Play Pane");
+        cardPane.add(shipsPane, "Ships Pane");
+
 
 
         startPane.login.addActionListener(this);
@@ -49,11 +54,17 @@ public class Panels extends JFrame implements ActionListener {
         signPane.sign.addActionListener(this);
         signPane.back.addActionListener(this);
 
+        homePane.play.addActionListener(this);
         homePane.settings.addActionListener(this);
         homePane.logout.addActionListener(this);
         homePane.exit.addActionListener(this);
 
         settingsPane.back.addActionListener(this);
+
+        playPane.back.addActionListener(this);
+        playPane.easy.addActionListener(this);
+
+        shipsPane.back.addActionListener(this);
 
 
         this.add(cardPane);
@@ -138,6 +149,16 @@ public class Panels extends JFrame implements ActionListener {
             settingsPane.setSettings();
             cards.show(cardPane, "Home Pane");
         }
-
+        else if(source == homePane.play)
+            cards.show(cardPane, "Play Pane");
+        else if(source == playPane.back)
+            cards.show(cardPane, "Home Pane");
+        else if(source == playPane.easy)
+            cards.show(cardPane, "Ships Pane");
+        else if(source == shipsPane.back)
+        {
+            shipsPane.reset();
+            cards.show(cardPane, "Play Pane");
+        }
     }
 }

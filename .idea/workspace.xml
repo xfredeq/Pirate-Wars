@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
+      <change afterPath="$PROJECT_DIR$/src/GUI/Play.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUI/Ships.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Backend/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/Backend/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Settings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Settings.java" afterDir="false" />
     </list>
@@ -175,5 +181,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="2.1" />
     <option name="LAST_COMMIT_MESSAGE" value="2.1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
