@@ -33,7 +33,7 @@ public class Users {
             pass += password[j];
 
         if (i >= 0 && passes.get(i).equals(pass)) {
-            currentUsername = pass;
+            currentUsername = name;
             return true;
         }
 
@@ -65,6 +65,7 @@ public class Users {
         else
         {
             addUser(name,pass1);
+            currentUsername = name;
             return true;
         }
 

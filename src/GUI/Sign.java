@@ -80,6 +80,11 @@ public class Sign extends JPanel
         g2d.drawImage(image, 0, 0, this);
     }
 
-
+    public void clearFields()
+    {
+        loginField.setText("");
+        passField.setText("");
+        confirmPassField.setText("");
+    }
 
 }

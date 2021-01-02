@@ -13,6 +13,7 @@ public class Start extends JPanel
     public JButton login=new JButton("Log In");
     public JButton signin=new JButton("Sign In");
     public JButton guest=new JButton("Play as Guest");
+    public JButton exit = new JButton("Exit");
     private JLabel title=new JLabel("Pirate Wars");
 
     public Start ( )
@@ -27,6 +28,7 @@ public class Start extends JPanel
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
         signin.setAlignmentX(Component.CENTER_ALIGNMENT);
         guest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exit.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Verdana",Font.PLAIN,36));
     }
@@ -41,6 +43,8 @@ public class Start extends JPanel
         add(signin);
         add(Box.createVerticalGlue());
         add(guest);
+        add(Box.createVerticalGlue());
+        add(exit);
         add(Box.createVerticalGlue());
 
         File imageFile = new File("graphics\\bg3.jpg");

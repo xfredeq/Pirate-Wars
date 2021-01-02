@@ -10,12 +10,11 @@ import java.awt.event.ActionListener;
 public class Panels extends JFrame implements ActionListener {
 
     private Users users = new Users();
-    private Start startPanel = new Start();
-    private Login loginPanel = new Login();
-    private Sign signPanel = new Sign();
-    private Home homePanel = new Home();
-    private Pic panelPic2 = new Pic();
-    private Pic picPanel = new Pic();
+    private Start startPane = new Start();
+    private Login loginPane = new Login();
+    private Sign signPane = new Sign();
+    private Home homePane = new Home();
+    private Settings settingsPane = new Settings();
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
@@ -32,24 +31,30 @@ public class Panels extends JFrame implements ActionListener {
     {
         cards = new CardLayout();
         cardPane.setLayout(cards);
-        cardPane.add(startPanel, "Start Pane");
-        cardPane.add(loginPanel, "Login Pane");
-        cardPane.add(signPanel, "Sign Pane");
-        cardPane.add(homePanel, "Home Pane");
+        cardPane.add(startPane, "Start Pane");
+        cardPane.add(loginPane, "Login Pane");
+        cardPane.add(signPane, "Sign Pane");
+        cardPane.add(homePane, "Home Pane");
+        cardPane.add(settingsPane,"Settings Pane");
 
 
-        startPanel.login.addActionListener(this);
-        startPanel.signin.addActionListener(this);
-        startPanel.guest.addActionListener(this);
+        startPane.login.addActionListener(this);
+        startPane.signin.addActionListener(this);
+        startPane.guest.addActionListener(this);
+        startPane.exit.addActionListener(this);
 
-        loginPanel.login.addActionListener(this);
-        loginPanel.back.addActionListener(this);
+        loginPane.login.addActionListener(this);
+        loginPane.back.addActionListener(this);
 
-        signPanel.sign.addActionListener(this);
-        signPanel.back.addActionListener(this);
+        signPane.sign.addActionListener(this);
+        signPane.back.addActionListener(this);
 
-        homePanel.exit.addActionListener(this);
-        homePanel.logout.addActionListener(this);
+        homePane.settings.addActionListener(this);
+        homePane.logout.addActionListener(this);
+        homePane.exit.addActionListener(this);
+
+        settingsPane.back.addActionListener(this);
+
 
         this.add(cardPane);
     }
@@ -58,7 +63,7 @@ public class Panels extends JFrame implements ActionListener {
     {
         setBackground(Color.LIGHT_GRAY);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1920, 1055);
+        this.setSize(1920, 1050);
         Dimension windowSize = getSize();
         GraphicsEnvironment screen = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Point center = screen.getCenterPoint();
@@ -73,51 +78,67 @@ public class Panels extends JFrame implements ActionListener {
     {
         Object source = e.getSource();
 
-        if (source == startPanel.login)
+        if (source == startPane.login)
             cards.show(cardPane, "Login Pane");
-        else if (source == startPanel.signin)
+        else if (source == startPane.signin)
             cards.show(cardPane, "Sign Pane");
-        else if (source == startPanel.guest)
+        else if (source == startPane.guest) {
             cards.show(cardPane, "Home Pane");
-        else if (source == loginPanel.login)
+            homePane.setUsername(users.getCurrentUsername());
+        }
+        else if (source == startPane.exit)
+            System.exit(0);
+        else if (source == loginPane.back)
+            cards.show(cardPane, "Start Pane");
+        else if (source == loginPane.login) {
+            EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run ( )
+                {
+                    if (users.login(loginPane.loginField.getText(), loginPane.passField.getPassword())) {
+                        homePane.setUsername(users.getCurrentUsername());
+                        loginPane.clearFields();
+                        cards.show(cardPane, "Home Pane");
+                    } else
+                        loginPane.login.setBackground(Color.RED);
+                }
+            });
+        }
+        else if (source == signPane.back)
+            cards.show(cardPane, "Start Pane");
+        else if (source == signPane.sign)
         {
             EventQueue.invokeLater(new Runnable()
             {
                 @Override
                 public void run ( )
                 {
-                    if(users.login(loginPanel.loginField.getText(),loginPanel.passField.getPassword()))
+                    if (users.register(signPane.loginField.getText(), signPane.passField.getPassword(), signPane.confirmPassField.getPassword()))
+                    {
+                        homePane.setUsername(users.getCurrentUsername());
+                        signPane.clearFields();
                         cards.show(cardPane, "Home Pane");
+                    }
                     else
-                        loginPanel.login.setBackground(Color.RED);
+                        signPane.sign.setBackground(Color.RED);
                 }
             });
         }
-        else if (source == signPanel.sign)
-        {
-            EventQueue.invokeLater(new Runnable()
-            {
-                @Override
-                public void run ( )
-                {
-                    if(users.register(signPanel.loginField.getText(), signPanel.passField.getPassword(), signPanel.confirmPassField.getPassword()))
-                        cards.show(cardPane, "Home Pane");
-                    else
-                        signPanel.sign.setBackground(Color.RED);
-                }
-            });
-        }
-        else if (source == loginPanel.back)
-            cards.show(cardPane, "Start Pane");
-        else if (source == signPanel.back)
-            cards.show(cardPane, "Start Pane");
-        else if (source == homePanel.logout)
+        else if(source == homePane.settings)
+            cards.show(cardPane, "Settings Pane");
+        else if (source == homePane.logout)
         {
             users.setCurrentUsername("");
             cards.show(cardPane, "Start Pane");
         }
-        else if (source == homePanel.exit)
+        else if (source == homePane.exit)
             System.exit(0);
+        else if (source == settingsPane.back)
+        {
+            settingsPane.setSettings();
+            cards.show(cardPane, "Home Pane");
+            System.out.println(settingsPane.getFieldSize());
+        }
 
     }
 }
