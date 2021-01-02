@@ -5,13 +5,16 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Settings extends JPanel implements ChangeListener
+public class Settings extends JPanel implements ChangeListener, ActionListener
 {
     private int fieldSize;
+    private int shipSurface;
     private int biggestShip;
     private int maxShipSurface;
     private BufferedImage image;
@@ -30,6 +33,7 @@ public class Settings extends JPanel implements ChangeListener
         setComponents();
         addComponents();
         field.addChangeListener(this);
+        dft.addActionListener(this);
     }
 
     private void setComponents ( )
@@ -38,6 +42,7 @@ public class Settings extends JPanel implements ChangeListener
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         fieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        shipsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Verdana",Font.PLAIN,36));
@@ -46,16 +51,16 @@ public class Settings extends JPanel implements ChangeListener
         field.setMajorTickSpacing(1);
         field.setPaintTicks(true);
         field.setPaintLabels(true);
-        field.setMaximumSize(new Dimension(800,80));
+        field.setMaximumSize(new Dimension(1000,80));
 
         ships.setAlignmentX(Component.CENTER_ALIGNMENT);
-        ships.setMinimum((int) (field.getValue()*0.4));
+        ships.setMinimum((int) (field.getValue()*0.8));
         ships.setMaximum(maxShipSurface);
-        ships.setValue((ships.getMinimum()+ships.getMaximum())/2);
+        ships.setValue(maxShipSurface*4/5);
         ships.setMajorTickSpacing(1);
         ships.setPaintTicks(true);
         ships.setPaintLabels(true);
-        ships.setMaximumSize(new Dimension(800,80));
+        ships.setMaximumSize(new Dimension(1000,80));
 
         File imageFile = new File("graphics\\bg1.jpg");
         try
@@ -81,6 +86,7 @@ public class Settings extends JPanel implements ChangeListener
         add(fieldLabel);
         add(field);
         add(Box.createVerticalGlue());
+        add(shipsLabel);
         add(ships);
         add(Box.createVerticalGlue());
         add(back);
@@ -101,13 +107,15 @@ public class Settings extends JPanel implements ChangeListener
 
     public void setDefault()
     {
-        fieldSize=10;
+        field.setValue(10);
+        ships.setValue(20);
         adjustSettings();
     }
 
     public void setSettings()
     {
         fieldSize=field.getValue();
+        shipSurface=ships.getValue();
         adjustSettings();
     }
 
@@ -124,9 +132,19 @@ public class Settings extends JPanel implements ChangeListener
         if (source == field)
         {
             fieldSize=field.getValue();
-            ships.setMinimum((int) (field.getValue()*0.4));
+            adjustSettings();
+            ships.setMinimum((int) (field.getValue()*0.8));
             ships.setMaximum(maxShipSurface);
-            ships.setValue((ships.getMinimum()+ships.getMaximum())/2);
+            ships.setValue(maxShipSurface*4/5);
         }
+    }
+
+    @Override
+    public void actionPerformed (ActionEvent e)
+    {
+        Object source = e.getSource();
+        if (source == dft)
+            setDefault();
+
     }
 }
