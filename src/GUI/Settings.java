@@ -139,4 +139,19 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
             setDefault();
 
     }
+
+    public int getBiggestShip ( )
+    {
+        return biggestShip;
+    }
+
+    public int getMaxShipSurface ( )
+    {
+        return maxShipSurface;
+    }
+
+    public int getFieldSize ( )
+    {
+        return fieldSize;
+    }
 }

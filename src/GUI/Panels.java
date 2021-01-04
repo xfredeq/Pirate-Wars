@@ -16,7 +16,7 @@ public class Panels extends JFrame implements ActionListener {
     private Home homePane = new Home();
     private Settings settingsPane = new Settings();
     private Play playPane = new Play();
-    private Ships shipsPane = new Ships();
+    private Ships shipsPane;
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
@@ -39,7 +39,6 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(homePane, "Home Pane");
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
-        cardPane.add(shipsPane, "Ships Pane");
 
 
 
@@ -64,7 +63,6 @@ public class Panels extends JFrame implements ActionListener {
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
 
-        shipsPane.back.addActionListener(this);
 
 
         this.add(cardPane);
@@ -155,8 +153,11 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Home Pane");
         else if(source == playPane.easy)
         {
+            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getMaxShipSurface());
+            cardPane.add(shipsPane, "Ships Pane");
+            shipsPane.back.addActionListener(this);
             cards.show(cardPane, "Ships Pane");
-            shipsPane.getParams(8,2,4);
+            //shipsPane.getParams(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getMaxShipSurface());
         }
         else if(source == shipsPane.back)
         {
