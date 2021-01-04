@@ -13,6 +13,7 @@ import java.util.List;
 public class Ships extends JPanel implements ActionListener {
     private int fieldSize;
     private int shipSurface;
+    private int maxShipSurface;
     private int biggestShip;
     private int conflicts = 0;
     public BufferedImage image;
@@ -32,6 +33,7 @@ public class Ships extends JPanel implements ActionListener {
         this.fieldSize = fieldSize;
         this.biggestShip = biggestShip;
         this.shipSurface = shipSurface;
+        this.maxShipSurface = shipSurface;
         shipCount.setText(String.valueOf(this.shipSurface));
         setComponents();
         addComponents();
@@ -114,6 +116,7 @@ public class Ships extends JPanel implements ActionListener {
                 public void run ( )
                 {
                     reset();
+                    shipSurface=maxShipSurface;
                     shipCount.setText(String.valueOf(shipSurface));
                 }
             });
@@ -128,32 +131,30 @@ public class Ships extends JPanel implements ActionListener {
         }
 
 
-        for (int i = 0; i < fieldSize; i++) {
-            for (int j = 0; j < fieldSize; j++) {
-                if (source == board[i][j]) {
-                    int finalI = i;
-                    int finalJ = j;
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                int finalI = i;
+                int finalJ = j;
+                size = biggestShip;
+                boolean tab[][] = new boolean[fieldSize][fieldSize];
+                clear(tab);
+
+                if (source == board[i][j])
+                {
                     EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run ( )
                         {
-                            size = biggestShip;
-                            boolean tab[][] = new boolean[fieldSize][fieldSize];
-                            clear(tab);
                             if (board[finalI][finalJ].getBackground() == Color.GREEN)
                                 if (!checkSize(finalI, finalJ, tab))
                                     board[finalI][finalJ].setBackground(Color.RED);
-
-                            size = biggestShip;
-                            clear(tab);
-                            if (board[finalI][finalJ].getBackground() == Color.BLUE)
-                            {
-                                nValidate(finalI,finalJ, tab);
-                            }
-
                         }
                     });
                 }
+                if (board[finalI][finalJ].getBackground() == Color.RED)
+                    nValidate(finalI,finalJ, tab);
             }
         }
 
@@ -163,13 +164,8 @@ public class Ships extends JPanel implements ActionListener {
     {
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++)
-                this.board[i][j].setBackground(Color.blue);
+                this.board[i][j].setBackground(Color.BLUE);
         }
-    }
-
-    public void getParams (int fieldSize, int biggestShip, int maxShipSurface)
-    {
-
     }
 
     private boolean checkSize (int i, int j, boolean tab[][])
@@ -238,27 +234,17 @@ public class Ships extends JPanel implements ActionListener {
 
     private void color (int i, int j)
     {
-        /*if (board[i][j].getBackground() == Color.BLUE && shipSurface > 0) {
-            board[i][j].setBackground(Color.GREEN);
-            shipCount.setText(String.valueOf(--this.shipSurface));
-        } else if (board[i][j].getBackground() != Color.BLUE) {
-            if (board[i][j].getBackground() == Color.RED) {
-                conflicts--;
-                shipCount.setText(String.valueOf(++this.shipSurface));
-            } else
-                shipCount.setText(String.valueOf(++this.shipSurface));
-            board[i][j].setBackground(Color.BLUE);
-        } else if (board[i][j].getBackground() == Color.BLUE && shipSurface <= 0) {
-            board[i][j].setBackground(Color.RED);
-            conflicts++;
-            shipCount.setText(String.valueOf(--this.shipSurface));
-        }*/
         if (board[i][j].getBackground() == Color.BLUE && shipSurface > 0)
         {
             board[i][j].setBackground(Color.GREEN);
             shipCount.setText(String.valueOf(--this.shipSurface));
         }
-        else if (board[i][j].getBackground() != Color.BLUE)
+        else if (board[i][j].getBackground() == Color.GREEN)
+        {
+            board[i][j].setBackground(Color.BLUE);
+            shipCount.setText(String.valueOf(++this.shipSurface));
+        }
+        else if (board[i][j].getBackground() == Color.RED)
         {
             board[i][j].setBackground(Color.BLUE);
             shipCount.setText(String.valueOf(++this.shipSurface));
@@ -270,53 +256,8 @@ public class Ships extends JPanel implements ActionListener {
     {
         size = biggestShip;
         clear(tab);
-
-        if(i-1>=0)
-        {
-            if (checkSize(i - 1, j, tab) && board[i - 1][j].getBackground() == Color.RED) {
-                board[i - 1][j].setBackground(Color.GREEN);
-            }
-            if(board[i-1][j].getBackground()!=Color.BLUE && !tab[i - 1][j])
-                nValidate(i-1,j,tab);
-        }
-        size = biggestShip;
-        clear(tab);
-
-        if(i+1<fieldSize)
-        {
-            if(checkSize(i+1, j, tab) && board[i+1][j].getBackground() == Color.RED)
-            {
-                board[i+1][j].setBackground(Color.GREEN);
-            }
-            if(board[i+1][j].getBackground()!=Color.BLUE )
-                nValidate(i+1,j,tab);
-        }
-
-        size = biggestShip;
-        clear(tab);
-
-        if(j-1>=0)
-        {
-            if (checkSize(i, j - 1, tab) && board[i][j - 1].getBackground() == Color.RED) {
-                board[i][j - 1].setBackground(Color.GREEN);
-            }
-            if(board[i][j-1].getBackground()!=Color.BLUE)
-                nValidate(i,j-1,tab);
-        }
-        size = biggestShip;
-        clear(tab);
-
-        if(j+1<fieldSize)
-        {
-            if(checkSize(i, j+1, tab) && board[i][j+1].getBackground() == Color.RED)
-            {
-                board[i][j+1].setBackground(Color.GREEN);
-            }
-            if(board[i][j+1].getBackground()!=Color.BLUE)
-                nValidate(i,j+1,tab);
-        }
-
-
+        if (checkSize(i, j, tab))
+            board[i][j].setBackground(Color.GREEN);
     }
 
 }
