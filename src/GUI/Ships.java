@@ -14,7 +14,6 @@ public class Ships extends JPanel implements ActionListener {
     private int fieldSize;
     private int shipSurface;
     private int biggestShip;
-    private int maxShipSurface;
     private int conflicts = 0;
     public BufferedImage image;
     private JButton reset = new JButton("Reset");
@@ -27,13 +26,12 @@ public class Ships extends JPanel implements ActionListener {
 
     private static Integer size;
 
-    public Ships (int fieldSize, int biggestShip, int maxShipSurface)
+    public Ships (int fieldSize, int biggestShip, int shipSurface)
     {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.fieldSize = fieldSize;
         this.biggestShip = biggestShip;
-        this.maxShipSurface = maxShipSurface;
-        this.shipSurface = maxShipSurface;
+        this.shipSurface = shipSurface;
         shipCount.setText(String.valueOf(this.shipSurface));
         setComponents();
         addComponents();
@@ -116,7 +114,6 @@ public class Ships extends JPanel implements ActionListener {
                 public void run ( )
                 {
                     reset();
-                    shipSurface = maxShipSurface;
                     shipCount.setText(String.valueOf(shipSurface));
                 }
             });
@@ -279,6 +276,8 @@ public class Ships extends JPanel implements ActionListener {
             if (checkSize(i - 1, j, tab) && board[i - 1][j].getBackground() == Color.RED) {
                 board[i - 1][j].setBackground(Color.GREEN);
             }
+            if(board[i-1][j].getBackground()!=Color.BLUE && !tab[i - 1][j])
+                nValidate(i-1,j,tab);
         }
         size = biggestShip;
         clear(tab);
@@ -289,6 +288,8 @@ public class Ships extends JPanel implements ActionListener {
             {
                 board[i+1][j].setBackground(Color.GREEN);
             }
+            if(board[i+1][j].getBackground()!=Color.BLUE )
+                nValidate(i+1,j,tab);
         }
 
         size = biggestShip;
@@ -299,6 +300,8 @@ public class Ships extends JPanel implements ActionListener {
             if (checkSize(i, j - 1, tab) && board[i][j - 1].getBackground() == Color.RED) {
                 board[i][j - 1].setBackground(Color.GREEN);
             }
+            if(board[i][j-1].getBackground()!=Color.BLUE)
+                nValidate(i,j-1,tab);
         }
         size = biggestShip;
         clear(tab);
@@ -309,6 +312,8 @@ public class Ships extends JPanel implements ActionListener {
             {
                 board[i][j+1].setBackground(Color.GREEN);
             }
+            if(board[i][j+1].getBackground()!=Color.BLUE)
+                nValidate(i,j+1,tab);
         }
 
 

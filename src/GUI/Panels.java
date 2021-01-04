@@ -153,7 +153,7 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Home Pane");
         else if(source == playPane.easy)
         {
-            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getMaxShipSurface());
+            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
             cards.show(cardPane, "Ships Pane");

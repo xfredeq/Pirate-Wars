@@ -28,6 +28,7 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
     public Settings ( )
     {
         setDefault();
+        setSettings();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents();
         addComponents();
@@ -52,7 +53,6 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         field.setPaintLabels(true);
         field.setMaximumSize(new Dimension(1000, 80));
 
-        setDefault();
 
         ships.setAlignmentX(Component.CENTER_ALIGNMENT);
         ships.setMinimum(8);
@@ -108,7 +108,6 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
     {
         field.setValue(10);
         ships.setValue(20);
-        adjustSettings();
     }
 
     public void setSettings ( )
@@ -145,9 +144,9 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         return biggestShip;
     }
 
-    public int getMaxShipSurface ( )
+    public int getShipSurface ( )
     {
-        return maxShipSurface;
+        return shipSurface;
     }
 
     public int getFieldSize ( )
