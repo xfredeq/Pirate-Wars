@@ -14,12 +14,14 @@ public class Ships extends JPanel implements ActionListener {
     private int shipSurface;
     private int biggestShip;
     private int maxShipSurface;
+    private int conflicts = 0;
     public BufferedImage image;
     private JButton reset = new JButton("Reset");
     public JButton start = new JButton("Start");
     public JButton back = new JButton("back");
     private JLabel title = new JLabel("Pirate Wars");
     private JPanel pane = new JPanel(new GridLayout(fieldSize, fieldSize));
+    private JLabel shipCount = new JLabel();
     private JButton[][] board;
 
     public Ships ( )
@@ -34,6 +36,9 @@ public class Ships extends JPanel implements ActionListener {
         reset.setAlignmentX(Component.CENTER_ALIGNMENT);
         start.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        shipCount.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //shipCount.setText(String.valueOf(this.shipSurface));
 
         pane.setMaximumSize(new Dimension(500, 500));
         pane.setPreferredSize(new Dimension(500, 500));
@@ -63,6 +68,7 @@ public class Ships extends JPanel implements ActionListener {
         add(Box.createVerticalGlue());
         add(reset);
         add(Box.createVerticalGlue());
+        add(shipCount);
         add(pane);
         add(Box.createVerticalGlue());
         add(start);
@@ -101,13 +107,36 @@ public class Ships extends JPanel implements ActionListener {
                 public void run ( )
                 {
                     reset();
+                    shipSurface = maxShipSurface;
+                    shipCount.setText(String.valueOf(shipSurface));
                 }
             });
         }
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
                 if (source == board[i][j])
-                    board[i][j].setBackground(Color.RED);
+                {
+                    if (board[i][j].getBackground() == Color.BLUE && shipSurface > 0)
+                    {
+                        board[i][j].setBackground(Color.GREEN);
+                        shipCount.setText(String.valueOf(--this.shipSurface));
+                    }
+                    else if (board[i][j].getBackground() != Color.BLUE)
+                    {
+                        if(board[i][j].getBackground() == Color.RED)
+                            conflicts--;
+                        else
+                            shipCount.setText(String.valueOf(++this.shipSurface));
+                        board[i][j].setBackground(Color.BLUE);
+                    }
+                    else if (board[i][j].getBackground() == Color.BLUE && shipSurface <= 0)
+                    {
+                        board[i][j].setBackground(Color.RED);
+                        conflicts++;
+                    }
+                }
             }
         }
     }
@@ -118,5 +147,14 @@ public class Ships extends JPanel implements ActionListener {
             for (int j = 0; j < 8; j++)
                 this.board[i][j].setBackground(Color.blue);
         }
+    }
+
+    public void getParams (int fieldSize, int biggestShip, int maxShipSurface)
+    {
+        this.fieldSize = fieldSize;
+        this.biggestShip = biggestShip;
+        this.maxShipSurface = maxShipSurface;
+        this.shipSurface = maxShipSurface;
+        shipCount.setText(String.valueOf(this.shipSurface));
     }
 }
