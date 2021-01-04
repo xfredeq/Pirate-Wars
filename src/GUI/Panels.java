@@ -156,7 +156,7 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == playPane.easy)
         {
             cards.show(cardPane, "Ships Pane");
-            shipsPane.getParams(4,4,4);
+            shipsPane.getParams(8,2,4);
         }
         else if(source == shipsPane.back)
         {
