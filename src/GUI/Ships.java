@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Random;
 
 public class Ships extends JPanel implements ActionListener {
     private int fieldSize;
@@ -49,8 +49,8 @@ public class Ships extends JPanel implements ActionListener {
         //shipCount.setText(String.valueOf(this.shipSurface));
 
         pane = new JPanel(new GridLayout(fieldSize, fieldSize));
-        pane.setMaximumSize(new Dimension(500, 500));
-        pane.setPreferredSize(new Dimension(500, 500));
+        pane.setMaximumSize(new Dimension(400, 400));
+        pane.setPreferredSize(new Dimension(400, 400));
 
         reset.addActionListener(this);
 
@@ -61,7 +61,7 @@ public class Ships extends JPanel implements ActionListener {
                 tmp[j] = new JButton();
                 tmp[j].addActionListener(this);
                 pane.add(tmp[j]);
-                tmp[j].setBackground(Color.blue);
+                tmp[j].setBackground(Color.BLUE);
             }
             board[i] = tmp;
         }
@@ -116,8 +116,6 @@ public class Ships extends JPanel implements ActionListener {
                 public void run ( )
                 {
                     reset();
-                    shipSurface=maxShipSurface;
-                    shipCount.setText(String.valueOf(shipSurface));
                 }
             });
         }
@@ -149,9 +147,13 @@ public class Ships extends JPanel implements ActionListener {
                         {
                             if (board[finalI][finalJ].getBackground() == Color.GREEN)
                                 if (!checkSize(finalI, finalJ, tab))
+                                {
                                     board[finalI][finalJ].setBackground(Color.RED);
+                                    conflicts++;
+                                }
                         }
                     });
+
                 }
                 if (board[finalI][finalJ].getBackground() == Color.RED)
                     nValidate(finalI,finalJ, tab);
@@ -166,6 +168,9 @@ public class Ships extends JPanel implements ActionListener {
             for (int j = 0; j < fieldSize; j++)
                 this.board[i][j].setBackground(Color.BLUE);
         }
+        shipSurface=maxShipSurface;
+        shipCount.setText(String.valueOf(shipSurface));
+        conflicts=0;
     }
 
     private boolean checkSize (int i, int j, boolean tab[][])
@@ -217,7 +222,7 @@ public class Ships extends JPanel implements ActionListener {
             t[3] = true;
         }
 
-        if (t[0] && t[1] && t[2] && t[3] && size >= 0)
+        if (size >= 0)
             return true;
 
         return false;
@@ -247,6 +252,7 @@ public class Ships extends JPanel implements ActionListener {
         else if (board[i][j].getBackground() == Color.RED)
         {
             board[i][j].setBackground(Color.BLUE);
+            conflicts--;
             shipCount.setText(String.valueOf(++this.shipSurface));
         }
 
@@ -257,7 +263,127 @@ public class Ships extends JPanel implements ActionListener {
         size = biggestShip;
         clear(tab);
         if (checkSize(i, j, tab))
+        {
             board[i][j].setBackground(Color.GREEN);
+            conflicts--;
+        }
     }
 
+    public int getConflicts ( )
+    {
+        return conflicts;
+    }
+    public int getShipSurface ( )
+    {
+        return shipSurface;
+    }
+
+    public boolean[][] getBoard()
+    {
+        boolean brd[][]=new boolean[fieldSize][fieldSize];
+        clear(brd);
+        for(int i=0;i<fieldSize;i++)
+        {
+            for(int j=0;j<fieldSize;j++)
+            {
+                if(board[i][j].getBackground()==Color.GREEN)
+                brd[i][j]=true;
+            }
+        }
+        return brd;
+    }
+
+    private boolean checkRandomSize (int i, int j, boolean brd[][], boolean tab[][])
+    {
+        size--;
+
+        tab[i][j] = true;
+        boolean t[] = {true, true, true, true};
+        if (i - 1 >= 0) {
+            if (!brd[i - 1][j])
+                t[0] = false;
+        } else
+            t[0] = false;
+        if (i + 1 < fieldSize) {
+            if (!brd[i + 1][j])
+                t[1] = false;
+        } else
+            t[1] = false;
+        if (j - 1 >= 0) {
+            if (!brd[i][j - 1])
+                t[2] = false;
+        } else
+            t[2] = false;
+        if (j + 1 < fieldSize) {
+            if (!brd[i][j + 1])
+                t[3] = false;
+        } else
+            t[3] = false;
+
+        if (t[0] == true && tab[i - 1][j] == false) {
+            checkRandomSize(i - 1, j, brd, tab);
+        } else {
+            t[0] = true;
+        }
+        if (t[1] == true && tab[i + 1][j] == false) {
+            checkRandomSize(i + 1, j, brd, tab);
+        } else {
+            t[1] = true;
+        }
+        if (t[2] == true && tab[i][j - 1] == false) {
+            checkRandomSize(i, j - 1, brd, tab);
+        } else {
+            t[2] = true;
+        }
+        if (t[3] == true && tab[i][j + 1] == false) {
+            checkRandomSize(i, j + 1, brd, tab);
+        } else {
+            t[3] = true;
+        }
+
+        if (size >= 0)
+            return true;
+
+        return false;
+
+    }
+
+    public boolean[][] makeRandomBoard ( )
+    {
+        boolean brd[][] = new boolean[fieldSize][fieldSize];
+        boolean visited[][] = new boolean[fieldSize][fieldSize];
+        clear(visited);
+        clear(brd);
+        int surface = maxShipSurface;
+        Random rand = new Random();
+
+        while(surface>0)
+        {
+            clear(visited);
+            size=biggestShip;
+
+            int r1=rand.nextInt(fieldSize);
+            int r2=rand.nextInt(fieldSize);
+
+            //out.println("all " + r2 + " " + r1 + " " + surface);
+            if (brd[r1][r2] == false)
+            {
+                if (checkRandomSize(r1, r2, brd, visited))
+                {
+                    brd[r1][r2] = true;
+                    //System.out.println("tak " + r2 + " " + r1);
+                    surface--;
+                }
+                else
+                {
+                    //System.out.println("nie " + r2 + " " + r1);
+                    brd[r1][r2] = false;
+                    //surface++;
+                }
+            }
+        }
+
+
+        return brd;
+    }
 }

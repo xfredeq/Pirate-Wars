@@ -17,6 +17,7 @@ public class Panels extends JFrame implements ActionListener {
     private Settings settingsPane = new Settings();
     private Play playPane = new Play();
     private Ships shipsPane;
+    private Game gamePane;
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
@@ -156,8 +157,24 @@ public class Panels extends JFrame implements ActionListener {
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
+            shipsPane.start.addActionListener(this);
+
             cards.show(cardPane, "Ships Pane");
-            //shipsPane.getParams(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getMaxShipSurface());
+        }
+        else if(source == shipsPane.start)
+        {
+            if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
+            {
+                gamePane = new Game(settingsPane.getFieldSize(), shipsPane.getBoard(), shipsPane.makeRandomBoard());
+
+                cardPane.add(gamePane, "Game Pane");
+
+                cards.show(cardPane, "Game Pane");
+                //make array
+
+            }
+            else
+                shipsPane.start.setBackground(Color.RED);
         }
         else if(source == shipsPane.back)
         {
