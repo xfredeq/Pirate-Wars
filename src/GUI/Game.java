@@ -18,7 +18,7 @@ public class Game extends JPanel implements ActionListener {
     private String winner="";
     private String user1;
     private String user2;
-    private String gameMode;
+    private final String gameMode;
 
     private JPanel pane, controlPane;
 
@@ -83,6 +83,21 @@ public class Game extends JPanel implements ActionListener {
         }
         else
             player2 =new JLabel(user2, SwingConstants.CENTER);
+
+        player1.setBackground(Color.WHITE);
+        player1.setForeground(Color.MAGENTA);
+        player1.setFont(new Font("Verdana", Font.BOLD, 48));
+        //player1.setOpaque(true);
+
+        player2.setBackground(Color.WHITE);
+        player2.setForeground(Color.MAGENTA);
+        player2.setFont(new Font("Verdana", Font.BOLD, 48));
+        //player2.setOpaque(true);
+
+        vs.setBackground(Color.WHITE);
+        vs.setForeground(Color.MAGENTA);
+        vs.setFont(new Font("Verdana", Font.BOLD, 48));
+        //vs.setOpaque(true);
 
         points1=new JLabel("ships: " + p1, SwingConstants.CENTER);
         points2=new JLabel("ships: " + p2, SwingConstants.CENTER);
@@ -232,6 +247,13 @@ public class Game extends JPanel implements ActionListener {
             showEnd();
         }
 
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run ( )
+            {
+                checkShot();
+            }
+        });
     }
 
 
@@ -304,6 +326,101 @@ public class Game extends JPanel implements ActionListener {
         endPane.setBackground(Color.ORANGE);
         endPane.setOpaque(true);
         back.setVisible(true);
+    }
+
+    private boolean shot(int i, int j, int[][]tab, boolean[][] visited)
+    {
+
+        visited[i][j]=true;
+
+        if(tab[i][j]==1)
+            return false;
+        else {
+            boolean[] t = {true, true, true, true};
+            if (i - 1 >= 0) {
+                if (tab[i - 1][j] == 0)
+                    t[0] = false;
+
+            } else
+                t[0] = false;
+
+            if (i + 1 < fieldSize) {
+                if (tab[i + 1][j] == 0)
+                    t[1] = false;
+            } else
+                t[1] = false;
+
+            if (j - 1 >= 0) {
+                if (tab[i][j - 1] == 0)
+                    t[2] = false;
+            } else
+                t[2] = false;
+
+            if (j + 1 < fieldSize) {
+                if (tab[i][j + 1] == 0)
+                    t[3] = false;
+            } else
+                t[3] = false;
+
+
+            if (t[0] && tab[i - 1][j] != 0  && !visited[i - 1][j]) {
+                t[0] = shot(i - 1, j, tab, visited);
+            } else
+                t[0] = true;
+
+
+            if (t[1] && tab[i + 1][j] != 0  && !visited[i + 1][j]) {
+                t[1] = shot(i + 1, j, tab, visited);
+            } else
+                t[1] = true;
+
+
+            if (t[2] && tab[i][j - 1] != 0 && !visited[i][j - 1]) {
+                t[2] = shot(i, j - 1, tab, visited);
+            } else
+                t[2] = true;
+
+
+            if (t[3] && tab[i][j + 1] != 0 && !visited[i][j + 1]) {
+                t[3] = shot(i, j + 1, tab, visited);
+            } else
+                t[3] = true;
+
+            return t[0] && t[1] && t[2] && t[3];
+        }
+    }
+
+    private void checkShot()
+    {
+
+        boolean[][] visited = new boolean[fieldSize][fieldSize];
+
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                if(tab1[i][j]==2)
+                {
+                    clear(visited);
+                    if(shot(i,j, tab1, visited))
+                        board1[i][j].setBackground(Color.RED);
+                }
+                if(tab2[i][j]==2)
+                {
+                    clear(visited);
+                    if(shot(i,j, tab2, visited))
+                        board2[i][j].setBackground(Color.RED);
+                }
+            }
+        }
+    }
+
+    private void clear (boolean[][] tab)
+    {
+        for (int i = 0; i < fieldSize; i++) {
+            for (int j = 0; j < fieldSize; j++)
+                tab[i][j] = false;
+        }
     }
 
 }
