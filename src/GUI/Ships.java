@@ -18,7 +18,7 @@ public class Ships extends JPanel implements ActionListener {
     private int conflicts = 0;
     public BufferedImage image;
     private JButton reset = new JButton("Reset");
-    public JButton start = new JButton("Start");
+    public JButton start = new JButton("Ready");
     public JButton back = new JButton("back");
     private JLabel title = new JLabel("Pirate Wars");
     private JPanel pane;

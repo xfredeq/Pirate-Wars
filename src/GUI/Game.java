@@ -18,6 +18,7 @@ public class Game extends JPanel implements ActionListener {
     private String winner="";
     private String user1;
     private String user2;
+    private String gameMode;
 
     private JPanel pane, controlPane;
 
@@ -40,13 +41,14 @@ public class Game extends JPanel implements ActionListener {
     public JButton back = new JButton("Back to main menu");
 
 
-    public Game (int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface, String user1, String user2)
+    public Game (String mode, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface, String user1, String user2)
     {
         this.fieldSize = fieldSize;
         this.p1 = shipSurface;
         this.p2 = shipSurface;
         this.user1 = user1;
         this.user2 = user2;
+        this.gameMode=mode;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents(brd1, brd2);
         addComponents();
@@ -190,7 +192,7 @@ public class Game extends JPanel implements ActionListener {
         add(back);
         add(Box.createVerticalGlue());
 
-        File imageFile = new File("graphics\\bg3.jpg");
+        File imageFile = new File("graphics\\bg2.jpg");
         try {
             image = ImageIO.read(imageFile);
         } catch (IOException e) {
@@ -214,7 +216,10 @@ public class Game extends JPanel implements ActionListener {
     public void actionPerformed (ActionEvent e)
     {
         Object source = e.getSource();
-        vsPlayerGame(source);
+        if(gameMode.equals("easy"))
+            easyGame(source);
+        else if(gameMode.equals("guest") || gameMode.equals("player"))
+            vsPlayerGame(source);
 
         if(source==sur1)
         {
@@ -284,6 +289,11 @@ public class Game extends JPanel implements ActionListener {
                 }
 
             }
+
+    }
+
+    private void easyGame(Object source)
+    {
 
     }
 

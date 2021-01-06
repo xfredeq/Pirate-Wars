@@ -16,8 +16,10 @@ public class Panels extends JFrame implements ActionListener {
     private Home homePane = new Home();
     private Settings settingsPane = new Settings();
     private Play playPane = new Play();
-    private Ships shipsPane;
+    private Ships shipsPane, shipsPane2;
     private Game gamePane;
+    private boolean[][] board1, board2;
+    private boolean mode=false;
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
@@ -63,6 +65,10 @@ public class Panels extends JFrame implements ActionListener {
 
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
+        //playPane.medium.addActionListener(this);;
+        //playPane.hard.addActionListener(this);
+        playPane.guest.addActionListener(this);
+        playPane.player.addActionListener(this);
 
 
 
@@ -109,7 +115,10 @@ public class Panels extends JFrame implements ActionListener {
                     if (users.login(loginPane.loginField.getText(), loginPane.passField.getPassword())) {
                         homePane.setUsername(users.getCurrentUsername());
                         loginPane.clearFields();
-                        cards.show(cardPane, "Home Pane");
+                        if(mode)
+                            cards.show(cardPane, "Ships Pane");
+                        else
+                            cards.show(cardPane, "Home Pane");
                     } else
                         loginPane.login.setBackground(Color.RED);
                 }
@@ -155,6 +164,9 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Home Pane");
         else if(source == playPane.easy)
         {
+            settingsPane.setGameMode("easy");
+            board1=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
+            board2=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
@@ -162,31 +174,95 @@ public class Panels extends JFrame implements ActionListener {
 
             cards.show(cardPane, "Ships Pane");
         }
+        else if(source == playPane.guest)
+        {
+            settingsPane.setGameMode("guest");
+            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
+            mode=true;
+            cardPane.add(shipsPane, "Ships Pane");
+            shipsPane.back.addActionListener(this);
+            shipsPane.start.addActionListener(this);
+
+            cards.show(cardPane, "Ships Pane");
+        }
+        else if(source == playPane.player)
+        {
+            settingsPane.setGameMode("player");
+            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
+            mode=true;
+            cardPane.add(shipsPane, "Ships Pane");
+            shipsPane.back.addActionListener(this);
+            shipsPane.start.addActionListener(this);
+
+            cards.show(cardPane, "Login Pane");
+        }
         else if(source == shipsPane.start)
         {
             if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
             {
-                gamePane = new Game(settingsPane.getFieldSize(), shipsPane.getBoard(), shipsPane.makeRandomBoard(),settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
+                if (mode)
+                {
+                    shipsPane2 = new Ships(settingsPane.getFieldSize(), settingsPane.getBiggestShip(), settingsPane.getShipSurface());
+                    cardPane.add(shipsPane2, "Ships Pane 2");
+                    cards.show(cardPane, "Ships Pane 2");
+                    shipsPane2.back.addActionListener(this);
+                    shipsPane2.start.addActionListener(this);
+                }
+                else
+                {
+                    getBoard1();
+                    getBoard2();
+                    gamePane = new Game(settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
 
-                gamePane.back.addActionListener(this);
+                    gamePane.back.addActionListener(this);
 
-                cardPane.add(gamePane, "Game Pane");
-
-                cards.show(cardPane, "Game Pane");
-                //make array
-
+                    cardPane.add(gamePane, "Game Pane");
+                    cards.show(cardPane, "Game Pane");
+                }
             }
             else
                 shipsPane.start.setBackground(Color.RED);
+
         }
         else if(source == shipsPane.back)
         {
             shipsPane.reset();
             cards.show(cardPane, "Play Pane");
         }
+        else if(source == shipsPane2.back)
+        {
+            shipsPane2.reset();
+            cards.show(cardPane, "Ships Pane");
+        }
+        else if(source == shipsPane2.start)
+        {
+            if(true)//shipsPane2.getConflicts()==0 && shipsPane2.getShipSurface()==0)
+            {
+                getBoard1();
+                getBoard2();
+                gamePane = new Game(settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
+
+                gamePane.back.addActionListener(this);
+
+                cardPane.add(gamePane, "Game Pane");
+                cards.show(cardPane, "Game Pane");
+            }
+        }
         else if(source == gamePane.back)
         {
             cards.show(cardPane, "Home Pane");
         }
+    }
+
+    private void getBoard1()
+    {
+        board1 = shipsPane.getBoard();
+    }
+    private void getBoard2()
+    {
+        if(settingsPane.getGameMode().equals("easy") || settingsPane.getGameMode().equals("medium") || settingsPane.getGameMode().equals("hard"))
+            board2= shipsPane.makeRandomBoard();
+        else if(settingsPane.getGameMode().equals("guest") || settingsPane.getGameMode().equals("player"))
+            board2= shipsPane2.getBoard();
     }
 }

@@ -16,7 +16,11 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
     private int shipSurface;
     private int biggestShip;
     private int maxShipSurface;
+
+    private String gameMode;
+
     private BufferedImage image;
+
     public JButton dft = new JButton("Restore Default");
     public JButton back = new JButton("Save and back");
     public JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
@@ -152,5 +156,15 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
     public int getFieldSize ( )
     {
         return fieldSize;
+    }
+
+    public String getGameMode ( )
+    {
+        return gameMode;
+    }
+
+    public void setGameMode (String gameMode)
+    {
+        this.gameMode = gameMode;
     }
 }
