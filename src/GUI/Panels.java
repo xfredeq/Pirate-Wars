@@ -66,6 +66,7 @@ public class Panels extends JFrame implements ActionListener {
 
 
 
+
         this.add(cardPane);
     }
 
@@ -165,7 +166,9 @@ public class Panels extends JFrame implements ActionListener {
         {
             if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
             {
-                gamePane = new Game(settingsPane.getFieldSize(), shipsPane.getBoard(), shipsPane.makeRandomBoard());
+                gamePane = new Game(settingsPane.getFieldSize(), shipsPane.getBoard(), shipsPane.makeRandomBoard(),settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
+
+                gamePane.back.addActionListener(this);
 
                 cardPane.add(gamePane, "Game Pane");
 
@@ -180,6 +183,10 @@ public class Panels extends JFrame implements ActionListener {
         {
             shipsPane.reset();
             cards.show(cardPane, "Play Pane");
+        }
+        else if(source == gamePane.back)
+        {
+            cards.show(cardPane, "Home Pane");
         }
     }
 }

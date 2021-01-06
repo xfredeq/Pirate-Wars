@@ -11,6 +11,7 @@ public class Users {
     public Users ( )
     {
         currentUsername = "";
+        secondUsername = "";
         users = new ArrayList<>();
         passes = new ArrayList<>();
         users.add("admin");
@@ -77,6 +78,10 @@ public class Users {
     public String getCurrentUsername ( )
     {
         return currentUsername;
+    }
+    public String getSecondUsername ( )
+    {
+        return secondUsername;
     }
 
     public void setCurrentUsername (String currentUsername)
