@@ -16,6 +16,8 @@ public class Users {
         passes = new ArrayList<>();
         users.add("admin");
         passes.add("admin");
+        users.add("player");
+        passes.add("player");
     }
 
     public int isUser (String name)
@@ -38,7 +40,12 @@ public class Users {
             if (currentUsername.equals(""))
                 currentUsername = name;
             else
-                secondUsername = name;
+            {
+             if (name.equals(currentUsername))
+                 return false;
+             else
+                 secondUsername = name;
+            }
             return true;
         }
 

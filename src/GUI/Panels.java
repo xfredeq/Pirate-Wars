@@ -16,7 +16,7 @@ public class Panels extends JFrame implements ActionListener {
     private Home homePane = new Home();
     private Settings settingsPane = new Settings();
     private Play playPane = new Play();
-    private Ships shipsPane, shipsPane2;
+    private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
     private boolean[][] board1, board2;
     private boolean mode=false;
@@ -165,8 +165,9 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == playPane.easy)
         {
             settingsPane.setGameMode("easy");
-            board1=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
-            board2=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
+            //board1=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
+            //board2=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
+            mode=false;
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);

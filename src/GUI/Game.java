@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends JPanel implements ActionListener {
     private final int fieldSize;
@@ -316,6 +318,70 @@ public class Game extends JPanel implements ActionListener {
 
     private void easyGame(Object source)
     {
+        System.out.println("frwfwf");
+        turn=false;
+        for (int i = 0; i < fieldSize; i++)
+        {
+            for (int j = 0; j < fieldSize; j++)
+            {
+                if (p1 > 0 && p2 > 0)
+                {
+                    if (!turn && source == board1[i][j])
+                    {
+                        if (tab1[i][j] == 1) {
+                            board1[i][j].setBackground(Color.pink);
+                            tab1[i][j] = 2;
+                            points2.setText("ships: " + (--p2));
+                        } else if (tab1[i][j] == 0)
+                        {
+                            board1[i][j].setBackground(Color.BLACK);
+                            tab1[i][j] = 3;
+                            turn = true;
+                            turn1.setBackground(Color.RED);
+                            turn2.setBackground(Color.GREEN);
+                        }
+                    }
+                    else
+                    {
+                        Random rand = new Random();
+                        int r1=rand.nextInt(fieldSize);
+                        int r2=rand.nextInt(fieldSize);
+
+                        while(tab2[r1][r2] != 0)
+                        {
+                            r1=rand.nextInt(fieldSize);
+                            r2=rand.nextInt(fieldSize);
+                        }
+
+                        if (tab2[r1][r2] == 1)
+                        {
+                            board2[r1][r2].setBackground(Color.pink);
+                            tab2[r1][r2] = 2;
+                            points1.setText("ships: " + (--p1));
+                        }
+                        else if (tab2[r1][r2] == 0)
+                        {
+                            board2[r1][r2].setBackground(Color.BLACK);
+                            tab2[r1][r2] = 3;
+                            turn = false;
+                            turn2.setBackground(Color.RED);
+                            turn1.setBackground(Color.GREEN);
+                        }
+
+                    }
+                }
+                else
+                {
+                    if(p1==0)
+                        winner = user2;
+                    else
+                        winner = user1;
+
+                    showEnd();
+                }
+            }
+
+        }
 
     }
 

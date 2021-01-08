@@ -3,25 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
