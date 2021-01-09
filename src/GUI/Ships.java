@@ -46,7 +46,6 @@ public class Ships extends JPanel implements ActionListener {
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         shipCount.setAlignmentX(Component.CENTER_ALIGNMENT);
-        //shipCount.setText(String.valueOf(this.shipSurface));
 
         pane = new JPanel(new GridLayout(fieldSize, fieldSize));
         pane.setMaximumSize(new Dimension(400, 400));
@@ -67,7 +66,10 @@ public class Ships extends JPanel implements ActionListener {
         }
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Verdana", Font.PLAIN, 36));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
+        title.setForeground(Color.RED);
+        title.setOpaque(true);
     }
 
     private void addComponents ( )

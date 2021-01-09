@@ -1,5 +1,7 @@
 package GUI;
 
+import Other.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +24,6 @@ public class Game extends JPanel implements ActionListener {
     private String user1;
     private String user2;
     private final String gameMode;
-
     private JPanel pane, controlPane;
 
     private final JLabel title = new JLabel("Pirate Wars");
@@ -31,6 +32,7 @@ public class Game extends JPanel implements ActionListener {
     private JLabel points2;
     private JLabel victory;
     private JLabel winn;
+    private JLabel time;
 
     private JPanel endPane;
 
@@ -43,6 +45,7 @@ public class Game extends JPanel implements ActionListener {
     public JButton turn2 = new JButton();
     public JButton back = new JButton("Back to main menu");
 
+    public CLK clk=new CLK();
 
     public Game (String mode, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface, String user1, String user2)
     {
@@ -64,6 +67,7 @@ public class Game extends JPanel implements ActionListener {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         vs.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        clk.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setVisible(false);
 
         sur1.addActionListener(this);
@@ -92,26 +96,33 @@ public class Game extends JPanel implements ActionListener {
         else
             player2 =new JLabel(user2, SwingConstants.CENTER);
 
-        player1.setBackground(Color.WHITE);
-        player1.setForeground(Color.MAGENTA);
-        player1.setFont(new Font("Verdana", Font.BOLD, 48));
-        //player1.setOpaque(true);
+        player1.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
+        player1.setForeground(Color.YELLOW);
+        player1.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+        player1.setOpaque(true);
 
-        player2.setBackground(Color.WHITE);
-        player2.setForeground(Color.MAGENTA);
-        player2.setFont(new Font("Verdana", Font.BOLD, 48));
-        //player2.setOpaque(true);
+        player2.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
+        player2.setForeground(Color.YELLOW);
+        player2.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
+        player2.setOpaque(true);
 
-        vs.setBackground(Color.WHITE);
-        vs.setForeground(Color.MAGENTA);
+        vs.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
+        vs.setForeground(Color.YELLOW);
         vs.setFont(new Font("Verdana", Font.BOLD, 48));
-        //vs.setOpaque(true);
+        vs.setOpaque(true);
 
         points1=new JLabel("ships: " + p1, SwingConstants.CENTER);
         points2=new JLabel("ships: " + p2, SwingConstants.CENTER);
 
+        points1.setFont(new Font("Verdana", Font.BOLD, 30));
+        points2.setFont(new Font("Verdana", Font.BOLD, 30));
 
-        title.setFont(new Font("Verdana", Font.PLAIN, 36));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
+        title.setForeground(Color.RED);
+        title.setOpaque(true);
+
+        clk.setMaximumSize(new Dimension(200,200));
 
         pane = new JPanel(new GridLayout(1, 3));
         pane.setMaximumSize(new Dimension(1800, 600));
@@ -122,18 +133,23 @@ public class Game extends JPanel implements ActionListener {
         JPanel pane2 = new JPanel(new GridLayout(fieldSize, fieldSize));
 
         endPane = new JPanel();
-        endPane.setLayout(new GridLayout(2,1));
+        endPane.setLayout(new GridLayout(3,1));
         endPane.setOpaque(false);
 
         victory = new JLabel("", SwingConstants.CENTER);
-        victory.setFont(new Font("Verdana", Font.PLAIN, 36));
+        victory.setFont(new Font("Comic Sans MS", Font.PLAIN, 60));
         victory.setOpaque(false);
 
+        time = new JLabel("", SwingConstants.CENTER);
+        time.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        time.setOpaque(false);
+
         winn = new JLabel("", SwingConstants.CENTER);
-        winn.setFont(new Font("Verdana", Font.PLAIN, 24));
+        winn.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
         winn.setOpaque(false);
 
         endPane.add(victory);
+        endPane.add(time);
         endPane.add(winn);
 
         pane.add(pane1);
@@ -206,6 +222,7 @@ public class Game extends JPanel implements ActionListener {
 
     private void addComponents ( )
     {
+        add(clk);
         add(Box.createVerticalGlue());
         add(title);
         add(Box.createVerticalGlue());
@@ -418,16 +435,20 @@ public class Game extends JPanel implements ActionListener {
 
     private void showEnd ( )
     {
+        clk.stop();
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++) {
                 if (tab2[i][j] == 1 && board2[i][j].getBackground() == Color.BLUE)
                     board2[i][j].setBackground(Color.GREEN);
+                board2[i][j].removeActionListener(this);
                 if (tab1[i][j] == 1 && board1[i][j].getBackground() == Color.BLUE)
                     board1[i][j].setBackground(Color.GREEN);
+                board1[i][j].removeActionListener(this);
             }
         }
 
         victory.setText("VICTORY!");
+        time.setText(clk.getTime());
         winn.setText("Winner: " + winner);
         endPane.setBackground(Color.ORANGE);
         endPane.setOpaque(true);

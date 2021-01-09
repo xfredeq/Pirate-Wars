@@ -33,12 +33,17 @@ public class Sign extends JPanel
         loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         confirmPassLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         loginField.setMaximumSize(new Dimension(200,1));
         passField.setMaximumSize(new Dimension(200,1));
         confirmPassField.setMaximumSize(new Dimension(200,1));
-        title.setFont(new Font("Verdana",Font.PLAIN,36));
+
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
+        title.setForeground(Color.RED);
+        title.setOpaque(true);
 
         File imageFile = new File("graphics\\bg1.jpg");
         try

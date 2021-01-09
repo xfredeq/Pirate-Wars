@@ -31,9 +31,13 @@ public class Home extends JPanel {
         credits.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         user.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Verdana", Font.PLAIN, 36));
+
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
+        title.setForeground(Color.RED);
+        title.setOpaque(true);
     }
 
     private void addComponents ( )

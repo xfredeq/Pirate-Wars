@@ -1,11 +1,12 @@
 package GUI;
 
-import Backend.*;
+import Other.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class Panels extends JFrame implements ActionListener {
 
@@ -228,6 +229,7 @@ public class Panels extends JFrame implements ActionListener {
 
                     cardPane.add(gamePane, "Game Pane");
                     cards.show(cardPane, "Game Pane");
+                    gamePane.clk.start();
                 }
             }
             else
@@ -256,6 +258,7 @@ public class Panels extends JFrame implements ActionListener {
 
                 cardPane.add(gamePane, "Game Pane");
                 cards.show(cardPane, "Game Pane");
+                gamePane.clk.start();
             }
         }
         else if(source == gamePane.back)
