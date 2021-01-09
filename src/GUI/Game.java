@@ -246,16 +246,34 @@ public class Game extends JPanel implements ActionListener {
         else if(gameMode.equals("guest") || gameMode.equals("player"))
             vsPlayerGame(source);
 
-        if(source==sur1)
-        {
-            winner=user2;
-            showEnd();
-        }
-        else if(source==sur2)
-        {
-            winner=user1;
-            showEnd();
-        }
+
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run ( )
+            {
+                if(source==sur1)
+                {
+                    winner=user2;
+                    showEnd();
+                }
+                else if(source==sur2)
+                {
+                    winner=user1;
+                    showEnd();
+                }
+                if(p1==0)
+                {
+                    winner=user2;
+                    showEnd();
+                }
+                else if(p2==0)
+                {
+                    winner=user1;
+                    showEnd();
+                }
+            }
+        });
+
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -398,10 +416,19 @@ public class Game extends JPanel implements ActionListener {
         }
     }
 
-    private void showEnd()
+    private void showEnd ( )
     {
+        for (int i = 0; i < fieldSize; i++) {
+            for (int j = 0; j < fieldSize; j++) {
+                if (tab2[i][j] == 1 && board2[i][j].getBackground() == Color.BLUE)
+                    board2[i][j].setBackground(Color.GREEN);
+                if (tab1[i][j] == 1 && board1[i][j].getBackground() == Color.BLUE)
+                    board1[i][j].setBackground(Color.GREEN);
+            }
+        }
+
         victory.setText("VICTORY!");
-        winn.setText("Winner: "+winner);
+        winn.setText("Winner: " + winner);
         endPane.setBackground(Color.ORANGE);
         endPane.setOpaque(true);
         back.setVisible(true);
@@ -483,13 +510,19 @@ public class Game extends JPanel implements ActionListener {
                 {
                     clear(visited1);
                     if(shot(i,j, tab1, visited1))
+                    {
                         board1[i][j].setBackground(Color.RED);
+                        tab1[i][j]=4;
+                    }
                 }
                 if(tab2[i][j]==2)
                 {
                     clear(visited2);
                     if(shot(i,j, tab2, visited2))
+                    {
                         board2[i][j].setBackground(Color.RED);
+                        tab2[i][j]=4;
+                    }
                 }
             }
         }
@@ -508,7 +541,6 @@ public class Game extends JPanel implements ActionListener {
         int r1, r2;
         while(turn)
         {
-            sleep(400);
             r1=rand.nextInt(fieldSize);
             r2=rand.nextInt(fieldSize);
             while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
@@ -518,12 +550,14 @@ public class Game extends JPanel implements ActionListener {
             }
             if(tab2[r1][r2]==1)
             {
+                sleep(200);
                 board2[r1][r2].setBackground(Color.pink);
                 tab2[r1][r2]=2;
                 points1.setText("ships: " + (--p1));
             }
             else if(tab2[r1][r2]==0)
             {
+                sleep(200);
                 board2[r1][r2].setBackground(Color.BLACK);
                 tab2[r1][r2]=3;
                 turn=false;
@@ -538,24 +572,65 @@ public class Game extends JPanel implements ActionListener {
     private boolean mediumShooting(boolean turn, Random rand) throws InterruptedException
     {
         int r1, r2;
+        boolean czy;
         while(turn)
         {
-            sleep(400);
+            czy=false;
             r1=rand.nextInt(fieldSize);
             r2=rand.nextInt(fieldSize);
-            while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
+            for(int i=0;i<fieldSize;i++)
             {
-                r1=rand.nextInt(fieldSize);
-                r2=rand.nextInt(fieldSize);
+                for(int j=0;j<fieldSize;j++)
+                {
+                    if(tab2[i][j]==2)
+                    {
+                        czy=true;
+                        if(i-1>=0 && (tab2[i-1][j]==0 || tab2[i-1][j]==1))
+                        {
+                            r1=i-1;
+                            r2=j;
+                            break;
+                        }
+                        if(i+1<fieldSize && (tab2[i+1][j]==0 || tab2[i+1][j]==1))
+                        {
+                            r1=i+1;
+                            r2=j;
+                            break;
+                        }
+                        if(j-1>=0 && (tab2[i][j-1]==0 || tab2[i][j-1]==1))
+                        {
+                            r1=i;
+                            r2=j-1;
+                            break;
+                        }
+                        if(j+1<fieldSize && (tab2[i][j+1]==0 || tab2[i][j+1]==1))
+                        {
+                            r1=i;
+                            r2=j+1;
+                            break;
+                        }
+                    }
+                }
             }
+            if(!czy)
+            {
+                while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
+                {
+                    r1=rand.nextInt(fieldSize);
+                    r2=rand.nextInt(fieldSize);
+                }
+            }
+
             if(tab2[r1][r2]==1)
             {
+                sleep(200);
                 board2[r1][r2].setBackground(Color.pink);
                 tab2[r1][r2]=2;
                 points1.setText("ships: " + (--p1));
             }
             else if(tab2[r1][r2]==0)
             {
+                sleep(200);
                 board2[r1][r2].setBackground(Color.BLACK);
                 tab2[r1][r2]=3;
                 turn=false;
