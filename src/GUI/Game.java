@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.*;
 
 public class Game extends JPanel implements ActionListener {
     private final int fieldSize;
@@ -66,7 +67,12 @@ public class Game extends JPanel implements ActionListener {
         back.setVisible(false);
 
         sur1.addActionListener(this);
-        sur2.addActionListener(this);
+        sur2.setVisible(false);
+        if(gameMode.equals("guest") || gameMode.equals("player"))
+        {
+            sur2.addActionListener(this);
+            sur2.setVisible(true);
+        }
 
         JLabel player1;
         if(user1.equals(""))
@@ -234,7 +240,9 @@ public class Game extends JPanel implements ActionListener {
     {
         Object source = e.getSource();
         if(gameMode.equals("easy"))
-            easyGame(source);
+                autoGame(source);
+        else if(gameMode.equals("medium"))
+                autoGame(source);
         else if(gameMode.equals("guest") || gameMode.equals("player"))
             vsPlayerGame(source);
 
@@ -316,10 +324,9 @@ public class Game extends JPanel implements ActionListener {
 
     }
 
-    private void easyGame(Object source)
+    private void autoGame (Object source )
     {
-        System.out.println("frwfwf");
-        turn=false;
+        Random rand=new Random();
         for (int i = 0; i < fieldSize; i++)
         {
             for (int j = 0; j < fieldSize; j++)
@@ -340,34 +347,42 @@ public class Game extends JPanel implements ActionListener {
                             turn1.setBackground(Color.RED);
                             turn2.setBackground(Color.GREEN);
                         }
-                    }
-                    else
-                    {
-                        Random rand = new Random();
-                        int r1=rand.nextInt(fieldSize);
-                        int r2=rand.nextInt(fieldSize);
-
-                        while(tab2[r1][r2] != 0)
+                        if(gameMode.equals("easy"))
                         {
-                            r1=rand.nextInt(fieldSize);
-                            r2=rand.nextInt(fieldSize);
-                        }
+                            EventQueue.invokeLater(new Runnable() {
+                                @Override
+                                public void run ( )
+                                {
+                                    try
+                                    {
+                                        turn=easyShooting(turn, rand);
+                                    }
+                                    catch (InterruptedException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
 
-                        if (tab2[r1][r2] == 1)
-                        {
-                            board2[r1][r2].setBackground(Color.pink);
-                            tab2[r1][r2] = 2;
-                            points1.setText("ships: " + (--p1));
                         }
-                        else if (tab2[r1][r2] == 0)
+                        else if(gameMode.equals("medium"))
                         {
-                            board2[r1][r2].setBackground(Color.BLACK);
-                            tab2[r1][r2] = 3;
-                            turn = false;
-                            turn2.setBackground(Color.RED);
-                            turn1.setBackground(Color.GREEN);
-                        }
+                            EventQueue.invokeLater(new Runnable() {
+                                @Override
+                                public void run ( )
+                                {
+                                    try
+                                    {
+                                        turn=mediumShooting(turn, rand);
+                                    }
+                                    catch (InterruptedException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
 
+                        }
                     }
                 }
                 else
@@ -380,9 +395,7 @@ public class Game extends JPanel implements ActionListener {
                     showEnd();
                 }
             }
-
         }
-
     }
 
     private void showEnd()
@@ -429,25 +442,25 @@ public class Game extends JPanel implements ActionListener {
                 t[3] = false;
 
 
-            if (t[0] && tab[i - 1][j] != 0  && !visited[i - 1][j]) {
+            if (t[0] && tab[i - 1][j] != 0 && tab[i - 1][j] != 3 && !visited[i - 1][j]) {
                 t[0] = shot(i - 1, j, tab, visited);
             } else
                 t[0] = true;
 
 
-            if (t[1] && tab[i + 1][j] != 0  && !visited[i + 1][j]) {
+            if (t[1] && tab[i + 1][j] != 0 && tab[i + 1][j] != 3 && !visited[i + 1][j]) {
                 t[1] = shot(i + 1, j, tab, visited);
             } else
                 t[1] = true;
 
 
-            if (t[2] && tab[i][j - 1] != 0 && !visited[i][j - 1]) {
+            if (t[2] && tab[i][j - 1] != 0 && tab[i][j - 1] != 3 && !visited[i][j - 1]) {
                 t[2] = shot(i, j - 1, tab, visited);
             } else
                 t[2] = true;
 
 
-            if (t[3] && tab[i][j + 1] != 0 && !visited[i][j + 1]) {
+            if (t[3] && tab[i][j + 1] != 0 && tab[i][j + 1] != 3 && !visited[i][j + 1]) {
                 t[3] = shot(i, j + 1, tab, visited);
             } else
                 t[3] = true;
@@ -459,7 +472,8 @@ public class Game extends JPanel implements ActionListener {
     private void checkShot()
     {
 
-        boolean[][] visited = new boolean[fieldSize][fieldSize];
+        boolean[][] visited1 = new boolean[fieldSize][fieldSize];
+        boolean[][] visited2 = new boolean[fieldSize][fieldSize];
 
         for (int i = 0; i < fieldSize; i++)
         {
@@ -467,14 +481,14 @@ public class Game extends JPanel implements ActionListener {
             {
                 if(tab1[i][j]==2)
                 {
-                    clear(visited);
-                    if(shot(i,j, tab1, visited))
+                    clear(visited1);
+                    if(shot(i,j, tab1, visited1))
                         board1[i][j].setBackground(Color.RED);
                 }
                 if(tab2[i][j]==2)
                 {
-                    clear(visited);
-                    if(shot(i,j, tab2, visited))
+                    clear(visited2);
+                    if(shot(i,j, tab2, visited2))
                         board2[i][j].setBackground(Color.RED);
                 }
             }
@@ -487,6 +501,70 @@ public class Game extends JPanel implements ActionListener {
             for (int j = 0; j < fieldSize; j++)
                 tab[i][j] = false;
         }
+    }
+
+    private boolean easyShooting(boolean turn, Random rand) throws InterruptedException
+    {
+        int r1, r2;
+        while(turn)
+        {
+            sleep(400);
+            r1=rand.nextInt(fieldSize);
+            r2=rand.nextInt(fieldSize);
+            while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
+            {
+                r1=rand.nextInt(fieldSize);
+                r2=rand.nextInt(fieldSize);
+            }
+            if(tab2[r1][r2]==1)
+            {
+                board2[r1][r2].setBackground(Color.pink);
+                tab2[r1][r2]=2;
+                points1.setText("ships: " + (--p1));
+            }
+            else if(tab2[r1][r2]==0)
+            {
+                board2[r1][r2].setBackground(Color.BLACK);
+                tab2[r1][r2]=3;
+                turn=false;
+                turn2.setBackground(Color.RED);
+                sleep(100);
+                turn1.setBackground(Color.GREEN);
+            }
+        }
+        return false;
+    }
+
+    private boolean mediumShooting(boolean turn, Random rand) throws InterruptedException
+    {
+        int r1, r2;
+        while(turn)
+        {
+            sleep(400);
+            r1=rand.nextInt(fieldSize);
+            r2=rand.nextInt(fieldSize);
+            while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
+            {
+                r1=rand.nextInt(fieldSize);
+                r2=rand.nextInt(fieldSize);
+            }
+            if(tab2[r1][r2]==1)
+            {
+                board2[r1][r2].setBackground(Color.pink);
+                tab2[r1][r2]=2;
+                points1.setText("ships: " + (--p1));
+            }
+            else if(tab2[r1][r2]==0)
+            {
+                board2[r1][r2].setBackground(Color.BLACK);
+                tab2[r1][r2]=3;
+                turn=false;
+                turn2.setBackground(Color.RED);
+                sleep(100);
+                turn1.setBackground(Color.GREEN);
+            }
+        }
+        return false;
     }
 
 }

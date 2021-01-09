@@ -12,7 +12,7 @@ public class Play extends JPanel
     public BufferedImage image;
     public JButton easy=new JButton("Easy");
     public JButton medium=new JButton("Medium");
-    public JButton hard=new JButton("Hard");
+    public JButton hard=new JButton("Hard - TBD");
     public JButton guest=new JButton("Play vs Guest");
     public JButton player=new JButton("Play vs 2. player");
     public JButton back=new JButton("back");
@@ -39,6 +39,8 @@ public class Play extends JPanel
         multi.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Verdana",Font.PLAIN,36));
+
+        hard.setBackground(Color.RED);
     }
 
     private void addComponents ( )

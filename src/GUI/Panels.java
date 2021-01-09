@@ -65,7 +65,7 @@ public class Panels extends JFrame implements ActionListener {
 
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
-        //playPane.medium.addActionListener(this);;
+        playPane.medium.addActionListener(this);;
         //playPane.hard.addActionListener(this);
         playPane.guest.addActionListener(this);
         playPane.player.addActionListener(this);
@@ -165,8 +165,17 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == playPane.easy)
         {
             settingsPane.setGameMode("easy");
-            //board1=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
-            //board2=new boolean[settingsPane.getFieldSize()][settingsPane.getFieldSize()];
+            mode=false;
+            shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
+            cardPane.add(shipsPane, "Ships Pane");
+            shipsPane.back.addActionListener(this);
+            shipsPane.start.addActionListener(this);
+
+            cards.show(cardPane, "Ships Pane");
+        }
+        else if(source == playPane.medium)
+        {
+            settingsPane.setGameMode("medium");
             mode=false;
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
