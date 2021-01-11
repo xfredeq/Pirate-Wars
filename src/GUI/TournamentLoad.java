@@ -84,7 +84,7 @@ public class TournamentLoad extends JPanel
         g2d.drawImage(image, 0, 0, this);
     }
 
-    public void showScoreboard()
+    public void showTournaments()
     {
         users.sort();
         ArrayList<String> users = this.users.getUsers();

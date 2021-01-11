@@ -1,5 +1,8 @@
 package GUI;
 
+import Other.Data;
+import Other.Tournament;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -10,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TournamentSettings extends JPanel implements ChangeListener, ActionListener {
     private int fieldSize;
@@ -18,22 +22,26 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     private int maxShipSurface;
     private int playersNumber;
 
-    private String gameMode;
+    private Data data;
 
     private BufferedImage image;
 
-    public JButton dft = new JButton("Restore Default");
     public JButton back = new JButton("back");
-    public JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
-    public JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
-    public JSlider ships = new JSlider(JSlider.HORIZONTAL);
+    public JButton create = new JButton("Create Tournament");
+
+    private final JButton dft = new JButton("Restore Default");
+    private JTextField name = new JTextField();
+    private final JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
+    private final JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
+    private final JSlider ships = new JSlider(JSlider.HORIZONTAL);
     private final JLabel playersLabel = new JLabel("Players number: ");
     private final JLabel fieldLabel = new JLabel("Field Size(NxN): ");
     private final JLabel shipsLabel = new JLabel("Ship surface: ");
     private final JLabel title = new JLabel("Pirate Wars");
 
-    public TournamentSettings ( )
+    public TournamentSettings (Data data )
     {
+        this.data=data;
         setDefault();
         setSettings();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -48,6 +56,10 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     {
         dft.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        create.setAlignmentX(Component.CENTER_ALIGNMENT);
+        name.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        name.setMaximumSize(new Dimension(200,1));
 
         playersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         fieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -98,6 +110,8 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         add(Box.createVerticalGlue());
         add(dft);
         add(Box.createVerticalGlue());
+        add(name);
+        add(Box.createVerticalGlue());
         add(playersLabel);
         add(players);
         add(Box.createVerticalGlue());
@@ -106,6 +120,8 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         add(Box.createVerticalGlue());
         add(shipsLabel);
         add(ships);
+        add(Box.createVerticalGlue());
+        add(create);
         add(Box.createVerticalGlue());
         add(back);
         add(Box.createVerticalGlue());
@@ -126,17 +142,45 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
 
     public void setDefault ( )
     {
+        setDefaultName();
         players.setValue(5);
         field.setValue(10);
         ships.setValue(20);
     }
 
-    public void setSettings ( )
+    private void setSettings ( )
     {
         playersNumber=players.getValue();
         fieldSize = field.getValue();
         shipSurface = ships.getValue();
         adjustSettings();
+    }
+
+    private void setDefaultName()
+    {
+        ArrayList<Tournament> t = data.getTournaments();
+        String tmp, name = "Tournament_";
+        boolean czy=true;
+        for(int i=1;i<10000;i++)
+        {
+            czy=true;
+            tmp=name+String.valueOf(i);
+            for(int j=0;j<t.size();j++)
+            {
+                if(tmp.equals(t.get(j).name))
+                {
+                    czy=false;
+                    break;
+                }
+            }
+            if(czy)
+            {
+                name+=String.valueOf(i);
+                this.name.setText(name);
+                return;
+            }
+        }
+
     }
 
     @Override
@@ -176,13 +220,10 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         return fieldSize;
     }
 
-    public String getGameMode ( )
+    public int getPlayers ( )
     {
-        return gameMode;
+        return playersNumber;
     }
 
-    public void setGameMode (String gameMode)
-    {
-        this.gameMode = gameMode;
-    }
+
 }

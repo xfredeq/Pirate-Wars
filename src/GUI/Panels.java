@@ -6,30 +6,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import static java.awt.EventQueue.invokeLater;
 
 public class Panels extends JFrame implements ActionListener {
 
     private final Users users = new Users();
+    private final Data data = new Data(users);
+
     private final Start startPane = new Start();
     private final Login loginPane = new Login();
     private final Sign signPane = new Sign();
     private final Home homePane = new Home();
     private final Settings settingsPane = new Settings();
-    private final TournamentSettings tournamentSettingsPane = new TournamentSettings();
+    private final TournamentSettings tSettingsPane = new TournamentSettings(data);
     private final Scoreboard scorePane = new Scoreboard(users);
     private final Play playPane = new Play();
-    private final TournamentStart tournamentStartPane = new TournamentStart();
-    private final TournamentLoad tournamentLoadPane = new TournamentLoad();
+    private final TournamentStart tStartPane = new TournamentStart();
+    private final TournamentLoad tLoadPane = new TournamentLoad();
     private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
 
     private boolean[][] board1, board2;
     private boolean mode=false;
 
-    private final Data data = new Data(users);
 
     JPanel cardPane = new JPanel();
     CardLayout cards;
@@ -65,9 +65,9 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
         cardPane.add(scorePane, "Scoreboard Pane");
-        cardPane.add(tournamentSettingsPane, "TournamentSettings Pane");
-        cardPane.add(tournamentStartPane, "TournamentStart Pane");
-        cardPane.add(tournamentLoadPane, "TournamentLoad Pane");
+        cardPane.add(tSettingsPane, "TournamentSettings Pane");
+        cardPane.add(tStartPane, "TournamentStart Pane");
+        cardPane.add(tLoadPane, "TournamentLoad Pane");
 
         startPane.login.addActionListener(this);
         startPane.signin.addActionListener(this);
@@ -98,13 +98,14 @@ public class Panels extends JFrame implements ActionListener {
         playPane.player.addActionListener(this);
         playPane.tournament.addActionListener(this);
 
-        tournamentStartPane.newT.addActionListener(this);
-        tournamentStartPane.loadT.addActionListener(this);
-        tournamentStartPane.back.addActionListener(this);
+        tStartPane.newT.addActionListener(this);
+        tStartPane.loadT.addActionListener(this);
+        tStartPane.back.addActionListener(this);
 
-        tournamentLoadPane.back.addActionListener(this);
+        tLoadPane.back.addActionListener(this);
 
-        tournamentSettingsPane.back.addActionListener(this);
+        tSettingsPane.back.addActionListener(this);
+        tSettingsPane.create.addActionListener(this);
 
 
         this.add(cardPane);
@@ -260,16 +261,25 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source== playPane.tournament)
             cards.show(cardPane, "TournamentStart Pane");
-        else if(source== tournamentStartPane.back)
+        else if(source== tStartPane.back)
             cards.show(cardPane, "Play Pane");
-        else if(source== tournamentStartPane.newT)
+        else if(source== tStartPane.newT)
             cards.show(cardPane, "TournamentSettings Pane");
-        else if(source== tournamentStartPane.loadT)
+        else if(source== tStartPane.loadT)
             cards.show(cardPane, "TournamentLoad Pane");
-        else if(source== tournamentSettingsPane.back)
+        else if(source== tSettingsPane.back)
+        {
+            tSettingsPane.setDefault();
             cards.show(cardPane, "TournamentStart Pane");
-        else if(source== tournamentLoadPane.back)
+        }
+        else if(source== tLoadPane.back)
             cards.show(cardPane, "TournamentStart Pane");
+        else if(source== tSettingsPane.create)
+        {
+            Tournament t = new Tournament("t1", tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip());
+            t.tLogin(cardPane, cards);
+
+        }
         else if(source == shipsPane.start)
         {
             if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)

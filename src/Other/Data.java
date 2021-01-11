@@ -9,14 +9,16 @@ import java.util.Scanner;
 
 public class Data
 {
-    File file;
-    Scanner read;
-    PrintWriter write;
-    Users users;
+    private final File file;
+    private Scanner read;
+    private PrintWriter write;
+    private final Users users;
+    private ArrayList<Tournament> tournaments;
 
     public Data(Users users)
     {
         this.users=users;
+        this.tournaments = new ArrayList<>();
         file = new File("dane.txt");
 
         try {
@@ -82,6 +84,14 @@ public class Data
         }
 
     }
+
+    public ArrayList<Tournament> getTournaments ( ) { return this.tournaments; }
+
+    public void addTournament(Tournament t)
+    {
+        this.tournaments.add(t);
+    }
+
 
 
 

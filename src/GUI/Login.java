@@ -32,6 +32,7 @@ public class Login extends JPanel
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         loginField.setMaximumSize(new Dimension(200,1));
         passField.setMaximumSize(new Dimension(200,1));
 
