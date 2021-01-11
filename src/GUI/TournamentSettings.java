@@ -11,31 +11,35 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Settings extends JPanel implements ChangeListener, ActionListener {
+public class TournamentSettings extends JPanel implements ChangeListener, ActionListener {
     private int fieldSize;
     private int shipSurface;
     private int biggestShip;
     private int maxShipSurface;
+    private int playersNumber;
 
     private String gameMode;
 
     private BufferedImage image;
 
     public JButton dft = new JButton("Restore Default");
-    public JButton back = new JButton("Save and back");
+    public JButton back = new JButton("back");
+    public JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
     public JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
     public JSlider ships = new JSlider(JSlider.HORIZONTAL);
+    private final JLabel playersLabel = new JLabel("Players number: ");
     private final JLabel fieldLabel = new JLabel("Field Size(NxN): ");
     private final JLabel shipsLabel = new JLabel("Ship surface: ");
     private final JLabel title = new JLabel("Pirate Wars");
 
-    public Settings ( )
+    public TournamentSettings ( )
     {
         setDefault();
         setSettings();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents();
         addComponents();
+        players.addChangeListener(this);
         field.addChangeListener(this);
         dft.addActionListener(this);
     }
@@ -45,6 +49,7 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         dft.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        playersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         fieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         shipsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -54,12 +59,17 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
+        players.setAlignmentX(Component.CENTER_ALIGNMENT);
+        players.setMajorTickSpacing(1);
+        players.setPaintTicks(true);
+        players.setPaintLabels(true);
+        players.setMaximumSize(new Dimension(1000, 80));
+
         field.setAlignmentX(Component.CENTER_ALIGNMENT);
         field.setMajorTickSpacing(1);
         field.setPaintTicks(true);
         field.setPaintLabels(true);
         field.setMaximumSize(new Dimension(1000, 80));
-
 
         ships.setAlignmentX(Component.CENTER_ALIGNMENT);
         ships.setMinimum(8);
@@ -88,6 +98,9 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         add(Box.createVerticalGlue());
         add(dft);
         add(Box.createVerticalGlue());
+        add(playersLabel);
+        add(players);
+        add(Box.createVerticalGlue());
         add(fieldLabel);
         add(field);
         add(Box.createVerticalGlue());
@@ -113,12 +126,14 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
 
     public void setDefault ( )
     {
+        players.setValue(5);
         field.setValue(10);
         ships.setValue(20);
     }
 
     public void setSettings ( )
     {
+        playersNumber=players.getValue();
         fieldSize = field.getValue();
         shipSurface = ships.getValue();
         adjustSettings();

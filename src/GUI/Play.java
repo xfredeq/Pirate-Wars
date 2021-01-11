@@ -15,6 +15,7 @@ public class Play extends JPanel
     public JButton hard=new JButton("Hard - TBD");
     public JButton guest=new JButton("Play vs Guest");
     public JButton player=new JButton("Play vs 2. player");
+    public JButton tournament=new JButton("Tournament");
     public JButton back=new JButton("back");
     private JLabel title=new JLabel("Pirate Wars");
     private JLabel single=new JLabel("SinglePlayer");
@@ -34,6 +35,7 @@ public class Play extends JPanel
         hard.setAlignmentX(Component.CENTER_ALIGNMENT);
         player.setAlignmentX(Component.CENTER_ALIGNMENT);
         guest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tournament.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
         single.setAlignmentX(Component.CENTER_ALIGNMENT);
         multi.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -65,6 +67,8 @@ public class Play extends JPanel
         add(guest);
         add(Box.createVerticalGlue());
         add(player);
+        add(Box.createVerticalGlue());
+        add(tournament);
         add(Box.createVerticalGlue());
         add(back);
         add(Box.createVerticalGlue());

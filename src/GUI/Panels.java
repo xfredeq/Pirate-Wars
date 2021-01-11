@@ -18,8 +18,11 @@ public class Panels extends JFrame implements ActionListener {
     private final Sign signPane = new Sign();
     private final Home homePane = new Home();
     private final Settings settingsPane = new Settings();
+    private final TournamentSettings tournamentSettingsPane = new TournamentSettings();
     private final Scoreboard scorePane = new Scoreboard(users);
     private final Play playPane = new Play();
+    private final TournamentStart tournamentStartPane = new TournamentStart();
+    private final TournamentLoad tournamentLoadPane = new TournamentLoad();
     private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
 
@@ -62,7 +65,9 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
         cardPane.add(scorePane, "Scoreboard Pane");
-
+        cardPane.add(tournamentSettingsPane, "TournamentSettings Pane");
+        cardPane.add(tournamentStartPane, "TournamentStart Pane");
+        cardPane.add(tournamentLoadPane, "TournamentLoad Pane");
 
         startPane.login.addActionListener(this);
         startPane.signin.addActionListener(this);
@@ -91,6 +96,15 @@ public class Panels extends JFrame implements ActionListener {
         //playPane.hard.addActionListener(this);
         playPane.guest.addActionListener(this);
         playPane.player.addActionListener(this);
+        playPane.tournament.addActionListener(this);
+
+        tournamentStartPane.newT.addActionListener(this);
+        tournamentStartPane.loadT.addActionListener(this);
+        tournamentStartPane.back.addActionListener(this);
+
+        tournamentLoadPane.back.addActionListener(this);
+
+        tournamentSettingsPane.back.addActionListener(this);
 
 
         this.add(cardPane);
@@ -244,6 +258,18 @@ public class Panels extends JFrame implements ActionListener {
 
             cards.show(cardPane, "Login Pane");
         }
+        else if(source== playPane.tournament)
+            cards.show(cardPane, "TournamentStart Pane");
+        else if(source== tournamentStartPane.back)
+            cards.show(cardPane, "Play Pane");
+        else if(source== tournamentStartPane.newT)
+            cards.show(cardPane, "TournamentSettings Pane");
+        else if(source== tournamentStartPane.loadT)
+            cards.show(cardPane, "TournamentLoad Pane");
+        else if(source== tournamentSettingsPane.back)
+            cards.show(cardPane, "TournamentStart Pane");
+        else if(source== tournamentLoadPane.back)
+            cards.show(cardPane, "TournamentStart Pane");
         else if(source == shipsPane.start)
         {
             if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
@@ -302,6 +328,7 @@ public class Panels extends JFrame implements ActionListener {
         {
             cards.show(cardPane, "Home Pane");
         }
+
     }
 
     private void getBoard1()
