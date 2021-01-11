@@ -18,6 +18,7 @@ public class Panels extends JFrame implements ActionListener {
     private final Sign signPane = new Sign();
     private final Home homePane = new Home();
     private final Settings settingsPane = new Settings();
+    private final Scoreboard scorePane = new Scoreboard(users);
     private final Play playPane = new Play();
     private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
@@ -49,7 +50,7 @@ public class Panels extends JFrame implements ActionListener {
         this.setVisible(true);
 
     }
-    
+
     private void setLayout ( )
     {
         cards = new CardLayout();
@@ -60,6 +61,7 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(homePane, "Home Pane");
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
+        cardPane.add(scorePane, "Scoreboard Pane");
 
 
         startPane.login.addActionListener(this);
@@ -75,10 +77,13 @@ public class Panels extends JFrame implements ActionListener {
 
         homePane.play.addActionListener(this);
         homePane.settings.addActionListener(this);
+        homePane.score.addActionListener(this);
         homePane.logout.addActionListener(this);
         homePane.exit.addActionListener(this);
 
         settingsPane.back.addActionListener(this);
+
+        scorePane.back.addActionListener(this);
 
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
@@ -166,6 +171,11 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source == homePane.settings)
             cards.show(cardPane, "Settings Pane");
+        else if(source == homePane.score)
+        {
+            scorePane.showScoreboard();
+            cards.show(cardPane, "Scoreboard Pane");
+        }
         else if (source == homePane.logout)
         {
             users.setCurrentUsername("");
@@ -176,14 +186,18 @@ public class Panels extends JFrame implements ActionListener {
             data.save();
             System.exit(0);
         }
-
+        else if(source == homePane.play)
+            cards.show(cardPane, "Play Pane");
         else if (source == settingsPane.back)
         {
             settingsPane.setSettings();
             cards.show(cardPane, "Home Pane");
         }
-        else if(source == homePane.play)
-            cards.show(cardPane, "Play Pane");
+        else if(source == scorePane.back)
+        {
+            scorePane.clearScoreboard();
+            cards.show(cardPane, "Home Pane");
+        }
         else if(source == playPane.back)
             cards.show(cardPane, "Home Pane");
         else if(source == playPane.easy)
@@ -246,7 +260,7 @@ public class Panels extends JFrame implements ActionListener {
                 {
                     getBoard1();
                     getBoard2();
-                    gamePane = new Game(settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
+                    gamePane = new Game(users, settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface());
 
                     gamePane.back.addActionListener(this);
 
@@ -275,7 +289,7 @@ public class Panels extends JFrame implements ActionListener {
             {
                 getBoard1();
                 getBoard2();
-                gamePane = new Game(settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface(), users.getCurrentUsername(), users.getSecondUsername());
+                gamePane = new Game(users, settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface());
 
                 gamePane.back.addActionListener(this);
 

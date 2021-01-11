@@ -3,9 +3,9 @@ package Other;
 import java.util.ArrayList;
 
 public class Users {
-    private ArrayList<String> users;
-    private ArrayList<String> passes;
-    private ArrayList<Integer> scores;
+    private final ArrayList<String> users;
+    private final ArrayList<String> passes;
+    private final ArrayList<Integer> scores;
     private String currentUsername;
     private String secondUsername;
 
@@ -37,8 +37,7 @@ public class Users {
     {
         int i = isUser(name);
         String pass = "";
-        for (int j = 0; j < password.length; j++)
-            pass += password[j];
+        for (char c : password) pass += c;
 
         if (i >= 0 && passes.get(i).equals(pass)) {
             if (currentUsername.equals(""))
@@ -66,12 +65,10 @@ public class Users {
     public boolean register (String name, char[] password1, char[] password2)
     {
         String pass1 = "";
-        for (int j = 0; j < password1.length; j++)
-            pass1 += password1[j];
+        for (char value : password1) pass1 += value;
 
         String pass2 = "";
-        for (int j = 0; j < password2.length; j++)
-            pass2 += password2[j];
+        for (char c : password2) pass2 += c;
 
         if (!pass1.equals(pass2))
             return false;
@@ -109,6 +106,45 @@ public class Users {
             return -1;
     }
 
+    public void addScore (String name, int points )
+    {
+        int i=isUser(name);
+        if(i>=0)
+            scores.set(i, scores.get(i) + points);
+    }
+
+    public void setScore (String name, int points )
+    {
+        int i=isUser(name);
+        if(i>=0)
+            scores.set(i, points);
+    }
+
+    public void sort()
+    {
+        Integer tmp1;
+        String tmp2;
+        for(int i=0;i<users.size();i++)
+        {
+            for(int j=i+1;j<users.size();j++)
+            {
+                if(scores.get(j)>scores.get(i))
+                {
+                    tmp1=scores.get(i);
+                    scores.set(i,scores.get(j));
+                    scores.set(j,tmp1);
+
+                    tmp2=users.get(i);
+                    users.set(i,users.get(j));
+                    users.set(j,tmp2);
+
+                    tmp2=users.get(i);
+                    users.set(i,users.get(j));
+                    users.set(j,tmp2);
+                }
+            }
+        }
+    }
 
     public ArrayList<String> getUsers ( )
     {

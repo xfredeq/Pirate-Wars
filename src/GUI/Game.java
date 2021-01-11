@@ -12,15 +12,19 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import static java.awt.EventQueue.*;
 import static java.lang.Thread.*;
 
-public class Game extends JPanel implements ActionListener {
+public class Game extends JPanel implements ActionListener
+{
+    private Users users;
+
     private final int fieldSize;
     private int p1;
     private int p2;
     private boolean turn=false;
     private int[][] tab1, tab2;
-    private String winner="";
+    private String winner="", loser="";
     private String user1;
     private String user2;
     private final String gameMode;
@@ -47,13 +51,14 @@ public class Game extends JPanel implements ActionListener {
 
     public CLK clk=new CLK();
 
-    public Game (String mode, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface, String user1, String user2)
+    public Game (Users users, String mode, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface)
     {
+        this.users=users;
         this.fieldSize = fieldSize;
         this.p1 = shipSurface;
         this.p2 = shipSurface;
-        this.user1 = user1;
-        this.user2 = user2;
+        this.user1 = users.getCurrentUsername();
+        this.user2 = users.getSecondUsername();
         this.gameMode=mode;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents(brd1, brd2);
@@ -256,49 +261,45 @@ public class Game extends JPanel implements ActionListener {
     public void actionPerformed (ActionEvent e)
     {
         Object source = e.getSource();
-        if(gameMode.equals("easy"))
-                autoGame(source);
-        else if(gameMode.equals("medium"))
-                autoGame(source);
-        else if(gameMode.equals("guest") || gameMode.equals("player"))
-            vsPlayerGame(source);
+        switch (gameMode) {
+            case "easy", "medium" -> autoGame(source);
+            case "guest", "player" -> vsPlayerGame(source);
+        }
 
 
-        EventQueue.invokeLater(new Runnable() {
+        invokeLater(new Runnable() {
             @Override
             public void run ( )
             {
                 if(source==sur1)
                 {
                     winner=user2;
+                    loser=user1;
                     showEnd();
                 }
                 else if(source==sur2)
                 {
                     winner=user1;
+                    loser=user2;
                     showEnd();
                 }
                 if(p1==0)
                 {
                     winner=user2;
+                    loser=user1;
                     showEnd();
                 }
                 else if(p2==0)
                 {
                     winner=user1;
+                    loser=user2;
                     showEnd();
                 }
             }
         });
 
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run ( )
-            {
-                checkShot();
-            }
-        });
+        invokeLater(this::checkShot);
     }
 
 
@@ -384,7 +385,7 @@ public class Game extends JPanel implements ActionListener {
                         }
                         if(gameMode.equals("easy"))
                         {
-                            EventQueue.invokeLater(new Runnable() {
+                            invokeLater(new Runnable() {
                                 @Override
                                 public void run ( )
                                 {
@@ -402,7 +403,7 @@ public class Game extends JPanel implements ActionListener {
                         }
                         else if(gameMode.equals("medium"))
                         {
-                            EventQueue.invokeLater(new Runnable() {
+                            invokeLater(new Runnable() {
                                 @Override
                                 public void run ( )
                                 {
@@ -449,10 +450,24 @@ public class Game extends JPanel implements ActionListener {
 
         victory.setText("VICTORY!");
         time.setText(clk.getTime());
-        winn.setText("Winner: " + winner);
+        if(!winner.equals("Guest1") && !winner.equals("Guest2"))
+        {
+            winn.setText("Winner: " + winner + "(" + users.getScore(winner) + "+" + "3" + ")");
+            users.addScore(winner,3);
+        }
+        else
+            winn.setText("Winner: " + winner);
         endPane.setBackground(Color.ORANGE);
         endPane.setOpaque(true);
         back.setVisible(true);
+
+
+        if(!loser.equals("Guest1") && !loser.equals("Guest2"))
+        {
+            users.addScore(loser,-1);
+            if(users.getScore(loser)<0)
+                users.setScore(loser,0);
+        }
     }
 
     private boolean shot(int i, int j, int[][]tab, boolean[][] visited)

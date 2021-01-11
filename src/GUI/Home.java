@@ -11,6 +11,7 @@ public class Home extends JPanel {
     public BufferedImage image;
     public JButton play = new JButton("Play");
     public JButton settings = new JButton("Settings");
+    public JButton score = new JButton("Scoreboard");
     public JButton credits = new JButton("Credits");
     public JButton logout = new JButton("Logout");
     public JButton exit = new JButton("Exit");
@@ -28,6 +29,7 @@ public class Home extends JPanel {
     {
         play.setAlignmentX(Component.CENTER_ALIGNMENT);
         settings.setAlignmentX(Component.CENTER_ALIGNMENT);
+        score.setAlignmentX(Component.CENTER_ALIGNMENT);
         credits.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -49,6 +51,8 @@ public class Home extends JPanel {
         add(play);
         add(Box.createVerticalGlue());
         add(settings);
+        add(Box.createVerticalGlue());
+        add(score);
         add(Box.createVerticalGlue());
         add(credits);
         add(Box.createVerticalGlue());
