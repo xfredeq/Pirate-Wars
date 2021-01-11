@@ -14,7 +14,7 @@ public class Start extends JPanel
     public JButton signin=new JButton("Sign In");
     public JButton guest=new JButton("Play as Guest");
     public JButton exit = new JButton("Exit");
-    private JLabel title=new JLabel("Pirate Wars");
+    private final JLabel title=new JLabel("Pirate Wars");
 
     public Start ( )
     {

@@ -2,36 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
-      <change afterPath="$PROJECT_DIR$/src/Other/CLK.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dane.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Other/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Backend/Users.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Home.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Login.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Play.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Play.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Settings.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Settings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Ships.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Start.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Start.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Users.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Play.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Ships.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Ships.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Sign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Sign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Other/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Users.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,6 +96,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

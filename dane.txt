@@ -1,0 +1,7 @@
+PLAYER
+admin admin 7
+PLAYER
+player player 9
+PLAYER
+qwe qwe 0
+X

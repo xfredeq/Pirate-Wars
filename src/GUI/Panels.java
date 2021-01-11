@@ -6,33 +6,50 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.util.ArrayList;
+
+import static java.awt.EventQueue.invokeLater;
 
 public class Panels extends JFrame implements ActionListener {
 
-    private Users users = new Users();
-    private Start startPane = new Start();
-    private Login loginPane = new Login();
-    private Sign signPane = new Sign();
-    private Home homePane = new Home();
-    private Settings settingsPane = new Settings();
-    private Play playPane = new Play();
+    private final Users users = new Users();
+    private final Start startPane = new Start();
+    private final Login loginPane = new Login();
+    private final Sign signPane = new Sign();
+    private final Home homePane = new Home();
+    private final Settings settingsPane = new Settings();
+    private final Play playPane = new Play();
     private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
+
     private boolean[][] board1, board2;
     private boolean mode=false;
+
+    private final Data data = new Data(users);
+
     JPanel cardPane = new JPanel();
     CardLayout cards;
 
     public Panels ( )
     {
         super("Pirate Wars");
+        invokeLater(data::read);
+
+        /*ArrayList<String> users = this.users.getUsers();
+        ArrayList<String> passes = this.users.getPasses();
+        ArrayList<Integer> scores = this.users.getScores();
+
+        for(int i=0;i<users.size();i++)
+        {
+            System.out.println(users.get(i)+" "+passes.get(i)+" "+scores.get(i));
+        }*/
 
         setLayout();
         setWindow();
         this.setVisible(true);
-    }
 
+    }
+    
     private void setLayout ( )
     {
         cards = new CardLayout();
@@ -43,7 +60,6 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(homePane, "Home Pane");
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
-
 
 
         startPane.login.addActionListener(this);
@@ -70,8 +86,6 @@ public class Panels extends JFrame implements ActionListener {
         //playPane.hard.addActionListener(this);
         playPane.guest.addActionListener(this);
         playPane.player.addActionListener(this);
-
-
 
 
         this.add(cardPane);
@@ -105,11 +119,15 @@ public class Panels extends JFrame implements ActionListener {
             homePane.setUsername(users.getCurrentUsername());
         }
         else if (source == startPane.exit)
+        {
+            data.save();
             System.exit(0);
+        }
         else if (source == loginPane.back)
             cards.show(cardPane, "Start Pane");
-        else if (source == loginPane.login) {
-            EventQueue.invokeLater(new Runnable() {
+        else if (source == loginPane.login)
+        {
+            invokeLater(new Runnable() {
                 @Override
                 public void run ( )
                 {
@@ -129,7 +147,7 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Start Pane");
         else if (source == signPane.sign)
         {
-            EventQueue.invokeLater(new Runnable()
+            invokeLater(new Runnable()
             {
                 @Override
                 public void run ( )
@@ -142,6 +160,7 @@ public class Panels extends JFrame implements ActionListener {
                     }
                     else
                         signPane.sign.setBackground(Color.RED);
+
                 }
             });
         }
@@ -153,7 +172,11 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Start Pane");
         }
         else if (source == homePane.exit)
+        {
+            data.save();
             System.exit(0);
+        }
+
         else if (source == settingsPane.back)
         {
             settingsPane.setSettings();

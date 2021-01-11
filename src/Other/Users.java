@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Users {
     private ArrayList<String> users;
     private ArrayList<String> passes;
+    private ArrayList<Integer> scores;
     private String currentUsername;
     private String secondUsername;
 
@@ -14,10 +15,13 @@ public class Users {
         secondUsername = "";
         users = new ArrayList<>();
         passes = new ArrayList<>();
-        users.add("admin");
+        scores = new ArrayList<>();
+        /*users.add("admin");
         passes.add("admin");
+        scores.add(0);
         users.add("player");
         passes.add("player");
+        scores.add(0);*/
     }
 
     public int isUser (String name)
@@ -56,6 +60,7 @@ public class Users {
     {
         users.add(name);
         passes.add(password);
+        scores.add(0);
     }
 
     public boolean register (String name, char[] password1, char[] password2)
@@ -81,6 +86,10 @@ public class Users {
         }
 
     }
+    public void setCurrentUsername (String currentUsername)
+    {
+        this.currentUsername = currentUsername;
+    }
 
     public String getCurrentUsername ( )
     {
@@ -91,8 +100,28 @@ public class Users {
         return secondUsername;
     }
 
-    public void setCurrentUsername (String currentUsername)
+    public Integer getScore (String name )
     {
-        this.currentUsername = currentUsername;
+        int i=isUser(name);
+        if(i>=0)
+            return scores.get(i);
+        else
+            return -1;
+    }
+
+
+    public ArrayList<String> getUsers ( )
+    {
+        return users;
+    }
+
+    public ArrayList<String> getPasses ( )
+    {
+        return passes;
+    }
+
+    public ArrayList<Integer> getScores ( )
+    {
+        return scores;
     }
 }
