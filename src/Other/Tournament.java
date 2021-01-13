@@ -31,6 +31,8 @@ public class Tournament implements ActionListener
 
     public Tournament (Users users, String name, int playersN, int fieldSize, int shipSurface, int biggestShip)
     {
+        this.playersCounter=0;
+        this.guestCounter=1;
         this.players=new ArrayList<>();
         this.users=users;
         this.name=name;
@@ -49,8 +51,6 @@ public class Tournament implements ActionListener
 
     public void tLogin (TournamentLogin tournamentLoginPane, CardLayout cards, JPanel cardPane, TournamentHome tHome)
     {
-        this.playersCounter=0;
-        this.guestCounter=1;
         this.tHome=tHome;
         this.tLogin = tournamentLoginPane;
         this.cards=cards;
@@ -97,19 +97,33 @@ public class Tournament implements ActionListener
 
         if(source== tLogin.login)
         {
-            if(playersCounter<playersNumber)
+            if(playersCounter+1<playersNumber)
             {
+                System.out.println(playersCounter+" "+playersNumber);
                 String name = tLogin.loginField.getText();
+                System.out.println(name);
                 char[] password = tLogin.passField.getPassword();
                 String pass = "";
                 for (char c : password) pass += c;
                 int i = users.isUser(name);
-                if (i < 0 || players.contains(name)) {
+                if (i < 0  )
+                {
                     tLogin.login.setBackground(Color.RED);
-                } else {
+                    System.out.println(1);
+                }
+                else if(players.contains(name))
+                {
+                    tLogin.login.setBackground(Color.RED);
+                    System.out.println(2);
+                }
+                else {
                     if (!pass.equals(users.getPasses().get(i)))
+                    {
                         tLogin.login.setBackground(Color.RED);
-                    else {
+                        System.out.println(3);
+                    }
+                    else
+                        {
                         this.players.add(name);
                         this.points.add(0);
                         playersCounter++;
@@ -119,6 +133,27 @@ public class Tournament implements ActionListener
             }
             else
             {
+                String name = tLogin.loginField.getText();
+                char[] password = tLogin.passField.getPassword();
+                String pass = "";
+                for (char c : password) pass += c;
+                int i = users.isUser(name);
+                if (i < 0 || players.contains(name))
+                {
+                    tLogin.login.setBackground(Color.RED);
+                }
+                else
+                {
+                    if (!pass.equals(users.getPasses().get(i)))
+                        tLogin.login.setBackground(Color.RED);
+                    else
+                    {
+                        this.players.add(name);
+                        this.points.add(0);
+                        playersCounter++;
+                    }
+                }
+
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
                 this.cards.show(cardPane, "tHome Pane");
@@ -126,7 +161,7 @@ public class Tournament implements ActionListener
         }
         else if(source== tLogin.guest)
         {
-            if(playersCounter<playersNumber)
+            if(playersCounter+1<playersNumber)
             {
                 this.players.add("Guest"+String.valueOf(guestCounter++));
                 this.points.add(0);
@@ -135,6 +170,10 @@ public class Tournament implements ActionListener
             }
             else
             {
+                this.players.add("Guest"+String.valueOf(guestCounter++));
+                this.points.add(0);
+                playersCounter++;
+
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
                 this.cards.show(cardPane, "tHome Pane");
@@ -146,7 +185,25 @@ public class Tournament implements ActionListener
 
     public void sort()
     {
+        Integer tmp1;
+        String tmp2;
 
+        for(int i=0;i<players.size();i++)
+        {
+            for(int j=i+1;j<players.size();j++)
+            {
+                if(points.get(j)>points.get(i))
+                {
+                    tmp1=points.get(i);
+                    points.set(i,points.get(j));
+                    points.set(j,tmp1);
+
+                    tmp2=players.get(i);
+                    players.set(i,players.get(j));
+                    players.set(j,tmp2);
+                }
+            }
+        }
     }
 
     public ArrayList<String> getPlayers ( )

@@ -137,10 +137,6 @@ public class Users {
                     tmp2=users.get(i);
                     users.set(i,users.get(j));
                     users.set(j,tmp2);
-
-                    tmp2=users.get(i);
-                    users.set(i,users.get(j));
-                    users.set(j,tmp2);
                 }
             }
         }

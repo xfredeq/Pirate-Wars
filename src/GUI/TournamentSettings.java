@@ -196,6 +196,10 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
             ships.setMaximum(maxShipSurface);
             ships.setValue(maxShipSurface * 4 / 5);
         }
+        else if (source==players)
+        {
+            this.playersNumber=players.getValue();
+        }
     }
 
     @Override
