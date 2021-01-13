@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TLogin extends JPanel
+public class TournamentLogin extends JPanel
 {
     private BufferedImage image;
     private final JLabel loginLabel=new JLabel("login:");
@@ -19,7 +19,7 @@ public class TLogin extends JPanel
     public JButton guest=new JButton("add Guest");
     private final JLabel title=new JLabel("Pirate Wars");
 
-    public TLogin ( )
+    public TournamentLogin ( )
     {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setComponents();

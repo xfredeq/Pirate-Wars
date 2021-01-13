@@ -2,6 +2,7 @@ package GUI;
 
 import Other.Data;
 import Other.Tournament;
+import Other.Users;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     public JButton create = new JButton("Create Tournament");
 
     private final JButton dft = new JButton("Restore Default");
-    private JTextField name = new JTextField();
+    private final JTextField name = new JTextField();
     private final JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
     private final JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
     private final JSlider ships = new JSlider(JSlider.HORIZONTAL);
@@ -159,6 +160,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     private void setDefaultName()
     {
         ArrayList<Tournament> t = data.getTournaments();
+        //t.add(new Tournament(new Users(),"Tournament_1",1,1,1,2));
         String tmp, name = "Tournament_";
         boolean czy=true;
         for(int i=1;i<10000;i++)
@@ -223,6 +225,11 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     public int getPlayers ( )
     {
         return playersNumber;
+    }
+
+    public String getName ( )
+    {
+        return name.getText();
     }
 
 
