@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Login extends JPanel
+public class TLogin extends JPanel
 {
     private BufferedImage image;
     private final JLabel loginLabel=new JLabel("login:");
@@ -15,10 +15,11 @@ public class Login extends JPanel
     public JTextField loginField = new JTextField();
     public JPasswordField passField = new JPasswordField();
     public JButton login=new JButton("Log In");
-    public JButton back=new JButton("back");
+    public JButton cancel=new JButton("Cancel Tournament creation");
+    public JButton guest=new JButton("add Guest");
     private final JLabel title=new JLabel("Pirate Wars");
 
-    public Login ( )
+    public TLogin ( )
     {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setComponents();
@@ -30,12 +31,13 @@ public class Login extends JPanel
         login.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+        guest.setAlignmentX(Component.CENTER_ALIGNMENT);
+        cancel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         loginField.setMaximumSize(new Dimension(200,1));
         passField.setMaximumSize(new Dimension(200,1));
 
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
@@ -68,7 +70,9 @@ public class Login extends JPanel
         add(Box.createVerticalGlue());
         add(login);
         add(Box.createVerticalGlue());
-        add(back);
+        add(guest);
+        add(Box.createVerticalGlue());
+        add(cancel);
         add(Box.createVerticalGlue());
     }
 
@@ -82,6 +86,7 @@ public class Login extends JPanel
     {
         loginField.setText("");
         passField.setText("");
+        login.setBackground(null);
     }
 
 
