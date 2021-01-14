@@ -62,14 +62,14 @@ public class TournamentHome extends JPanel
 
         nextMatch.setHorizontalAlignment(0);
         nextMatch.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
-        nextMatch.setFont(new Font("Verdana", Font.BOLD, 60));
+        nextMatch.setFont(new Font("Verdana", Font.BOLD, 30));
         //nextMatch.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.3f));
         //nextMatch.setOpaque(false);
 
 
         lastMatch.setHorizontalAlignment(0);
         lastMatch.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
-        lastMatch.setFont(new Font("Verdana", Font.BOLD, 60));
+        lastMatch.setFont(new Font("Verdana", Font.BOLD, 30));
         //lastMatch.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.4f));
         //lastMatch.setOpaque(false);
 

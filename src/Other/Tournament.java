@@ -181,7 +181,9 @@ public class Tournament implements ActionListener
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
                 this.cards.show(cardPane, "tHome Pane");
-                start();
+                //start();
+                setNextMatch();
+                tHome.setMatches();
 
                 this.tLogin.guest.removeActionListener(this);
                 this.tLogin.login.removeActionListener(this);
@@ -209,7 +211,9 @@ public class Tournament implements ActionListener
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
                 this.cards.show(cardPane, "tHome Pane");
-                start();
+                //start();
+                setNextMatch();
+                tHome.setMatches();
 
                 this.tLogin.guest.removeActionListener(this);
                 this.tLogin.login.removeActionListener(this);
