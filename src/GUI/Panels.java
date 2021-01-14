@@ -294,11 +294,7 @@ public class Panels extends JFrame implements ActionListener {
             data.addTournament(new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip()));
             data.getLastTournament().addCurrUser();
             data.getLastTournament().tLogin(tLoginPane, cards, cardPane, tHomePane);
-            //t = new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip());
-            //t.addCurrUser();
             cards.show(cardPane, "tLogin Pane");
-            //t.tLogin(tLoginPane, cards, cardPane, tHomePane);
-            //data.addTournament(t);
 
         }
         else if(source== tLoginPane.cancel)

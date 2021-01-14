@@ -41,6 +41,10 @@ public class Play extends JPanel
         multi.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        tournament.setMaximumSize(new Dimension(200, 80));
+        tournament.setPreferredSize(new Dimension(200, 80));
+        tournament.setBackground(Color.cyan);
+
         title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
