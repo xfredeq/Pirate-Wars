@@ -92,6 +92,16 @@ public class Data
         this.tournaments.add(t);
     }
 
+    public Tournament getLastTournament()
+    {
+        return this.tournaments.get(this.tournaments.size()-1);
+    }
+
+    public void deleteLastTournament()
+    {
+        this.tournaments.remove(this.tournaments.size()-1);
+    }
+
 
 
 

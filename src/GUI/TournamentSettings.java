@@ -31,7 +31,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     public JButton create = new JButton("Create Tournament");
 
     private final JButton dft = new JButton("Restore Default");
-    private final JTextField name = new JTextField();
+    private JTextField name = new JTextField();
     private final JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
     private final JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
     private final JSlider ships = new JSlider(JSlider.HORIZONTAL);
@@ -216,10 +216,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         return biggestShip;
     }
 
-    public int getShipSurface ( )
-    {
-        return shipSurface;
-    }
+    public int getShipSurface ( ) { return shipSurface; }
 
     public int getFieldSize ( )
     {

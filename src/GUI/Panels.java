@@ -24,7 +24,7 @@ public class Panels extends JFrame implements ActionListener {
     private final Play playPane = new Play();
     private final TournamentStart tStartPane = new TournamentStart();
     private final TournamentLoad tLoadPane = new TournamentLoad();
-    private final TournamentLogin tLoginPane = new TournamentLogin();
+    private TournamentLogin tLoginPane = new TournamentLogin();
     private  TournamentHome tHomePane=new TournamentHome();
     private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
     private Game gamePane;
@@ -32,7 +32,7 @@ public class Panels extends JFrame implements ActionListener {
     private boolean[][] board1, board2;
     private boolean mode=false;
 
-    private Tournament t;
+    //private Tournament t;
 
 
     JPanel cardPane = new JPanel();
@@ -280,9 +280,9 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source== tStartPane.loadT)
             cards.show(cardPane, "tLoad Pane");
-        else if(source== tSettingsPane.back)
-            cards.show(cardPane, "tStart Pane");
         else if(source== tLoadPane.back)
+            cards.show(cardPane, "tStart Pane");
+        else if(source== tSettingsPane.back)
             cards.show(cardPane, "tStart Pane");
         else if(source== tSettingsPane.create)
         {
@@ -290,16 +290,20 @@ public class Panels extends JFrame implements ActionListener {
             tHomePane=new TournamentHome();
             cardPane.add(tHomePane, "tHome Pane");
             tHomePane.back.addActionListener(this);
-            t = new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip());
-            t.addCurrUser();
+
+            data.addTournament(new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip()));
+            data.getLastTournament().addCurrUser();
+            data.getLastTournament().tLogin(tLoginPane, cards, cardPane, tHomePane);
+            //t = new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip());
+            //t.addCurrUser();
             cards.show(cardPane, "tLogin Pane");
-            t.tLogin(tLoginPane, cards, cardPane, tHomePane);
-            data.addTournament(t);
+            //t.tLogin(tLoginPane, cards, cardPane, tHomePane);
+            //data.addTournament(t);
 
         }
         else if(source== tLoginPane.cancel)
         {
-            tLoginPane.clearFields();
+            data.deleteLastTournament();
             cards.show(cardPane, "tStart Pane");
         }
         else if(source== tHomePane.back)

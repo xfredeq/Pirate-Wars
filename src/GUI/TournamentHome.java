@@ -16,7 +16,8 @@ public class TournamentHome extends JPanel
     public BufferedImage image;
     public JButton back = new JButton("back");
     private final JLabel title=new JLabel("Pirate Wars");
-    private final JLabel score=new JLabel("Scoreboard");
+    private final JLabel score=new JLabel("THome");
+    private JPanel pane = new JPanel(new GridLayout(2, 3));
     private JPanel list = new JPanel(new GridLayout(1, 1));
 
     private Tournament t;
@@ -40,14 +41,24 @@ public class TournamentHome extends JPanel
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
-        score.setAlignmentX(Component.CENTER_ALIGNMENT);
+        score.setHorizontalAlignment(0);
         score.setFont(new Font("Arial Black", Font.BOLD, 91));
-        score.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
-        score.setForeground(Color.CYAN);
+        score.setBackground(new Color(0.1f, 0.2f, 1.0f, 0.7f));
+        score.setForeground(Color.YELLOW);
         score.setOpaque(true);
 
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
         list.setOpaque(true);
+
+        pane.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pane.add(score);
+        pane.add(Box.createHorizontalGlue());
+        pane.add(Box.createHorizontalGlue());
+        pane.add(list);
+        pane.add(Box.createHorizontalGlue());
+        pane.add(Box.createHorizontalGlue());
+        pane.setOpaque(false);
+
 
     }
 
@@ -56,8 +67,7 @@ public class TournamentHome extends JPanel
         add(Box.createVerticalGlue());
         add(title);
         add(Box.createVerticalGlue());
-        add(score);
-        add(list);
+        add(pane);
         add(Box.createVerticalGlue());
         add(back);
         add(Box.createVerticalGlue());
