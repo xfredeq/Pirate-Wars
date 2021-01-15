@@ -227,23 +227,7 @@ public class Tournament implements ActionListener
 
     }
 
-    public void sort()
-    {
-        String tmp2;
 
-        for(int i=0;i<players.size();i++)
-        {
-            for(int j=i+1;j<players.size();j++)
-            {
-                if(points.get(j)>points.get(i))
-                {
-                    tmp2=players.get(i);
-                    players.set(i,players.get(j));
-                    players.set(j,tmp2);
-                }
-            }
-        }
-    }
 
     public ArrayList<String> getPlayers ( ) { return players; }
 

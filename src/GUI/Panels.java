@@ -151,7 +151,7 @@ public class Panels extends JFrame implements ActionListener {
                 data.tHomePages.get(i).clearScoreboard();
                 currTournamentPointer=-1;
             }
-            else if(source==data.tHomePages.get(currTournamentPointer).start)
+            else if(source==data.tHomePages.get(i).start)
             {
                 mode=2;
 

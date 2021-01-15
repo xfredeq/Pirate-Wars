@@ -137,7 +137,7 @@ public class TournamentHome extends JPanel
 
     public void showTScoreboard()
     {
-        t.sort();
+
         ArrayList<String> users = this.t.getPlayers();
         ArrayList<Integer> scores = new ArrayList<>();
 
@@ -153,6 +153,28 @@ public class TournamentHome extends JPanel
                 }
             }
         }
+
+        Integer tmp1;
+        String tmp2;
+
+        for(int i=0;i<users.size();i++)
+        {
+            for(int j=0;j<users.size();j++)
+            {
+                if(scores.get(j)<scores.get(i))
+                {
+                    tmp2=users.get(i);
+                    users.set(i,users.get(j));
+                    users.set(j,tmp2);
+
+                    tmp1=scores.get(i);
+                    scores.set(i,scores.get(j));
+                    scores.set(j,tmp1);
+                }
+            }
+        }
+
+
 
         list.setMaximumSize(new Dimension(600, users.size()*40));
         list.setPreferredSize(new Dimension(600, users.size()*40));

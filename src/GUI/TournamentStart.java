@@ -14,7 +14,7 @@ public class TournamentStart extends JPanel
     public JButton loadT=new JButton("Load Tournament");
     public JButton back = new JButton("back");
 
-    private JPanel panel = new JPanel(new GridLayout(1,3));
+    private final JPanel panel = new JPanel(new GridLayout(1,3));
     private final JLabel title=new JLabel("Pirate Wars");
 
     public TournamentStart ( )
