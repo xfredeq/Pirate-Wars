@@ -14,7 +14,10 @@ import java.util.ArrayList;
 public class TournamentHome extends JPanel
 {
     public BufferedImage image;
+
     public JButton back = new JButton("back");
+    public JButton start = new JButton("Play");
+
     private final JLabel title=new JLabel("Pirate Wars");
     private final JLabel score=new JLabel("Scoreboard");
     private final JPanel list = new JPanel(new GridLayout(1, 1));
@@ -23,11 +26,14 @@ public class TournamentHome extends JPanel
     private JLabel nextMatch=new JLabel("Next Match");
     private JLabel lastMatch=new JLabel("Previous Match");
 
+    public String name;
+
     private Tournament t;
 
-    public TournamentHome ()
+    public TournamentHome (String name)
     {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        this.name=name;
         setComponents();
         addComponents();
     }
@@ -54,10 +60,10 @@ public class TournamentHome extends JPanel
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
         list.setOpaque(true);
 
-        JPanel pane1 = new JPanel(new GridLayout(2, 1));
-        pane1.add(Box.createHorizontalGlue());
-        pane1.add(score);
-        pane1.setOpaque(false);
+        start.setHorizontalAlignment(0);
+        start.setBackground(new Color(0.1f, 0.3f, 1.0f, 0.7f));
+        start.setFont(new Font("Calibri", Font.BOLD, 50));
+
 
 
         nextMatch.setHorizontalAlignment(0);
@@ -76,13 +82,13 @@ public class TournamentHome extends JPanel
         JPanel pane2 = new JPanel(new GridLayout(2, 1));
         pane2.add(nextMatch);
         pane2.add(lastMatch);
-        pane2.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.4f));
+        pane2.setBackground(Color.GREEN);
         pane2.setOpaque(true);
 
 
         pane.setAlignmentX(Component.CENTER_ALIGNMENT);
-        pane.add(pane1);
-        pane.add(Box.createHorizontalGlue());
+        pane.add(score);
+        pane.add(start);
         pane.add(pane2);
         pane.add(list);
         pane.add(Box.createHorizontalGlue());
@@ -133,10 +139,26 @@ public class TournamentHome extends JPanel
     {
         t.sort();
         ArrayList<String> users = this.t.getPlayers();
-        ArrayList<Integer> scores = this.t.getPoints();
+        ArrayList<Integer> scores = new ArrayList<>();
+
+        for(int i=0;i<users.size();i++)
+        {
+            for(int j=0;j<users.size();j++)
+            {
+
+                if(users.get(i).equals(t.getPlayersOrder().get(j)))
+                {
+                    scores.add(t.getPoints().get(j));
+                    break;
+                }
+            }
+        }
 
         list.setMaximumSize(new Dimension(600, users.size()*40));
         list.setPreferredSize(new Dimension(600, users.size()*40));
+        list.setAlignmentX(Component.CENTER_ALIGNMENT);
+        list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
+        list.setOpaque(true);
 
         list.setLayout(new GridLayout(users.size()+1, 3));
 
@@ -181,16 +203,19 @@ public class TournamentHome extends JPanel
     public void clearScoreboard()
     {
         list.removeAll();
-        t.setGuestsCounter(1);
-        t.setPlayersCounter(0);
     }
 
     public void setMatches()
     {
         if(t.nextMatch.p1==-1)
-            nextMatch.setText("error");
+            nextMatch.setText("Next match: none");
         else
-            nextMatch.setText("Next match: "+t.getPlayers().get(t.nextMatch.p1) + " vs " +t.getPlayers().get(t.nextMatch.p2));
+            nextMatch.setText("Next match: "+t.getPlayersOrder().get(t.nextMatch.p1) + " vs " +t.getPlayersOrder().get(t.nextMatch.p2));
+
+        if(t.lastMatch.p1==-1)
+            lastMatch.setText("Previous match: none");
+        else
+            lastMatch.setText("Previous match: "+t.getPlayersOrder().get(t.lastMatch.p1) + " vs " +t.getPlayersOrder().get(t.lastMatch.p2));
     }
 
 

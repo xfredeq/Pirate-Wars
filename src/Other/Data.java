@@ -1,5 +1,7 @@
 package Other;
 
+import GUI.TournamentHome;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,12 +15,14 @@ public class Data
     private Scanner read;
     private PrintWriter write;
     private final Users users;
-    private ArrayList<Tournament> tournaments;
+    private final ArrayList<Tournament> tournaments;
+    public final ArrayList<TournamentHome> tHomePages;
 
     public Data(Users users)
     {
         this.users=users;
         this.tournaments = new ArrayList<>();
+        this.tHomePages=new ArrayList<>();
         file = new File("dane.txt");
 
         try {
@@ -100,6 +104,11 @@ public class Data
     public void deleteLastTournament()
     {
         this.tournaments.remove(this.tournaments.size()-1);
+    }
+
+    public TournamentHome getLastTHomePage()
+    {
+        return this.tHomePages.get(this.tHomePages.size()-1);
     }
 
 

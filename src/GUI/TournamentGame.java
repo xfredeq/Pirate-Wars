@@ -15,9 +15,8 @@ import java.util.Random;
 import static java.awt.EventQueue.*;
 import static java.lang.Thread.*;
 
-public class Game extends JPanel implements ActionListener
+public class TournamentGame extends JPanel implements ActionListener
 {
-    private Users users;
 
     private final int fieldSize;
     private int p1;
@@ -27,7 +26,6 @@ public class Game extends JPanel implements ActionListener
     private String winner="", loser="";
     private String user1;
     private String user2;
-    private final String gameMode;
     private JPanel pane, controlPane;
 
     private final JLabel title = new JLabel("Pirate Wars");
@@ -51,15 +49,13 @@ public class Game extends JPanel implements ActionListener
 
     public CLK clk=new CLK();
 
-    public Game (Users users, String mode, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface)
+    public TournamentGame (String name1, String name2, int fieldSize, boolean[][] brd1, boolean[][] brd2,int shipSurface)
     {
-        this.users=users;
         this.fieldSize = fieldSize;
         this.p1 = shipSurface;
         this.p2 = shipSurface;
-        this.user1 = users.getCurrentUsername();
-        this.user2 = users.getSecondUsername();
-        this.gameMode=mode;
+        this.user1 = name1;
+        this.user2 = name2;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setComponents(brd1, brd2);
         addComponents();
@@ -77,28 +73,17 @@ public class Game extends JPanel implements ActionListener
 
         sur1.addActionListener(this);
         sur2.setVisible(false);
-        if(gameMode.equals("guest") || gameMode.equals("player") || gameMode.equals("tournament"))
-        {
+
             sur2.addActionListener(this);
             sur2.setVisible(true);
-        }
+
 
         JLabel player1;
-        if(user1.equals(""))
-        {
-            player1 =new JLabel("Guest1", SwingConstants.CENTER);
-            user1="Guest1";
-        }
-        else
+
             player1 =new JLabel(user1, SwingConstants.CENTER);
 
         JLabel player2;
-        if(user2.equals(""))
-        {
-            player2 =new JLabel("Guest2", SwingConstants.CENTER);
-            user2="Guest2";
-        }
-        else
+
             player2 =new JLabel(user2, SwingConstants.CENTER);
 
         player1.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
@@ -261,10 +246,9 @@ public class Game extends JPanel implements ActionListener
     public void actionPerformed (ActionEvent e)
     {
         Object source = e.getSource();
-        switch (gameMode) {
-            case "easy", "medium" -> autoGame(source);
-            case "guest", "player" -> vsPlayerGame(source);
-        }
+
+           vsPlayerGame(source);
+
 
 
         invokeLater(new Runnable() {
@@ -307,62 +291,6 @@ public class Game extends JPanel implements ActionListener
 
     private void vsPlayerGame (Object source )
     {
-            for (int i = 0; i < fieldSize; i++)
-            {
-                for (int j = 0; j < fieldSize; j++)
-                {
-                    if (p1 > 0 && p2 > 0)
-                    {
-                        if (!turn && source == board1[i][j])
-                        {
-                            if (tab1[i][j] == 1) {
-                                board1[i][j].setBackground(Color.pink);
-                                tab1[i][j] = 2;
-                                points2.setText("ships: " + (--p2));
-                            } else if (tab1[i][j] == 0)
-                            {
-                                board1[i][j].setBackground(Color.BLACK);
-                                tab1[i][j] = 3;
-                                turn = true;
-                                turn1.setBackground(Color.RED);
-                                turn2.setBackground(Color.GREEN);
-                            }
-                        }
-
-                        if (turn && source == board2[i][j])
-                        {
-                            if (tab2[i][j] == 1) {
-                                board2[i][j].setBackground(Color.pink);
-                                tab2[i][j] = 2;
-                                points1.setText("ships: " + (--p1));
-                            } else if (tab2[i][j] == 0)
-                            {
-                                board2[i][j].setBackground(Color.BLACK);
-                                tab2[i][j] = 3;
-                                turn = false;
-                                turn2.setBackground(Color.RED);
-                                turn1.setBackground(Color.GREEN);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if(p1==0)
-                            winner = user2;
-                        else
-                            winner = user1;
-
-                        showEnd();
-                    }
-                }
-
-            }
-
-    }
-
-    private void autoGame (Object source )
-    {
-        Random rand=new Random();
         for (int i = 0; i < fieldSize; i++)
         {
             for (int j = 0; j < fieldSize; j++)
@@ -383,41 +311,21 @@ public class Game extends JPanel implements ActionListener
                             turn1.setBackground(Color.RED);
                             turn2.setBackground(Color.GREEN);
                         }
-                        if(gameMode.equals("easy"))
-                        {
-                            invokeLater(new Runnable() {
-                                @Override
-                                public void run ( )
-                                {
-                                    try
-                                    {
-                                        turn=easyShooting(turn, rand);
-                                    }
-                                    catch (InterruptedException e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                    }
 
-                        }
-                        else if(gameMode.equals("medium"))
+                    if (turn && source == board2[i][j])
+                    {
+                        if (tab2[i][j] == 1) {
+                            board2[i][j].setBackground(Color.pink);
+                            tab2[i][j] = 2;
+                            points1.setText("ships: " + (--p1));
+                        } else if (tab2[i][j] == 0)
                         {
-                            invokeLater(new Runnable() {
-                                @Override
-                                public void run ( )
-                                {
-                                    try
-                                    {
-                                        turn=mediumShooting(turn, rand);
-                                    }
-                                    catch (InterruptedException e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-
+                            board2[i][j].setBackground(Color.BLACK);
+                            tab2[i][j] = 3;
+                            turn = false;
+                            turn2.setBackground(Color.RED);
+                            turn1.setBackground(Color.GREEN);
                         }
                     }
                 }
@@ -431,7 +339,9 @@ public class Game extends JPanel implements ActionListener
                     showEnd();
                 }
             }
+
         }
+
     }
 
     private void showEnd ( )
@@ -450,24 +360,14 @@ public class Game extends JPanel implements ActionListener
 
         victory.setText("VICTORY!");
         time.setText(clk.getTime());
-        if(!winner.equals("Guest1") && !winner.equals("Guest2"))
-        {
-            winn.setText("Winner: " + winner + "(" + users.getScore(winner) + "+" + "3" + ")");
-            users.addScore(winner,3);
-        }
-        else
-            winn.setText("Winner: " + winner);
+
+        winn.setText("Winner: " + winner);
         endPane.setBackground(Color.ORANGE);
         endPane.setOpaque(true);
         back.setVisible(true);
 
 
-        if(!loser.equals("Guest1") && !loser.equals("Guest2"))
-        {
-            users.addScore(loser,-1);
-            if(users.getScore(loser)<0)
-                users.setScore(loser,0);
-        }
+
     }
 
     private boolean shot(int i, int j, int[][]tab, boolean[][] visited)
@@ -572,110 +472,5 @@ public class Game extends JPanel implements ActionListener
         }
     }
 
-    private boolean easyShooting(boolean turn, Random rand) throws InterruptedException
-    {
-        int r1, r2;
-        while(turn)
-        {
-            r1=rand.nextInt(fieldSize);
-            r2=rand.nextInt(fieldSize);
-            while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
-            {
-                r1=rand.nextInt(fieldSize);
-                r2=rand.nextInt(fieldSize);
-            }
-            if(tab2[r1][r2]==1)
-            {
-                sleep(200);
-                board2[r1][r2].setBackground(Color.pink);
-                tab2[r1][r2]=2;
-                points1.setText("ships: " + (--p1));
-            }
-            else if(tab2[r1][r2]==0)
-            {
-                sleep(200);
-                board2[r1][r2].setBackground(Color.BLACK);
-                tab2[r1][r2]=3;
-                turn=false;
-                turn2.setBackground(Color.RED);
-                sleep(100);
-                turn1.setBackground(Color.GREEN);
-            }
-        }
-        return false;
-    }
-
-    private boolean mediumShooting(boolean turn, Random rand) throws InterruptedException
-    {
-        int r1, r2;
-        boolean czy;
-        while(turn)
-        {
-            czy=false;
-            r1=rand.nextInt(fieldSize);
-            r2=rand.nextInt(fieldSize);
-            for(int i=0;i<fieldSize;i++)
-            {
-                for(int j=0;j<fieldSize;j++)
-                {
-                    if(tab2[i][j]==2)
-                    {
-                        czy=true;
-                        if(i-1>=0 && (tab2[i-1][j]==0 || tab2[i-1][j]==1))
-                        {
-                            r1=i-1;
-                            r2=j;
-                            break;
-                        }
-                        if(i+1<fieldSize && (tab2[i+1][j]==0 || tab2[i+1][j]==1))
-                        {
-                            r1=i+1;
-                            r2=j;
-                            break;
-                        }
-                        if(j-1>=0 && (tab2[i][j-1]==0 || tab2[i][j-1]==1))
-                        {
-                            r1=i;
-                            r2=j-1;
-                            break;
-                        }
-                        if(j+1<fieldSize && (tab2[i][j+1]==0 || tab2[i][j+1]==1))
-                        {
-                            r1=i;
-                            r2=j+1;
-                            break;
-                        }
-                    }
-                }
-            }
-            if(!czy)
-            {
-                while(tab2[r1][r2]!=0 && tab2[r1][r2]!=1)
-                {
-                    r1=rand.nextInt(fieldSize);
-                    r2=rand.nextInt(fieldSize);
-                }
-            }
-
-            if(tab2[r1][r2]==1)
-            {
-                sleep(200);
-                board2[r1][r2].setBackground(Color.pink);
-                tab2[r1][r2]=2;
-                points1.setText("ships: " + (--p1));
-            }
-            else if(tab2[r1][r2]==0)
-            {
-                sleep(200);
-                board2[r1][r2].setBackground(Color.BLACK);
-                tab2[r1][r2]=3;
-                turn=false;
-                turn2.setBackground(Color.RED);
-                sleep(100);
-                turn1.setBackground(Color.GREEN);
-            }
-        }
-        return false;
-    }
 
 }

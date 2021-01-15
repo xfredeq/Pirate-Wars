@@ -14,6 +14,9 @@ public class Panels extends JFrame implements ActionListener {
     private final Users users = new Users();
     private final Data data = new Data(users);
 
+    private boolean[][] board1=new boolean[1][1], board2=new boolean[1][1];
+    private int mode=-1;
+
     private final Start startPane = new Start();
     private final Login loginPane = new Login();
     private final Sign signPane = new Sign();
@@ -25,14 +28,14 @@ public class Panels extends JFrame implements ActionListener {
     private final TournamentStart tStartPane = new TournamentStart();
     private final TournamentLoad tLoadPane = new TournamentLoad();
     private TournamentLogin tLoginPane = new TournamentLogin();
-    private  TournamentHome tHomePane=new TournamentHome();
-    private Ships shipsPane, shipsPane2 = new Ships(1,1,1);
-    private Game gamePane;
+    //private  TournamentHome tHomePane=new TournamentHome();
+    private Ships shipsPane= new Ships(1,1,1), shipsPane2 = new Ships(1,1,1);
+    private Game gamePane=new Game(users," ",1,board1,board2,1);
+    private TournamentGame tGamePane=new TournamentGame("","",1,board1,board2,1);
 
-    private boolean[][] board1, board2;
-    private boolean mode=false;
 
-    //private Tournament t;
+
+    private int currTournamentPointer;
 
 
     JPanel cardPane = new JPanel();
@@ -115,7 +118,7 @@ public class Panels extends JFrame implements ActionListener {
 
         tLoginPane.cancel.addActionListener(this);
 
-        tHomePane.back.addActionListener(this);
+        //tHomePane.back.addActionListener(this);
 
 
         this.add(cardPane);
@@ -139,6 +142,29 @@ public class Panels extends JFrame implements ActionListener {
     public void actionPerformed (ActionEvent e)
     {
         Object source = e.getSource();
+
+        for(int i=0;i<data.tHomePages.size();i++)
+        {
+            if(source==data.tHomePages.get(i).back)
+            {
+                cards.show(cardPane, "Play Pane");
+                data.tHomePages.get(i).clearScoreboard();
+                currTournamentPointer=-1;
+            }
+            else if(source==data.tHomePages.get(currTournamentPointer).start)
+            {
+                mode=2;
+
+                shipsPane = new Ships(data.getTournaments().get(i).fieldSize,data.getTournaments().get(i).biggestShip,data.getTournaments().get(i).shipSurface);
+                cardPane.add(shipsPane, "Ships Pane");
+                shipsPane.back.addActionListener(this);
+                shipsPane.start.addActionListener(this);
+
+                cards.show(cardPane, "Ships Pane");
+
+
+            }
+        }
 
         if (source == startPane.login)
             cards.show(cardPane, "Login Pane");
@@ -164,7 +190,7 @@ public class Panels extends JFrame implements ActionListener {
                     if (users.login(loginPane.loginField.getText(), loginPane.passField.getPassword())) {
                         homePane.setUsername(users.getCurrentUsername());
                         loginPane.clearFields();
-                        if(mode)
+                        if(mode==1)
                             cards.show(cardPane, "Ships Pane");
                         else
                             cards.show(cardPane, "Home Pane");
@@ -228,7 +254,7 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == playPane.easy)
         {
             settingsPane.setGameMode("easy");
-            mode=false;
+            mode=0;
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
@@ -239,7 +265,7 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == playPane.medium)
         {
             settingsPane.setGameMode("medium");
-            mode=false;
+            mode=0;
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
@@ -251,7 +277,7 @@ public class Panels extends JFrame implements ActionListener {
         {
             settingsPane.setGameMode("guest");
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
-            mode=true;
+            mode=1;
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
             shipsPane.start.addActionListener(this);
@@ -262,7 +288,7 @@ public class Panels extends JFrame implements ActionListener {
         {
             settingsPane.setGameMode("player");
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
-            mode=true;
+            mode=1;
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
             shipsPane.start.addActionListener(this);
@@ -287,13 +313,16 @@ public class Panels extends JFrame implements ActionListener {
         else if(source== tSettingsPane.create)
         {
             tLoginPane.clearFields();
-            tHomePane=new TournamentHome();
-            cardPane.add(tHomePane, "tHome Pane");
-            tHomePane.back.addActionListener(this);
+            data.tHomePages.add(new TournamentHome("tHome Pane "+String.valueOf(data.tHomePages.size())));
+            data.getLastTHomePage().back.addActionListener(this);
+            currTournamentPointer=data.tHomePages.size()-1;
+            cardPane.add(data.getLastTHomePage(), "tHome Pane "+String.valueOf(data.tHomePages.size()-1));
+            data.getLastTHomePage().back.addActionListener(this);
+            data.getLastTHomePage().start.addActionListener(this);
 
             data.addTournament(new Tournament(users,tSettingsPane.getName(), tSettingsPane.getPlayers(), tSettingsPane.getFieldSize(), tSettingsPane.getShipSurface(), tSettingsPane.getBiggestShip()));
             data.getLastTournament().addCurrUser();
-            data.getLastTournament().tLogin(tLoginPane, cards, cardPane, tHomePane);
+            data.getLastTournament().tLogin(tLoginPane, cards, cardPane, data.getLastTHomePage());
             cards.show(cardPane, "tLogin Pane");
 
         }
@@ -302,22 +331,78 @@ public class Panels extends JFrame implements ActionListener {
             data.deleteLastTournament();
             cards.show(cardPane, "tStart Pane");
         }
-        else if(source== tHomePane.back)
+        /*else if(source== tHomePane.back)
         {
             cards.show(cardPane, "Play Pane");
             tHomePane.clearScoreboard();
-        }
+        }*/
         else if(source == shipsPane.start)
         {
             if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
             {
-                if (mode)
+                if (mode==1)
                 {
                     shipsPane2 = new Ships(settingsPane.getFieldSize(), settingsPane.getBiggestShip(), settingsPane.getShipSurface());
                     cardPane.add(shipsPane2, "Ships Pane 2");
                     cards.show(cardPane, "Ships Pane 2");
                     shipsPane2.back.addActionListener(this);
                     shipsPane2.start.addActionListener(this);
+                }
+                else if(mode==0)
+                {
+                    getBoard1();
+                    getBoard2();
+                    gamePane = new Game(users, settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface());
+
+                    gamePane.back.addActionListener(this);
+
+                    cardPane.add(gamePane, "Game Pane");
+                    cards.show(cardPane, "Game Pane");
+                    gamePane.clk.start();
+                }
+                else if(mode==2)
+                {
+                    shipsPane2 = new Ships(data.getTournaments().get(currTournamentPointer).fieldSize, data.getTournaments().get(currTournamentPointer).biggestShip, data.getTournaments().get(currTournamentPointer).shipSurface);
+                    cardPane.add(shipsPane2, "Ships Pane 2");
+                    cards.show(cardPane, "Ships Pane 2");
+                    shipsPane2.back.addActionListener(this);
+                    shipsPane2.start.addActionListener(this);
+                }
+            }
+            else
+                shipsPane.start.setBackground(Color.RED);
+
+        }
+        else if(source == shipsPane.back)
+        {
+            if(mode==2)
+            {
+                cards.show(cardPane, "tHome Pane "+String.valueOf(currTournamentPointer));
+            }
+            else
+            {
+                cards.show(cardPane, "Play Pane");
+            }
+        }
+        else if(source == shipsPane2.back)
+        {
+            shipsPane.reset();
+            cards.show(cardPane, "Ships Pane");
+        }
+        else if(source == shipsPane2.start)
+        {
+            if(true)//shipsPane2.getConflicts()==0 && shipsPane2.getShipSurface()==0)
+            {
+                if(mode==2)
+                {
+                    getBoard1();
+                    getBoard2();
+                    tGamePane = new TournamentGame(data.getTournaments().get(currTournamentPointer).getPlayer1(), data.getTournaments().get(currTournamentPointer).getPlayer2(), data.getTournaments().get(currTournamentPointer).fieldSize, board1, board2, data.getTournaments().get(currTournamentPointer).shipSurface);
+                    tGamePane.back.addActionListener(this);
+
+                    cardPane.add(tGamePane, "tGame Pane");
+                    cards.show(cardPane, "tGame Pane");
+                    tGamePane.clk.start();
                 }
                 else
                 {
@@ -332,39 +417,19 @@ public class Panels extends JFrame implements ActionListener {
                     gamePane.clk.start();
                 }
             }
-            else
-                shipsPane.start.setBackground(Color.RED);
-
-        }
-        else if(source == shipsPane.back)
-        {
-            shipsPane.reset();
-            cards.show(cardPane, "Play Pane");
-        }
-        else if(source == shipsPane2.back)
-        {
-            shipsPane2.reset();
-            cards.show(cardPane, "Ships Pane");
-        }
-        else if(source == shipsPane2.start)
-        {
-            if(true)//shipsPane2.getConflicts()==0 && shipsPane2.getShipSurface()==0)
-            {
-                getBoard1();
-                getBoard2();
-                gamePane = new Game(users, settingsPane.getGameMode(), settingsPane.getFieldSize(), board1, board2, settingsPane.getShipSurface());
-
-                gamePane.back.addActionListener(this);
-
-                cardPane.add(gamePane, "Game Pane");
-                cards.show(cardPane, "Game Pane");
-                gamePane.clk.start();
-            }
         }
         else if(source == gamePane.back)
         {
             cards.show(cardPane, "Home Pane");
         }
+        else if(source == tGamePane.back)
+        {
+
+            data.getTournaments().get(currTournamentPointer).setResults(0);
+            cards.show(cardPane, "tHome Pane "+String.valueOf(currTournamentPointer));
+        }
+
+
 
     }
 
@@ -374,9 +439,9 @@ public class Panels extends JFrame implements ActionListener {
     }
     private void getBoard2()
     {
-        if(settingsPane.getGameMode().equals("easy") || settingsPane.getGameMode().equals("medium") || settingsPane.getGameMode().equals("hard"))
+        if(mode==0)
             board2= shipsPane.makeRandomBoard();
-        else if(settingsPane.getGameMode().equals("guest") || settingsPane.getGameMode().equals("player"))
+        else
             board2= shipsPane2.getBoard();
     }
 }

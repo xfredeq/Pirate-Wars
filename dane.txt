@@ -3,5 +3,5 @@ admin admin 12
 PLAYER
 player player 12
 PLAYER
-qwe qwe 9
+qwe qwe 11
 X

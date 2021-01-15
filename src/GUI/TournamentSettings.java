@@ -23,6 +23,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     private int maxShipSurface;
     private int playersNumber;
 
+
     private Data data;
 
     private BufferedImage image;
@@ -232,6 +233,8 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     {
         return name.getText();
     }
+
+
 
 
 }

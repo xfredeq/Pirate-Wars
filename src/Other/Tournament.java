@@ -31,8 +31,11 @@ public class Tournament implements ActionListener
     private JPanel cardPane;
     private TournamentHome tHome;
 
-    private final int shipSurface;
-    private final int biggestShip;
+    public final String gameMode="tournament";
+
+    public final int shipSurface;
+    public final int biggestShip;
+    public final int fieldSize;
 
     public Tournament (Users users, String name, int playersN, int fieldSize, int shipSurface, int biggestShip)
     {
@@ -49,6 +52,7 @@ public class Tournament implements ActionListener
         this.games= new boolean[playersN][playersN];
         this.shipSurface=shipSurface;
         this.biggestShip=biggestShip;
+        this.fieldSize=fieldSize;
 
         for(int i=1;i<playersN;i++)
         {
@@ -180,7 +184,7 @@ public class Tournament implements ActionListener
 
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
-                this.cards.show(cardPane, "tHome Pane");
+                this.cards.show(cardPane, tHome.name);
                 //start();
                 setNextMatch();
                 tHome.setMatches();
@@ -210,7 +214,7 @@ public class Tournament implements ActionListener
 
                 tHome.setTournament(this);
                 tHome.showTScoreboard();
-                this.cards.show(cardPane, "tHome Pane");
+                this.cards.show(cardPane, tHome.name);
                 //start();
                 setNextMatch();
                 tHome.setMatches();
@@ -225,7 +229,6 @@ public class Tournament implements ActionListener
 
     public void sort()
     {
-        Integer tmp1;
         String tmp2;
 
         for(int i=0;i<players.size();i++)
@@ -234,10 +237,6 @@ public class Tournament implements ActionListener
             {
                 if(points.get(j)>points.get(i))
                 {
-                    tmp1=points.get(i);
-                    points.set(i,points.get(j));
-                    points.set(j,tmp1);
-
                     tmp2=players.get(i);
                     players.set(i,players.get(j));
                     players.set(j,tmp2);
@@ -246,9 +245,15 @@ public class Tournament implements ActionListener
         }
     }
 
-    public ArrayList<String> getPlayers ( ) { return playersOrder; }
+    public ArrayList<String> getPlayers ( ) { return players; }
+
+    public ArrayList<String> getPlayersOrder ( ) { return playersOrder; }
 
     public ArrayList<Integer> getPoints ( ) {return points; }
+
+    public String getPlayer1(){return playersOrder.get(nextMatch.p1);}
+
+    public String getPlayer2(){return playersOrder.get(nextMatch.p2);}
 
     public void setPlayersCounter(int x) {this.playersCounter=x;}
 
@@ -256,7 +261,8 @@ public class Tournament implements ActionListener
 
     private void setNextMatch()
     {
-        if(matchesCounter<matchesNumber) {
+        if(matchesCounter<matchesNumber)
+        {
             int p2;
             int p1 = lastMatch.p1;
             if (p1 == -1) {
@@ -317,4 +323,31 @@ public class Tournament implements ActionListener
             }
         }
     }
+
+    public void setResults(int winner)
+    {
+        matches.set(nextMatch.p1, matches.get(nextMatch.p1) + 1);
+        matches.set(nextMatch.p2, matches.get(nextMatch.p2) + 1);
+        games[nextMatch.p1][nextMatch.p2] = true;
+        games[nextMatch.p2][nextMatch.p1] = true;
+        lastMatch.p1 = nextMatch.p1;
+        lastMatch.p2 = nextMatch.p2;
+        matchesCounter++;
+
+        switch (winner)
+        {
+            case 0 -> points.set(nextMatch.p1, points.get(nextMatch.p1) + 3);
+            case 1 -> points.set(nextMatch.p2, points.get(nextMatch.p2) + 3);
+            case 2 -> points.set(nextMatch.p1, points.get(nextMatch.p1) + 2);
+            case 3 -> points.set(nextMatch.p2, points.get(nextMatch.p2) + 2);
+        }
+        setNextMatch();
+
+        tHome.clearScoreboard();
+        tHome.showTScoreboard();
+        tHome.setMatches();
+
+
+    }
+
 }
