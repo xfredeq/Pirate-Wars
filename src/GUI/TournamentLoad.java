@@ -15,7 +15,7 @@ public class TournamentLoad extends JPanel
     public BufferedImage image;
     public JButton back = new JButton("back");
     private final JLabel title=new JLabel("Pirate Wars");
-    private final JLabel score=new JLabel("Scoreboard");
+    private final JLabel tournaments =new JLabel("Tournaments");
     private JPanel list = new JPanel(new GridLayout(1, 1));;
 
     private Users users;
@@ -31,7 +31,7 @@ public class TournamentLoad extends JPanel
     private void setComponents ( )
     {
         list.setAlignmentX(Component.CENTER_ALIGNMENT);
-        score.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tournaments.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -40,11 +40,11 @@ public class TournamentLoad extends JPanel
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
-        score.setAlignmentX(Component.CENTER_ALIGNMENT);
-        score.setFont(new Font("Arial Black", Font.BOLD, 91));
-        score.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
-        score.setForeground(Color.CYAN);
-        score.setOpaque(true);
+        tournaments.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tournaments.setFont(new Font("Arial Black", Font.BOLD, 91));
+        tournaments.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
+        tournaments.setForeground(Color.CYAN);
+        tournaments.setOpaque(true);
 
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
         list.setOpaque(true);
@@ -56,7 +56,7 @@ public class TournamentLoad extends JPanel
         add(Box.createVerticalGlue());
         add(title);
         add(Box.createVerticalGlue());
-        add(score);
+        add(tournaments);
         add(list);
         add(Box.createVerticalGlue());
         add(back);

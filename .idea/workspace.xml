@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/TournamentHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/TournamentHome.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Tournament.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/TournamentHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TournamentHome.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/TournamentStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TournamentStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Other/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/TournamentLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TournamentLoad.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
