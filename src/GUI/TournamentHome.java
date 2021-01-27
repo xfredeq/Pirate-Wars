@@ -23,8 +23,8 @@ public class TournamentHome extends JPanel
     private final JPanel list = new JPanel(new GridLayout(1, 1));
     private final JPanel pane = new JPanel(new GridLayout(2, 3));
 
-    private JLabel nextMatch=new JLabel("Next Match");
-    private JLabel lastMatch=new JLabel("Previous Match");
+    private final JLabel nextMatch=new JLabel("Next Match");
+    private final JLabel lastMatch=new JLabel("Previous Match");
 
     public String name;
 
@@ -205,7 +205,7 @@ public class TournamentHome extends JPanel
 
         for(int i=0;i<users.size();i++)
         {
-            tmp = new JLabel(String.valueOf(i+1)+".");
+            tmp = new JLabel((i + 1) +".");
             tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
             tmp.setHorizontalAlignment(0);
             tmp.setOpaque(false);

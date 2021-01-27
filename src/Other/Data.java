@@ -101,6 +101,11 @@ public class Data
         return this.tournaments.get(this.tournaments.size()-1);
     }
 
+    public Tournament getTournament(int i)
+    {
+        return this.tournaments.get(i);
+    }
+
     public void deleteLastTournament()
     {
         this.tournaments.remove(this.tournaments.size()-1);
@@ -109,6 +114,11 @@ public class Data
     public TournamentHome getLastTHomePage()
     {
         return this.tHomePages.get(this.tHomePages.size()-1);
+    }
+
+    public TournamentHome getTHomePage(int i)
+    {
+        return this.tHomePages.get(i);
     }
 
 

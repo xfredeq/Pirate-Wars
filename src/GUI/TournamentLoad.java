@@ -1,6 +1,6 @@
 package GUI;
 
-import Other.Users;
+import Other.Tournament;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,14 +15,19 @@ public class TournamentLoad extends JPanel
     public BufferedImage image;
     public JButton back = new JButton("back");
     private final JLabel title=new JLabel("Pirate Wars");
-    private final JLabel tournaments =new JLabel("Tournaments");
-    private JPanel list = new JPanel(new GridLayout(1, 1));;
+    private final JLabel tournaments_label =new JLabel("Tournaments");
 
-    private Users users;
+    private ArrayList<Tournament> tournaments;
 
-    public TournamentLoad()// (Users users )
+    private final JPanel list = new JPanel(new GridLayout(1, 1));
+
+    private JButton[] buttons = new JButton[1];
+
+
+
+    public TournamentLoad()
     {
-        //this.users=users;
+
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setComponents();
         addComponents();
@@ -30,8 +35,9 @@ public class TournamentLoad extends JPanel
 
     private void setComponents ( )
     {
+
         list.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tournaments.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tournaments_label.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -40,11 +46,11 @@ public class TournamentLoad extends JPanel
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
-        tournaments.setAlignmentX(Component.CENTER_ALIGNMENT);
-        tournaments.setFont(new Font("Arial Black", Font.BOLD, 91));
-        tournaments.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
-        tournaments.setForeground(Color.CYAN);
-        tournaments.setOpaque(true);
+        tournaments_label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tournaments_label.setFont(new Font("Arial Black", Font.BOLD, 91));
+        tournaments_label.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
+        tournaments_label.setForeground(Color.CYAN);
+        tournaments_label.setOpaque(true);
 
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
         list.setOpaque(true);
@@ -56,7 +62,7 @@ public class TournamentLoad extends JPanel
         add(Box.createVerticalGlue());
         add(title);
         add(Box.createVerticalGlue());
-        add(tournaments);
+        add(tournaments_label);
         add(list);
         add(Box.createVerticalGlue());
         add(back);
@@ -86,57 +92,58 @@ public class TournamentLoad extends JPanel
 
     public void showTournaments()
     {
-        users.sort();
-        ArrayList<String> users = this.users.getUsers();
-        ArrayList<Integer> scores = this.users.getScores();
+        this.buttons=new JButton[this.tournaments.size()];
 
-        list.setMaximumSize(new Dimension(600, users.size()*40));
-        list.setPreferredSize(new Dimension(600, users.size()*40));
 
-        list.setLayout(new GridLayout(users.size()+1, 3));
+        list.setMaximumSize(new Dimension(600, Integer.min(8000,  100*this.tournaments.size())));
+        list.setPreferredSize(new Dimension(600,  100*this.tournaments.size()));
 
-        JLabel tmp = new JLabel("position:");
+        list.setLayout(new GridLayout(this.tournaments.size()+1, 2));
+
+        JLabel tmp = new JLabel("name:");
         tmp.setFont(new Font("Verdana", Font.BOLD, 20));
         tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
         tmp.setHorizontalAlignment(0);
         tmp.setOpaque(false);
         list.add(tmp);
-        tmp = new JLabel("name:");
-        tmp.setFont(new Font("Verdana", Font.BOLD, 20));
-        tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
-        tmp.setHorizontalAlignment(0);
-        tmp.setOpaque(false);
-        list.add(tmp);
-        tmp = new JLabel("points:");
+        tmp = new JLabel("load:");
         tmp.setFont(new Font("Verdana", Font.BOLD, 20));
         tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
         tmp.setHorizontalAlignment(0);
         tmp.setOpaque(false);
         list.add(tmp);
 
-        for(int i=0;i<users.size();i++)
+
+        for(int i=0;i<this.tournaments.size();i++)
         {
-            tmp = new JLabel(String.valueOf(i+1)+".");
+            tmp = new JLabel(this.tournaments.get(i).name);
             tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
             tmp.setHorizontalAlignment(0);
             tmp.setOpaque(false);
             list.add(tmp);
-            tmp=new JLabel(users.get(i));
+
+            JButton tmpB=new JButton("LOAD " + this.tournaments.get(i).name);
             tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
             tmp.setHorizontalAlignment(0);
             tmp.setOpaque(false);
-            list.add(tmp);
-            tmp=new JLabel(String.valueOf(scores.get(i)));
-            tmp.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
-            tmp.setHorizontalAlignment(0);
-            tmp.setOpaque(false);
-            list.add(tmp);
+            list.add(tmpB);
+            this.buttons[i]=tmpB;
         }
     }
-    public void clearScoreboard()
+    public void clearTournaments()
     {
         list.removeAll();
     }
 
+    public void setTournaments(ArrayList<Tournament> t)
+    {
+        this.tournaments=t;
+    }
 
+
+
+    public JButton[] getButtons ( )
+    {
+        return buttons;
+    }
 }

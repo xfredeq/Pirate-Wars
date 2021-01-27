@@ -1,5 +1,6 @@
 package Other;
 
+import GUI.TournamentLoadLogin;
 import GUI.TournamentLogin;
 import GUI.TournamentHome;
 
@@ -13,6 +14,7 @@ public class Tournament implements ActionListener
 {
     private int playersCounter;
     private int guestCounter;
+    private int loadCounter;
     private int matchesNumber=0;
     private int matchesCounter=0;
     public String name;
@@ -26,12 +28,13 @@ public class Tournament implements ActionListener
     private final boolean[][] games;
 
     private TournamentLogin tLogin;
+    private TournamentLoadLogin tLoadLogin;
     private final Users users;
     private CardLayout cards;
     private JPanel cardPane;
     private TournamentHome tHome;
 
-    public final String gameMode="tournament";
+    public int mode=-1;
 
     public final int shipSurface;
     public final int biggestShip;
@@ -42,6 +45,7 @@ public class Tournament implements ActionListener
         this.lastMatch=new Match(-1,-1);
         this.playersCounter=0;
         this.guestCounter=1;
+        this.loadCounter=0;
         this.players=new ArrayList<>();
         this.playersOrder=new ArrayList<>();
         this.matches=new ArrayList<>();
@@ -66,14 +70,53 @@ public class Tournament implements ActionListener
     }
 
 
-    public void tLogin (TournamentLogin tournamentLoginPane, CardLayout cards, JPanel cardPane, TournamentHome tHome)
+    public void tLogin (TournamentLogin tournamentLoginPane, CardLayout cards, JPanel cardPane, TournamentHome tHome, int loginMode)
     {
+        this.mode=loginMode;
+
         this.tHome=tHome;
         this.tLogin = tournamentLoginPane;
         this.cards=cards;
         this.cardPane=cardPane;
-        this.tLogin.guest.addActionListener(this);
-        this.tLogin.login.addActionListener(this);
+        if(this.mode==0)
+        {
+            this.tLogin.guest.addActionListener(this);
+            this.tLogin.login.addActionListener(this);
+        }
+
+
+
+    }
+
+    public void tLoadLogin (TournamentLoadLogin tournamentLoginPane, CardLayout cards, JPanel cardPane, TournamentHome tHome, int loginMode)
+    {
+        this.mode=loginMode;
+        this.loadCounter=0;
+        this.tHome=tHome;
+        this.tLoadLogin = tournamentLoginPane;
+        this.cards=cards;
+        this.cardPane=cardPane;
+
+        if(this.mode==1)
+        {
+            this.tLogin.login.addActionListener(this);
+            while(this.loadCounter<this.playersNumber && this.playersOrder.get(this.loadCounter).contains("Guest"))
+            {
+                this.loadCounter++;
+            }
+            System.out.print("load counter: " + this.loadCounter + "p number: " + this.playersNumber);
+            if(this.loadCounter<this.playersNumber)
+                this.tLoadLogin.loginField.setText(this.playersOrder.get(this.loadCounter));
+            else
+            {
+                tHome.setTournament(this);
+                tHome.showTScoreboard();
+                this.cards.show(cardPane, tHome.name);
+                setNextMatch();
+                tHome.setMatches();
+            }
+        }
+
 
         //TODO pętla logowań + zapis nazw do wektora + okno THome + TLOAD
     }
@@ -117,112 +160,154 @@ public class Tournament implements ActionListener
     {
         Object source = e.getSource();
 
-        if(source== tLogin.login)
+        if(this.mode==0)
         {
-            if(playersCounter+1<playersNumber)
-            {
-                //System.out.println("action tlogin if: "+playersCounter+" "+playersNumber);
-                String login = tLogin.loginField.getText();
-                //System.out.println(login);
-                char[] password = tLogin.passField.getPassword();
-                String pass = "";
-                for (char c : password) pass += c;
+            if (source == tLogin.login) {
+                if (playersCounter + 1 < playersNumber) {
+                    //System.out.println("action tlogin if: "+playersCounter+" "+playersNumber);
+                    String login = tLogin.loginField.getText();
+                    //System.out.println(login);
+                    char[] password = tLogin.passField.getPassword();
+                    String pass = "";
+                    for (char c : password) pass += c;
 
-                int i = users.isUser(login);
-                //System.out.println("I "+i);
-                if (i < 0  )
-                {
-                    tLogin.login.setBackground(Color.RED);
-                    //System.out.println(111);
-                }
-                else if(players.contains(login))
-                {
-                    tLogin.login.setBackground(Color.RED);
-                    //.out.println(222);
-                }
-                else {
-                    if (!pass.equals(users.getPasses().get(i)))
-                    {
+                    int i = users.isUser(login);
+                    //System.out.println("I "+i);
+                    if (i < 0) {
                         tLogin.login.setBackground(Color.RED);
-                        //System.out.println(333);
+                        //System.out.println(111);
+                    } else if (players.contains(login)) {
+                        tLogin.login.setBackground(Color.RED);
+                        //.out.println(222);
+                    } else {
+                        if (!pass.equals(users.getPasses().get(i))) {
+                            tLogin.login.setBackground(Color.RED);
+                            //System.out.println(333);
+                        } else {
+                            this.players.add(login);
+                            this.playersOrder.add(login);
+                            this.points.add(0);
+                            this.matches.add(0);
+                            playersCounter++;
+                            this.tLogin.clearFields();
+                        }
                     }
-                    else
-                        {
-                        this.players.add(login);
-                        this.playersOrder.add(login);
-                        this.points.add(0);
-                        this.matches.add(0);
-                        playersCounter++;
-                        this.tLogin.clearFields();
+                } else if (playersCounter < playersNumber) {
+                    String login = tLogin.loginField.getText();
+                    char[] password = tLogin.passField.getPassword();
+                    String pass = "";
+                    for (char c : password) pass += c;
+                    int i = users.isUser(login);
+                    if (i < 0 || players.contains(login)) {
+                        tLogin.login.setBackground(Color.RED);
+                    } else {
+                        if (!pass.equals(users.getPasses().get(i)))
+                            tLogin.login.setBackground(Color.RED);
+                        else {
+                            this.players.add(login);
+                            this.playersOrder.add(login);
+                            this.points.add(0);
+                            this.matches.add(0);
+                            playersCounter++;
+                        }
                     }
+
+                    tHome.setTournament(this);
+                    tHome.showTScoreboard();
+                    this.cards.show(cardPane, tHome.name);
+                    setNextMatch();
+                    tHome.setMatches();
+
+                    this.tLogin.guest.removeActionListener(this);
+                    this.tLogin.login.removeActionListener(this);
                 }
             }
-            else if (playersCounter<playersNumber)
-            {
-                String login = tLogin.loginField.getText();
-                char[] password = tLogin.passField.getPassword();
-                String pass = "";
-                for (char c : password) pass += c;
-                int i = users.isUser(login);
-                if (i < 0 || players.contains(login))
-                {
-                    tLogin.login.setBackground(Color.RED);
-                }
-                else
-                {
-                    if (!pass.equals(users.getPasses().get(i)))
-                        tLogin.login.setBackground(Color.RED);
-                    else
-                    {
-                        this.players.add(login);
-                        this.playersOrder.add(login);
-                        this.points.add(0);
-                        this.matches.add(0);
-                        playersCounter++;
-                    }
+            else if (source == tLogin.guest) {
+                if (playersCounter + 1 < playersNumber) {
+                    this.players.add("Guest" + guestCounter);
+                    this.playersOrder.add("Guest" + guestCounter++);
+                    this.points.add(0);
+                    this.matches.add(0);
+                    playersCounter++;
+                    this.tLogin.clearFields();
+                } else if (playersCounter < playersNumber) {
+                    this.players.add("Guest" + guestCounter);
+                    this.playersOrder.add("Guest" + guestCounter++);
+                    this.points.add(0);
+                    this.matches.add(0);
+                    playersCounter++;
+
+                    tHome.setTournament(this);
+                    tHome.showTScoreboard();
+                    this.cards.show(cardPane, tHome.name);
+                    setNextMatch();
+                    tHome.setMatches();
+
+                    this.tLogin.guest.removeActionListener(this);
+                    this.tLogin.login.removeActionListener(this);
                 }
 
-                tHome.setTournament(this);
-                tHome.showTScoreboard();
-                this.cards.show(cardPane, tHome.name);
-                //start();
-                setNextMatch();
-                tHome.setMatches();
-
-                this.tLogin.guest.removeActionListener(this);
-                this.tLogin.login.removeActionListener(this);
             }
         }
-        else if(source== tLogin.guest)
+        else if(this.mode==1)
         {
-            if(playersCounter+1<playersNumber)
-            {
-                this.players.add("Guest"+String.valueOf(guestCounter));
-                this.playersOrder.add("Guest"+String.valueOf(guestCounter++));
-                this.points.add(0);
-                this.matches.add(0);
-                playersCounter++;
-                this.tLogin.clearFields();
+            if (source == tLogin.login) {
+                if (playersCounter + 1 < playersNumber) {
+                    //System.out.println("action tlogin if: "+playersCounter+" "+playersNumber);
+                    String login = tLogin.loginField.getText();
+                    //System.out.println(login);
+                    char[] password = tLogin.passField.getPassword();
+                    String pass = "";
+                    for (char c : password) pass += c;
+
+                    int i = users.isUser(login);
+                    //System.out.println("I "+i);
+                    if (i < 0) {
+                        tLogin.login.setBackground(Color.RED);
+                        //System.out.println(111);
+                    } else if (players.contains(login)) {
+                        tLogin.login.setBackground(Color.RED);
+                        //.out.println(222);
+                    } else {
+                        if (!pass.equals(users.getPasses().get(i))) {
+                            tLogin.login.setBackground(Color.RED);
+                            //System.out.println(333);
+                        } else {
+
+                            playersCounter++;
+                            this.tLogin.clearFields();
+                        }
+                    }
+                } else if (playersCounter < playersNumber) {
+                    String login = tLogin.loginField.getText();
+                    char[] password = tLogin.passField.getPassword();
+                    String pass = "";
+                    for (char c : password) pass += c;
+                    int i = users.isUser(login);
+                    if (i < 0 || players.contains(login)) {
+                        tLogin.login.setBackground(Color.RED);
+                    } else {
+                        if (!pass.equals(users.getPasses().get(i)))
+                            tLogin.login.setBackground(Color.RED);
+                        else {
+                            this.players.add(login);
+                            this.playersOrder.add(login);
+                            this.points.add(0);
+                            this.matches.add(0);
+                            playersCounter++;
+                        }
+                    }
+
+                    tHome.setTournament(this);
+                    tHome.showTScoreboard();
+                    this.cards.show(cardPane, tHome.name);
+                    setNextMatch();
+                    tHome.setMatches();
+
+                    this.tLogin.guest.removeActionListener(this);
+                    this.tLogin.login.removeActionListener(this);
+                }
             }
-            else if (playersCounter<playersNumber)
-            {
-                this.players.add("Guest"+String.valueOf(guestCounter));
-                this.playersOrder.add("Guest"+String.valueOf(guestCounter++));
-                this.points.add(0);
-                this.matches.add(0);
-                playersCounter++;
-
-                tHome.setTournament(this);
-                tHome.showTScoreboard();
-                this.cards.show(cardPane, tHome.name);
-                //start();
-                setNextMatch();
-                tHome.setMatches();
-
-                this.tLogin.guest.removeActionListener(this);
-                this.tLogin.login.removeActionListener(this);
-            }
-
         }
 
     }
