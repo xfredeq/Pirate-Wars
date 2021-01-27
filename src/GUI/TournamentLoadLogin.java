@@ -34,7 +34,7 @@ public class TournamentLoadLogin extends JPanel
 
         loginField.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginField.setFont(new Font("Verdana", Font.BOLD, 20));
-        loginField.setBackground(new Color(1,1,1, 40));
+        loginField.setBackground(Color.WHITE);
         loginField.setOpaque(true);
 
         loginField.setMaximumSize(new Dimension(200,1));

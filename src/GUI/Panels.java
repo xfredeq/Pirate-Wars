@@ -180,7 +180,6 @@ public class Panels extends JFrame implements ActionListener {
                 data.getTournament(i).tLoadLogin(tLoadLoginPane, cards, cardPane, data.getTHomePage(i), 1);
 
 
-                //cards.show(cardPane, "tLoadLogin Pane");
             }
         }
 
