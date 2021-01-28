@@ -109,9 +109,6 @@ public class Tournament implements ActionListener {
                 this.cards.show(cardPane, tHome.name);
             }
         }
-
-
-        //TODO pętla logowań + zapis nazw do wektora + okno THome + TLOAD
     }
 
 

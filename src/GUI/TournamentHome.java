@@ -1,7 +1,6 @@
 package GUI;
 
 import Other.Tournament;
-import Other.Users;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

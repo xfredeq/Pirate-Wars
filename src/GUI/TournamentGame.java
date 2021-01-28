@@ -10,10 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import static java.awt.EventQueue.*;
-import static java.lang.Thread.*;
 
 public class TournamentGame extends JPanel implements ActionListener
 {
@@ -23,9 +21,9 @@ public class TournamentGame extends JPanel implements ActionListener
     private int p2;
     private boolean turn=false;
     private int[][] tab1, tab2;
-    private String winner="", loser="";
-    private String user1;
-    private String user2;
+    private String winner="";
+    private final String user1;
+    private final String user2;
     private JPanel pane, controlPane;
 
     private final JLabel title = new JLabel("Pirate Wars");
@@ -258,25 +256,21 @@ public class TournamentGame extends JPanel implements ActionListener
                 if(source==sur1)
                 {
                     winner=user2;
-                    loser=user1;
                     showEnd();
                 }
                 else if(source==sur2)
                 {
                     winner=user1;
-                    loser=user2;
                     showEnd();
                 }
                 if(p1==0)
                 {
                     winner=user2;
-                    loser=user1;
                     showEnd();
                 }
                 else if(p2==0)
                 {
                     winner=user1;
-                    loser=user2;
                     showEnd();
                 }
             }
@@ -474,7 +468,6 @@ public class TournamentGame extends JPanel implements ActionListener
 
     public int results ()
     {
-        int res=-1;
         if(winner.equals(user1))
             return 0;
         else

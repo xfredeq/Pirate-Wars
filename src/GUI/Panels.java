@@ -102,7 +102,7 @@ public class Panels extends JFrame implements ActionListener {
 
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
-        playPane.medium.addActionListener(this);;
+        playPane.medium.addActionListener(this);
         //playPane.hard.addActionListener(this);
         playPane.guest.addActionListener(this);
         playPane.player.addActionListener(this);
