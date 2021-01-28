@@ -305,8 +305,6 @@ public class Tournament implements ActionListener {
                     }
 
 
-                } else if (this.loadCounter == this.playersNumber) {
-
                 }
             }
         }
@@ -421,8 +419,6 @@ public class Tournament implements ActionListener {
         switch (winner) {
             case 0 -> points.set(nextMatch.p1, points.get(nextMatch.p1) + 3);
             case 1 -> points.set(nextMatch.p2, points.get(nextMatch.p2) + 3);
-            case 2 -> points.set(nextMatch.p1, points.get(nextMatch.p1) + 2);
-            case 3 -> points.set(nextMatch.p2, points.get(nextMatch.p2) + 2);
         }
         setNextMatch();
 

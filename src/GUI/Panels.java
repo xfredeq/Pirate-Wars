@@ -150,9 +150,19 @@ public class Panels extends JFrame implements ActionListener {
         {
             if(source==data.tHomePages.get(i).back)
             {
-                cards.show(cardPane, "Play Pane");
-                data.tHomePages.get(i).clearScoreboard();
-                currTournamentPointer=-1;
+                if(data.tHomePages.get(i).winner.equals(""))
+                {
+                    cards.show(cardPane, "Play Pane");
+                    data.tHomePages.get(i).clearScoreboard();
+                    currTournamentPointer=-1;
+                }
+                else
+                {
+                    cards.show(cardPane, "Play Pane");
+                    currTournamentPointer=-1;
+                    data.deleteTournament(i);
+                }
+
             }
             else if(source==data.tHomePages.get(i).start)
             {
@@ -450,8 +460,8 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == tGamePane.back)
         {
 
-            data.getTournaments().get(currTournamentPointer).setResults(0);
-            cards.show(cardPane, "tHome Pane "+String.valueOf(currTournamentPointer));
+            data.getTournaments().get(currTournamentPointer).setResults(tGamePane.results());
+            cards.show(cardPane, "tHome Pane "+ currTournamentPointer);
         }
 
 

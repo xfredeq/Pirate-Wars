@@ -82,7 +82,7 @@ public class Data
                 {
                     users.add(user);
                     passes.add(pass);
-                    scores.add((Integer)score);
+                    scores.add(score);
                 }
             }
         }
@@ -109,6 +109,13 @@ public class Data
     public void deleteLastTournament()
     {
         this.tournaments.remove(this.tournaments.size()-1);
+        this.tHomePages.remove(this.tHomePages.size()-1);
+    }
+
+    public void deleteTournament(int i)
+    {
+        this.tournaments.remove(i);
+        this.tHomePages.remove(i);
     }
 
     public TournamentHome getLastTHomePage()

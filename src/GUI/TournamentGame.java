@@ -472,5 +472,15 @@ public class TournamentGame extends JPanel implements ActionListener
         }
     }
 
+    public int results ()
+    {
+        int res=-1;
+        if(winner.equals(user1))
+            return 0;
+        else
+            return 1;
+    }
+
+
 
 }

@@ -4,4 +4,6 @@ PLAYER
 player player 12
 PLAYER
 qwe qwe 11
+PLAYER
+asd asd 0
 X

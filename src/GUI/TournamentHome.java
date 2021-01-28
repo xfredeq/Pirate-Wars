@@ -22,6 +22,11 @@ public class TournamentHome extends JPanel
     private final JLabel score=new JLabel("Scoreboard");
     private final JPanel list = new JPanel(new GridLayout(1, 1));
     private final JPanel pane = new JPanel(new GridLayout(2, 3));
+    private JPanel pane2;
+    private JPanel endPane;
+
+    private JLabel victory;
+    private JLabel winn;
 
     private final JLabel nextMatch=new JLabel("Next Match");
     private final JLabel lastMatch=new JLabel("Previous Match");
@@ -29,6 +34,7 @@ public class TournamentHome extends JPanel
     public String name;
 
     private Tournament t;
+    public String winner="";
 
     public TournamentHome (String name)
     {
@@ -79,7 +85,25 @@ public class TournamentHome extends JPanel
         //lastMatch.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.4f));
         //lastMatch.setOpaque(false);
 
-        JPanel pane2 = new JPanel(new GridLayout(2, 1));
+
+        victory = new JLabel("", SwingConstants.CENTER);
+        victory.setFont(new Font("Comic Sans MS", Font.PLAIN, 60));
+        victory.setOpaque(false);
+
+
+        winn = new JLabel("", SwingConstants.CENTER);
+        winn.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+        winn.setOpaque(false);
+
+        endPane = new JPanel();
+        endPane.setLayout(new GridLayout(2,1));
+        endPane.setOpaque(false);
+
+        endPane.add(victory);
+        endPane.add(winn);
+
+
+        pane2 = new JPanel(new GridLayout(2, 1));
         pane2.add(nextMatch);
         pane2.add(lastMatch);
         pane2.setBackground(Color.GREEN);
@@ -91,7 +115,7 @@ public class TournamentHome extends JPanel
         pane.add(start);
         pane.add(pane2);
         pane.add(list);
-        pane.add(Box.createHorizontalGlue());
+        pane.add(endPane);
         pane.add(Box.createHorizontalGlue());
         pane.setOpaque(false);
 
@@ -230,7 +254,20 @@ public class TournamentHome extends JPanel
     public void setMatches()
     {
         if(t.nextMatch.p1==-1)
+        {
+            this.start.setVisible(false);
+            this.pane2.setVisible(false);
+
+            victory.setText("VICTORY!");
+
+            winner=this.t.getPlayers().get(0);
+
+            winn.setText("Winner: " + winner);
+            endPane.setBackground(Color.ORANGE);
+            endPane.setOpaque(true);
+
             nextMatch.setText("Next match: none");
+        }
         else
             nextMatch.setText("Next match: "+t.getPlayersOrder().get(t.nextMatch.p1) + " vs " +t.getPlayersOrder().get(t.nextMatch.p2));
 
