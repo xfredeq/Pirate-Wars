@@ -49,10 +49,24 @@ public class Settings extends JPanel implements ChangeListener, ActionListener {
         shipsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);
+
+        dft.setPreferredSize(new Dimension(200, 80));
+        dft.setBackground(new Color(6, 141, 203, 255));
+        dft.setFont(new Font("Arial", Font.BOLD, 25));
+
+        back.setPreferredSize(new Dimension(200, 80));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
+        fieldLabel.setPreferredSize(new Dimension(300, 80));
+        fieldLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        shipsLabel.setPreferredSize(new Dimension(300, 80));
+        shipsLabel.setFont(new Font("Arial", Font.BOLD, 25));
 
         field.setAlignmentX(Component.CENTER_ALIGNMENT);
         field.setMajorTickSpacing(1);

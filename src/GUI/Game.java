@@ -75,6 +75,11 @@ public class Game extends JPanel implements ActionListener
         clk.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setVisible(false);
 
+        back.setPreferredSize(new Dimension(200, 40));
+        back.setBackground(new Color(119, 8, 245, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+        back.setForeground(Color.BLACK);
+
         sur1.addActionListener(this);
         sur2.setVisible(false);
         if(gameMode.equals("guest") || gameMode.equals("player") || gameMode.equals("tournament"))
@@ -122,7 +127,7 @@ public class Game extends JPanel implements ActionListener
         points1.setFont(new Font("Verdana", Font.BOLD, 30));
         points2.setFont(new Font("Verdana", Font.BOLD, 30));
 
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

@@ -16,6 +16,7 @@ public class Panels extends JFrame implements ActionListener {
 
     private boolean[][] board1=new boolean[1][1], board2=new boolean[1][1];
     private int gameMode = -1;
+    private int loginMode = 0;
 
     private final Start startPane = new Start();
     private final Login loginPane = new Login();
@@ -208,7 +209,16 @@ public class Panels extends JFrame implements ActionListener {
             System.exit(0);
         }
         else if (source == loginPane.back)
-            cards.show(cardPane, "Start Pane");
+        {
+            if(loginMode==0)
+                cards.show(cardPane, "Start Pane");
+            else
+            {
+                cards.show(cardPane, "Play Pane");
+                loginMode=0;
+            }
+
+        }
         else if (source == loginPane.login)
         {
             invokeLater(new Runnable() {
@@ -314,6 +324,7 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source == playPane.player)
         {
+            loginMode=1;
             settingsPane.setGameMode("player");
             shipsPane = new Ships(settingsPane.getFieldSize(),settingsPane.getBiggestShip(),settingsPane.getShipSurface());
             gameMode =1;

@@ -24,7 +24,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     private int playersNumber;
 
 
-    private Data data;
+    private final Data data;
 
     private BufferedImage image;
 
@@ -32,10 +32,11 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
     public JButton create = new JButton("Create Tournament");
 
     private final JButton dft = new JButton("Restore Default");
-    private JTextField name = new JTextField();
+    private final JTextField name = new JTextField();
     private final JSlider players = new JSlider(JSlider.HORIZONTAL, 3, 8, 5);
     private final JSlider field = new JSlider(JSlider.HORIZONTAL, 5, 15, 10);
     private final JSlider ships = new JSlider(JSlider.HORIZONTAL);
+    private final JLabel nameLabel = new JLabel("Tournament name: ");
     private final JLabel playersLabel = new JLabel("Players number: ");
     private final JLabel fieldLabel = new JLabel("Field Size(NxN): ");
     private final JLabel shipsLabel = new JLabel("Ship surface: ");
@@ -61,17 +62,45 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         create.setAlignmentX(Component.CENTER_ALIGNMENT);
         name.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        name.setMaximumSize(new Dimension(200,1));
+        name.setMaximumSize(new Dimension(300,40));
+        name.setPreferredSize(new Dimension(250,30));
+        name.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         playersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         fieldLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         shipsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);
+
+        dft.setPreferredSize(new Dimension(200, 40));
+        dft.setBackground(new Color(6, 141, 203, 255));
+        dft.setFont(new Font("Arial", Font.BOLD, 25));
+
+        create.setPreferredSize(new Dimension(300, 80));
+        create.setBackground(new Color(76, 165, 9, 255));
+        create.setFont(new Font("Arial", Font.BOLD, 25));
+
+        back.setPreferredSize(new Dimension(200, 40));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
+        nameLabel.setPreferredSize(new Dimension(300, 80));
+        nameLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        playersLabel.setPreferredSize(new Dimension(300, 80));
+        playersLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        fieldLabel.setPreferredSize(new Dimension(300, 80));
+        fieldLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        shipsLabel.setPreferredSize(new Dimension(300, 80));
+        shipsLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
 
         players.setAlignmentX(Component.CENTER_ALIGNMENT);
         players.setMajorTickSpacing(1);
@@ -112,6 +141,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         add(Box.createVerticalGlue());
         add(dft);
         add(Box.createVerticalGlue());
+        add(nameLabel);
         add(name);
         add(Box.createVerticalGlue());
         add(playersLabel);

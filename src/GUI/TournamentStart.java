@@ -26,21 +26,32 @@ public class TournamentStart extends JPanel
 
     private void setComponents ( )
     {
-        newT.setOpaque(false);
-        loadT.setOpaque(false);
 
         panel.add(newT);
         panel.add(Box.createHorizontalGlue());
         panel.add(loadT);
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.setMaximumSize(new Dimension(600, 200));
-        panel.setPreferredSize(new Dimension(600, 200));
+        panel.setMaximumSize(new Dimension(1000, 300));
+        panel.setPreferredSize(new Dimension(1000, 300));
         panel.setOpaque(false);
 
+        newT.setPreferredSize(new Dimension(600, 200));
+        newT.setMaximumSize(new Dimension(600, 200));
+        newT.setBackground(new Color(76, 165, 9, 255));
+        newT.setFont(new Font("Arial", Font.BOLD, 25));
+
+        loadT.setPreferredSize(new Dimension(600, 200));
+        loadT.setMaximumSize(new Dimension(600, 200));
+        loadT.setBackground(new Color(217, 85, 24, 255));
+        loadT.setFont(new Font("Arial", Font.BOLD, 25));
+
+        back.setPreferredSize(new Dimension(300, 80));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

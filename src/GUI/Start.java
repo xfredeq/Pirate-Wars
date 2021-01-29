@@ -30,8 +30,25 @@ public class Start extends JPanel
         guest.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        login.setPreferredSize(new Dimension(300, 80));
+        login.setBackground(new Color(76, 165, 9, 255));
+        login.setFont(new Font("Arial", Font.BOLD, 25));
+
+        signin.setPreferredSize(new Dimension(200, 80));
+        signin.setBackground(new Color(6, 141, 203, 255));
+        signin.setFont(new Font("Arial", Font.BOLD, 25));
+
+        guest.setPreferredSize(new Dimension(200, 80));
+        guest.setBackground(new Color(203, 183, 6, 255));
+        guest.setFont(new Font("Arial", Font.BOLD, 25));
+
+        exit.setPreferredSize(new Dimension(200, 80));
+        exit.setBackground(new Color(236, 24, 49, 255));
+        exit.setFont(new Font("Arial", Font.BOLD, 25));
+
+
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

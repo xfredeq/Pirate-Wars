@@ -41,15 +41,19 @@ public class TournamentLoad extends JPanel
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
+        back.setPreferredSize(new Dimension(200, 40));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
         tournaments_label.setAlignmentX(Component.CENTER_ALIGNMENT);
         tournaments_label.setFont(new Font("Arial Black", Font.BOLD, 91));
         tournaments_label.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
-        tournaments_label.setForeground(Color.CYAN);
+        tournaments_label.setForeground(Color.MAGENTA);
         tournaments_label.setOpaque(true);
 
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));

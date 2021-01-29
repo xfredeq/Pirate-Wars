@@ -33,10 +33,27 @@ public class Login extends JPanel
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        loginField.setMaximumSize(new Dimension(200,1));
-        passField.setMaximumSize(new Dimension(200,1));
+        login.setPreferredSize(new Dimension(300, 80));
+        login.setBackground(new Color(76, 165, 9, 255));
+        login.setFont(new Font("Arial", Font.BOLD, 25));
 
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        back.setPreferredSize(new Dimension(200, 80));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
+        loginLabel.setPreferredSize(new Dimension(300, 80));
+        loginLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        passLabel.setPreferredSize(new Dimension(200, 80));
+        passLabel.setFont(new Font("Verdana", Font.BOLD, 25));
+
+        loginField.setPreferredSize(new Dimension(250,25));
+        passField.setPreferredSize(new Dimension(250,25));
+        loginField.setMaximumSize(new Dimension(250,25));
+        passField.setMaximumSize(new Dimension(250,25));
+
+
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

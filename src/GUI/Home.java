@@ -15,8 +15,8 @@ public class Home extends JPanel {
     public JButton credits = new JButton("Credits");
     public JButton logout = new JButton("Logout");
     public JButton exit = new JButton("Exit");
-    private JLabel title = new JLabel("Pirate Wars");
-    private JLabel user = new JLabel("You are logged as: ");
+    private final JLabel title = new JLabel("Pirate Wars");
+    private final JLabel user = new JLabel("You are logged as: ");
 
     public Home ( )
     {
@@ -35,8 +35,42 @@ public class Home extends JPanel {
         logout.setAlignmentX(Component.CENTER_ALIGNMENT);
         user.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        user.setPreferredSize(new Dimension(300, 40));
+        user.setFont(new Font("Arial", Font.BOLD, 15));
+
+        play.setPreferredSize(new Dimension(300, 80));
+        play.setBackground(new Color(76, 165, 9, 255));
+        play.setFont(new Font("Arial", Font.BOLD, 25));
+        play.setForeground(Color.BLACK);
+
+        settings.setPreferredSize(new Dimension(200, 80));
+        settings.setBackground(new Color(6, 141, 203, 255));
+        settings.setFont(new Font("Arial", Font.BOLD, 25));
+        settings.setForeground(Color.BLACK);
+
+        score.setPreferredSize(new Dimension(200, 80));
+        score.setBackground(new Color(119, 8, 245, 255));
+        score.setFont(new Font("Arial", Font.BOLD, 25));
+        score.setForeground(Color.BLACK);
+
+        credits.setPreferredSize(new Dimension(200, 80));
+        credits.setBackground(new Color(217, 85, 24, 255));
+        credits.setFont(new Font("Arial", Font.BOLD, 25));
+        credits.setForeground(Color.BLACK);
+
+        logout.setPreferredSize(new Dimension(200, 80));
+        logout.setBackground(new Color(203, 183, 6, 255));
+        logout.setFont(new Font("Arial", Font.BOLD, 25));
+        logout.setForeground(Color.BLACK);
+
+        exit.setPreferredSize(new Dimension(200, 80));
+        exit.setBackground(new Color(236, 24, 49, 255));
+        exit.setFont(new Font("Arial", Font.BOLD, 25));
+        exit.setForeground(Color.BLACK);
+
+
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

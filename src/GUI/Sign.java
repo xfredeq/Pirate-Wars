@@ -35,12 +35,33 @@ public class Sign extends JPanel
         confirmPassLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        loginField.setMaximumSize(new Dimension(200,1));
-        passField.setMaximumSize(new Dimension(200,1));
-        confirmPassField.setMaximumSize(new Dimension(200,1));
+        sign.setPreferredSize(new Dimension(300, 80));
+        sign.setBackground(new Color(76, 165, 9, 255));
+        sign.setFont(new Font("Arial", Font.BOLD, 25));
+
+        back.setPreferredSize(new Dimension(200, 80));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
+        loginLabel.setPreferredSize(new Dimension(300, 80));
+        loginLabel.setFont(new Font("Arial", Font.BOLD, 25));
+
+        passLabel.setPreferredSize(new Dimension(200, 80));
+        passLabel.setFont(new Font("Verdana", Font.BOLD, 25));
+
+        confirmPassLabel.setPreferredSize(new Dimension(200, 80));
+        confirmPassLabel.setFont(new Font("Verdana", Font.BOLD, 25));
+
+        loginField.setPreferredSize(new Dimension(250,25));
+        passField.setPreferredSize(new Dimension(250,25));
+        confirmPassField.setPreferredSize(new Dimension(250,25));
+
+        loginField.setMaximumSize(new Dimension(250,25));
+        passField.setMaximumSize(new Dimension(250,25));
+        confirmPassField.setMaximumSize(new Dimension(250,25));
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

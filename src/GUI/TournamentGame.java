@@ -43,7 +43,7 @@ public class TournamentGame extends JPanel implements ActionListener
     public JButton sur2 = new JButton("Surrender");
     public JButton turn1 = new JButton();
     public JButton turn2 = new JButton();
-    public JButton back = new JButton("Back to main menu");
+    public JButton back = new JButton("Back to Tournament");
 
     public CLK clk=new CLK();
 
@@ -65,9 +65,15 @@ public class TournamentGame extends JPanel implements ActionListener
     {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         vs.setAlignmentX(Component.CENTER_ALIGNMENT);
-        back.setAlignmentX(Component.CENTER_ALIGNMENT);
         clk.setAlignmentX(Component.CENTER_ALIGNMENT);
+        back.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+
         back.setVisible(false);
+        back.setPreferredSize(new Dimension(200, 40));
+        back.setBackground(new Color(119, 8, 245, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+        back.setForeground(Color.BLACK);
 
         sur1.addActionListener(this);
         sur2.setVisible(false);
@@ -105,7 +111,7 @@ public class TournamentGame extends JPanel implements ActionListener
         points1.setFont(new Font("Verdana", Font.BOLD, 30));
         points2.setFont(new Font("Verdana", Font.BOLD, 30));
 
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

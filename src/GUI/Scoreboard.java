@@ -35,7 +35,7 @@ public class Scoreboard extends JPanel
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);
@@ -45,6 +45,10 @@ public class Scoreboard extends JPanel
         score.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.7f));
         score.setForeground(Color.CYAN);
         score.setOpaque(true);
+
+        back.setPreferredSize(new Dimension(200, 80));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
 
         list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
         list.setOpaque(true);

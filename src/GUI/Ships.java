@@ -51,6 +51,18 @@ public class Ships extends JPanel implements ActionListener {
         pane.setMaximumSize(new Dimension(400, 400));
         pane.setPreferredSize(new Dimension(400, 400));
 
+        reset.setPreferredSize(new Dimension(200, 40));
+        reset.setBackground(new Color(236, 24, 49, 255));
+        reset.setFont(new Font("Arial", Font.BOLD, 25));
+
+        start.setPreferredSize(new Dimension(300, 80));
+        start.setBackground(new Color(76, 165, 9, 255));
+        start.setFont(new Font("Arial", Font.BOLD, 25));
+
+        back.setPreferredSize(new Dimension(200, 40));
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Arial", Font.BOLD, 25));
+
         reset.addActionListener(this);
 
         board = new JButton[fieldSize][fieldSize];
@@ -66,7 +78,7 @@ public class Ships extends JPanel implements ActionListener {
         }
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);

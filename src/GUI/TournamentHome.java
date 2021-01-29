@@ -50,40 +50,45 @@ public class TournamentHome extends JPanel
         back.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
+        title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 120));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
         title.setForeground(Color.RED);
         title.setOpaque(true);
 
         score.setHorizontalAlignment(0);
-        score.setFont(new Font("Arial Black", Font.BOLD, 91));
-        score.setBackground(new Color(0.1f, 0.2f, 1.0f, 0.7f));
+        score.setFont(new Font("Arial Black", Font.BOLD, 80));
+        score.setBackground(new Color(3, 24, 161, 255));
         score.setForeground(Color.YELLOW);
         score.setOpaque(true);
         score.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
 
-        list.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.6f));
+        list.setBackground(new Color(233, 233, 236, 190));
         list.setOpaque(true);
 
         start.setHorizontalAlignment(0);
-        start.setBackground(new Color(0.1f, 0.3f, 1.0f, 0.7f));
-        start.setFont(new Font("Calibri", Font.BOLD, 50));
+        start.setVerticalAlignment(0);
+        start.setBackground(new Color(60, 180, 17, 255));
+        start.setFont(new Font("Calibri", Font.BOLD, 100));
 
 
 
         nextMatch.setHorizontalAlignment(0);
         nextMatch.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
         nextMatch.setFont(new Font("Verdana", Font.BOLD, 30));
-        //nextMatch.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.3f));
-        //nextMatch.setOpaque(false);
+        nextMatch.setBackground(new Color(7, 206, 149, 255));
+        nextMatch.setOpaque(true);
 
 
         lastMatch.setHorizontalAlignment(0);
         lastMatch.setBorder(BorderFactory.createBevelBorder(1,Color.BLACK, Color.BLACK));
         lastMatch.setFont(new Font("Verdana", Font.BOLD, 30));
-        //lastMatch.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.4f));
-        //lastMatch.setOpaque(false);
+        lastMatch.setBackground(new Color(210, 120, 41, 255));
+        lastMatch.setOpaque(true);
 
+        back.setHorizontalAlignment(0);
+        back.setVerticalAlignment(0);
+        back.setBackground(new Color(203, 183, 6, 255));
+        back.setFont(new Font("Calibri", Font.BOLD, 30));
 
         victory = new JLabel("", SwingConstants.CENTER);
         victory.setFont(new Font("Comic Sans MS", Font.PLAIN, 60));
@@ -105,8 +110,8 @@ public class TournamentHome extends JPanel
         pane2 = new JPanel(new GridLayout(2, 1));
         pane2.add(nextMatch);
         pane2.add(lastMatch);
-        pane2.setBackground(Color.GREEN);
-        pane2.setOpaque(true);
+        //pane2.setBackground(new Color(187, 87, 10, 255));
+        pane2.setOpaque(false);
 
 
         pane.setAlignmentX(Component.CENTER_ALIGNMENT);
