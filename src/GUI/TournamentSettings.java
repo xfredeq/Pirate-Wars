@@ -2,7 +2,6 @@ package GUI;
 
 import Other.Data;
 import Other.Tournament;
-import Other.Users;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -52,6 +51,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         addComponents();
         players.addChangeListener(this);
         field.addChangeListener(this);
+        ships.addChangeListener(this);
         dft.addActionListener(this);
     }
 
@@ -193,16 +193,14 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         ArrayList<Tournament> t = data.getTournaments();
         //t.add(new Tournament(new Users(),"Tournament_1",1,1,1,2));
         String tmp, name = "Tournament_";
-        boolean czy=true;
+        boolean czy;
         for(int i=1;i<10000;i++)
         {
             czy=true;
-            tmp=name+String.valueOf(i);
-            for(int j=0;j<t.size();j++)
-            {
-                if(tmp.equals(t.get(j).name))
-                {
-                    czy=false;
+            tmp=name+ i;
+            for (Tournament tournament : t) {
+                if (tmp.equals(tournament.name)) {
+                    czy = false;
                     break;
                 }
             }
@@ -231,6 +229,10 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         {
             this.playersNumber=players.getValue();
         }
+        else if (source==ships)
+        {
+            this.shipSurface=ships.getValue();
+        }
     }
 
     @Override
@@ -247,7 +249,7 @@ public class TournamentSettings extends JPanel implements ChangeListener, Action
         return biggestShip;
     }
 
-    public int getShipSurface ( ) { return shipSurface; }
+    public int getShipSurface ( ) { return shipSurface;}
 
     public int getFieldSize ( )
     {

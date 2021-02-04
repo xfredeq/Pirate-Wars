@@ -76,6 +76,8 @@ public class Users {
             return false;
         else if (name.length() == 0)
             return false;
+        else if (name.contains("Guest"))
+            return false;
         else {
             addUser(name, pass1);
             currentUsername = name;

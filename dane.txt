@@ -6,4 +6,6 @@ PLAYER
 qwe qwe 11
 PLAYER
 asd asd 0
+PLAYER
+zxc zxc 0
 X

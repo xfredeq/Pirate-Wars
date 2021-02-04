@@ -25,6 +25,7 @@ public class Panels extends JFrame implements ActionListener {
     private final Settings settingsPane = new Settings();
     private final TournamentSettings tSettingsPane = new TournamentSettings(data);
     private final Scoreboard scorePane = new Scoreboard(users);
+    private final Credits creditsPane = new Credits();
     private final Play playPane = new Play();
     private final TournamentStart tStartPane = new TournamentStart();
     private final TournamentLoad tLoadPane = new TournamentLoad();
@@ -73,6 +74,7 @@ public class Panels extends JFrame implements ActionListener {
         cardPane.add(settingsPane,"Settings Pane");
         cardPane.add(playPane, "Play Pane");
         cardPane.add(scorePane, "Scoreboard Pane");
+        cardPane.add(creditsPane, "Credits Pane");
         cardPane.add(tSettingsPane, "tSettings Pane");
         cardPane.add(tStartPane, "tStart Pane");
         cardPane.add(tLoadPane, "tLoad Pane");
@@ -94,12 +96,15 @@ public class Panels extends JFrame implements ActionListener {
         homePane.play.addActionListener(this);
         homePane.settings.addActionListener(this);
         homePane.score.addActionListener(this);
+        homePane.credits.addActionListener(this);
         homePane.logout.addActionListener(this);
         homePane.exit.addActionListener(this);
 
         settingsPane.back.addActionListener(this);
 
         scorePane.back.addActionListener(this);
+
+        creditsPane.back.addActionListener(this);
 
         playPane.back.addActionListener(this);
         playPane.easy.addActionListener(this);
@@ -161,6 +166,14 @@ public class Panels extends JFrame implements ActionListener {
                 {
                     cards.show(cardPane, "Play Pane");
                     currTournamentPointer=-1;
+
+                    for(int j=0;j<data.getTournament(i).getPlayers().size();j++)
+                    {
+                        if(!data.getTournament(i).getPlayers().get(j).contains("Guest"))
+                        {
+                            users.addScore(data.getTournament(i).getPlayers().get(j),(2 * data.getTournament(i).getPoints().get(j)) - (3 * (data.getTournament(i).getPlayers().size()-1) ) );
+                        }
+                    }
                     data.deleteTournament(i);
                 }
 
@@ -199,7 +212,8 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Login Pane");
         else if (source == startPane.signin)
             cards.show(cardPane, "Sign Pane");
-        else if (source == startPane.guest) {
+        else if (source == startPane.guest)
+        {
             cards.show(cardPane, "Home Pane");
             homePane.setUsername(users.getCurrentUsername());
         }
@@ -265,6 +279,10 @@ public class Panels extends JFrame implements ActionListener {
             scorePane.showScoreboard();
             cards.show(cardPane, "Scoreboard Pane");
         }
+        else if(source == homePane.credits)
+        {
+            cards.show(cardPane, "Credits Pane");
+        }
         else if (source == homePane.logout)
         {
             users.setCurrentUsername("");
@@ -285,6 +303,10 @@ public class Panels extends JFrame implements ActionListener {
         else if(source == scorePane.back)
         {
             scorePane.clearScoreboard();
+            cards.show(cardPane, "Home Pane");
+        }
+        else if(source == creditsPane.back)
+        {
             cards.show(cardPane, "Home Pane");
         }
         else if(source == playPane.back)

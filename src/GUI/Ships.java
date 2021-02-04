@@ -11,18 +11,18 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Ships extends JPanel implements ActionListener {
-    private int fieldSize;
+    private final int fieldSize;
     private int shipSurface;
-    private int maxShipSurface;
-    private int biggestShip;
+    private final int maxShipSurface;
+    private final int biggestShip;
     private int conflicts = 0;
     public BufferedImage image;
-    private JButton reset = new JButton("Reset");
+    private final JButton reset = new JButton("Reset");
     public JButton start = new JButton("Ready");
     public JButton back = new JButton("back");
-    private JLabel title = new JLabel("Pirate Wars");
+    private final JLabel title = new JLabel("Pirate Wars");
     private JPanel pane;
-    private JLabel shipCount = new JLabel();
+    private final JLabel shipCount = new JLabel();
     private JButton[][] board;
 
     private static Integer size;
@@ -34,7 +34,7 @@ public class Ships extends JPanel implements ActionListener {
         this.biggestShip = biggestShip;
         this.shipSurface = shipSurface;
         this.maxShipSurface = shipSurface;
-        shipCount.setText(String.valueOf(this.shipSurface));
+        shipCount.setText("Ships remaining: " + this.shipSurface);
         setComponents();
         addComponents();
     }
@@ -125,13 +125,7 @@ public class Ships extends JPanel implements ActionListener {
         Object source = e.getSource();
 
         if (source == reset) {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run ( )
-                {
-                    reset();
-                }
-            });
+            EventQueue.invokeLater(this::reset);
         }
 
         for (int i = 0; i < fieldSize; i++) {
@@ -150,7 +144,7 @@ public class Ships extends JPanel implements ActionListener {
                 int finalI = i;
                 int finalJ = j;
                 size = biggestShip;
-                boolean tab[][] = new boolean[fieldSize][fieldSize];
+                boolean[][] tab = new boolean[fieldSize][fieldSize];
                 clear(tab);
 
                 if (source == board[i][j])
@@ -187,13 +181,13 @@ public class Ships extends JPanel implements ActionListener {
         conflicts=0;
     }
 
-    private boolean checkSize (int i, int j, boolean tab[][])
+    private boolean checkSize (int i, int j, boolean[][] tab)
     {
         //System.out.println("x: " + j + " y: " + i + " size: " + size);
         size--;
 
         tab[i][j] = true;
-        boolean t[] = {true, true, true, true};
+        boolean[] t = {true, true, true, true};
         if (i - 1 >= 0) {
             if (board[i - 1][j].getBackground() != Color.GREEN)
                 t[0] = false;
@@ -215,35 +209,32 @@ public class Ships extends JPanel implements ActionListener {
         } else
             t[3] = false;
 
-        if (t[0] == true && tab[i - 1][j] == false) {
+        if (t[0] && !tab[i - 1][j]) {
             checkSize(i - 1, j, tab);
         } else {
             t[0] = true;
         }
-        if (t[1] == true && tab[i + 1][j] == false) {
+        if (t[1] && !tab[i + 1][j]) {
             checkSize(i + 1, j, tab);
         } else {
             t[1] = true;
         }
-        if (t[2] == true && tab[i][j - 1] == false) {
+        if (t[2] && !tab[i][j - 1]) {
             checkSize(i, j - 1, tab);
         } else {
             t[2] = true;
         }
-        if (t[3] == true && tab[i][j + 1] == false) {
+        if (t[3] && !tab[i][j + 1]) {
             checkSize(i, j + 1, tab);
         } else {
             t[3] = true;
         }
 
-        if (size >= 0)
-            return true;
-
-        return false;
+        return size >= 0;
 
     }
 
-    private void clear (boolean tab[][])
+    private void clear (boolean[][] tab)
     {
         for (int i = 0; i < fieldSize; i++) {
             for (int j = 0; j < fieldSize; j++)
@@ -272,7 +263,7 @@ public class Ships extends JPanel implements ActionListener {
 
     }
 
-    private void nValidate(int i, int j, boolean tab[][])
+    private void nValidate(int i, int j, boolean[][] tab)
     {
         size = biggestShip;
         clear(tab);
@@ -294,7 +285,7 @@ public class Ships extends JPanel implements ActionListener {
 
     public boolean[][] getBoard()
     {
-        boolean brd[][]=new boolean[fieldSize][fieldSize];
+        boolean[][] brd =new boolean[fieldSize][fieldSize];
         clear(brd);
         for(int i=0;i<fieldSize;i++)
         {
@@ -307,12 +298,12 @@ public class Ships extends JPanel implements ActionListener {
         return brd;
     }
 
-    private boolean checkRandomSize (int i, int j, boolean brd[][], boolean tab[][])
+    private boolean checkRandomSize (int i, int j, boolean[][] brd, boolean[][] tab)
     {
         size--;
 
         tab[i][j] = true;
-        boolean t[] = {true, true, true, true};
+        boolean[] t = {true, true, true, true};
         if (i - 1 >= 0) {
             if (!brd[i - 1][j])
                 t[0] = false;
@@ -334,38 +325,35 @@ public class Ships extends JPanel implements ActionListener {
         } else
             t[3] = false;
 
-        if (t[0] == true && tab[i - 1][j] == false) {
+        if (t[0] && !tab[i - 1][j]) {
             checkRandomSize(i - 1, j, brd, tab);
         } else {
             t[0] = true;
         }
-        if (t[1] == true && tab[i + 1][j] == false) {
+        if (t[1] && !tab[i + 1][j]) {
             checkRandomSize(i + 1, j, brd, tab);
         } else {
             t[1] = true;
         }
-        if (t[2] == true && tab[i][j - 1] == false) {
+        if (t[2] && !tab[i][j - 1]) {
             checkRandomSize(i, j - 1, brd, tab);
         } else {
             t[2] = true;
         }
-        if (t[3] == true && tab[i][j + 1] == false) {
+        if (t[3] && !tab[i][j + 1]) {
             checkRandomSize(i, j + 1, brd, tab);
         } else {
             t[3] = true;
         }
 
-        if (size >= 0)
-            return true;
-
-        return false;
+        return size >= 0;
 
     }
 
     public boolean[][] makeRandomBoard ( )
     {
-        boolean brd[][] = new boolean[fieldSize][fieldSize];
-        boolean visited[][] = new boolean[fieldSize][fieldSize];
+        boolean[][] brd = new boolean[fieldSize][fieldSize];
+        boolean[][] visited = new boolean[fieldSize][fieldSize];
         clear(visited);
         clear(brd);
         int surface = maxShipSurface;
@@ -380,7 +368,7 @@ public class Ships extends JPanel implements ActionListener {
             int r2=rand.nextInt(fieldSize);
 
             //out.println("all " + r2 + " " + r1 + " " + surface);
-            if (brd[r1][r2] == false)
+            if (!brd[r1][r2])
             {
                 if (checkRandomSize(r1, r2, brd, visited))
                 {
