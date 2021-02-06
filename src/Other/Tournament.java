@@ -314,6 +314,38 @@ public class Tournament implements ActionListener {
         return players;
     }
 
+    public int getPlayersN ( )
+    {
+        return playersNumber;
+    }
+
+    public int getFieldSize ( )
+    {
+        return fieldSize;
+    }
+
+    public int getShipSurface ( )
+    {
+        return shipSurface;
+    }
+
+    public int getBiggestShip ( )
+    {
+        return biggestShip;
+    }
+
+    public int getMatchesCounter ( )
+    {
+        return matchesCounter;
+    }
+
+    public void setMatchesCounter (int i ) { this.matchesCounter=i;}
+
+    public boolean[][] getGames ( )
+    {
+        return games;
+    }
+
     public ArrayList<String> getPlayersOrder ( )
     {
         return playersOrder;

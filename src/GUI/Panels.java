@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.awt.EventQueue.*;
 import static java.awt.EventQueue.invokeLater;
 
 public class Panels extends JFrame implements ActionListener {
@@ -46,7 +47,17 @@ public class Panels extends JFrame implements ActionListener {
     public Panels ( )
     {
         super("Pirate Wars");
-        invokeLater(data::read);
+
+        invokeLater(new Runnable() {
+            @Override
+            public void run ( )
+            {
+                data.read(cardPane);
+            }
+        });
+
+
+
 
         /*ArrayList<String> users = this.users.getUsers();
         ArrayList<String> passes = this.users.getPasses();
@@ -383,7 +394,6 @@ public class Panels extends JFrame implements ActionListener {
         {
             tLoginPane.clearFields();
             data.tHomePages.add(new TournamentHome("tHome Pane "+ data.tHomePages.size()));
-            data.getLastTHomePage().back.addActionListener(this);
             currTournamentPointer=data.tHomePages.size()-1;
             cardPane.add(data.getLastTHomePage(), "tHome Pane "+ (data.tHomePages.size() - 1));
             data.getLastTHomePage().back.addActionListener(this);

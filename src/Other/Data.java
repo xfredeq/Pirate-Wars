@@ -2,6 +2,9 @@ package Other;
 
 import GUI.TournamentHome;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,8 +12,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Data
-{
+public class Data implements ActionListener {
     private final File file;
     private Scanner read;
     private PrintWriter write;
@@ -51,11 +53,47 @@ public class Data
             write.print(users.get(i) + " "+passes.get(i)+" "+scores.get(i)+"\n");
         }
 
+        for (Tournament tournament : tournaments)
+        {
+            write.print("TOURNAMENT\n");
+
+            write.print(tournament.name + " " + tournament.getPlayersN() + " " + tournament.getFieldSize() + " " + tournament.getShipSurface() + " " + tournament.getBiggestShip() + " " + tournament.getMatchesCounter() + "\n");
+
+            for(int j=0;j<tournament.getPlayersOrder().size();j++)
+            {
+                write.print(tournament.getPlayersOrder().get(j) + " ");
+            }
+            write.print("\n");
+
+            for(int j=0;j<tournament.getPlayers().size();j++)
+            {
+                write.print(tournament.getPlayers().get(j) + " ");
+            }
+            write.print("\n");
+
+            for(int j=0;j<tournament.getPoints().size();j++)
+            {
+                write.print(tournament.getPoints().get(j) + " ");
+            }
+            write.print("\n");
+
+            for(int j=0;j<tournament.getPlayersN();j++)
+            {
+                for(int k=0;k<tournament.getPlayersN();k++)
+                {
+                    write.print(tournament.getGames()[j][k] + " ");
+                }
+                write.print("\n");
+            }
+
+
+        }
+
         write.print("X");
         write.close();
     }
 
-    public void read ( )
+    public void read (JPanel cardPane )
     {
         try {
             this.read = new Scanner(this.file);
@@ -69,6 +107,9 @@ public class Data
 
         String user, pass;
         int score;
+
+        String tName;
+        int playersN, fieldSize, shipsSurface, biggestShip, matchesCounter;
 
         while(read.hasNextLine())
         {
@@ -85,6 +126,27 @@ public class Data
                     scores.add(score);
                 }
             }
+
+            while(read.nextLine().equals("TOURNAMENT"))
+            {
+
+                this.tHomePages.add(new TournamentHome("tHome Pane "+ this.tHomePages.size()));
+                cardPane.add(this.getLastTHomePage(), "tHome Pane "+ (this.tHomePages.size() - 1));
+                this.getLastTHomePage().back.addActionListener( this);
+                this.getLastTHomePage().start.addActionListener( this);
+
+
+                tName = read.next();
+                playersN = read.nextInt();
+                fieldSize = read.nextInt();
+                shipsSurface = read.nextInt();
+                biggestShip = read.nextInt();
+                matchesCounter = read.nextInt();
+
+                this.addTournament(new Tournament(this.users, tName, playersN, fieldSize, shipsSurface, biggestShip));
+                this.getLastTournament().setMatchesCounter(matchesCounter);
+            }
+
         }
 
     }
@@ -129,6 +191,9 @@ public class Data
     }
 
 
+    @Override
+    public void actionPerformed (ActionEvent e)
+    {
 
-
+    }
 }

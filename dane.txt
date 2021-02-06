@@ -1,11 +1,11 @@
 PLAYER
 admin admin 12
-PLAYER
-player player 12
-PLAYER
-qwe qwe 11
-PLAYER
-asd asd 0
-PLAYER
-zxc zxc 0
+TOURNAMENT
+Tournament_1 3 10 20 4 1
+
+
+
+true false false 
+false true false 
+false false true 
 X
