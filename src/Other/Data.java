@@ -118,20 +118,20 @@ public class Data implements ActionListener {
 
         String tName;
         int playersN, fieldSize, shipsSurface, biggestShip, matchesCounter;
+        while(read.hasNextLine())
+        {
+            while (read.next().equals("PLAYER")) {
+                user = read.next();
+                pass = read.next();
+                score = read.nextInt();
 
-            while(read.next().equals("PLAYER"))
-            {
-                user=read.next();
-                pass=read.next();
-                score=read.nextInt();
-
-                if(this.users.isUser(user)==-1)
-                {
+                if (this.users.isUser(user) == -1) {
                     users.add(user);
                     passes.add(pass);
                     scores.add(score);
                 }
             }
+        }
         while(read.hasNextLine())
         {
             while(read.next().equals("TOURNAMENT"))

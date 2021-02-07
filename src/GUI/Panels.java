@@ -227,7 +227,10 @@ public class Panels extends JFrame implements ActionListener {
             cards.show(cardPane, "Login Pane");
         }
         else if (source == startPane.signin)
+        {
+            signPane.clearFields();
             cards.show(cardPane, "Sign Pane");
+        }
         else if (source == startPane.guest)
         {
             cards.show(cardPane, "Home Pane");

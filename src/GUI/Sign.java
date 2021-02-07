@@ -111,6 +111,7 @@ public class Sign extends JPanel
         loginField.setText("");
         passField.setText("");
         confirmPassField.setText("");
+        sign.setBackground(new Color(76, 165, 9, 255));
     }
 
 }
