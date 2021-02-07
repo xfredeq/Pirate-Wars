@@ -4,6 +4,7 @@
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Window.java" afterDir="false" />
 =======
@@ -13,6 +14,13 @@
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Scoreboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Other/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Users.java" afterDir="false" />
+>>>>>>> Stashed changes
+=======
+      <change beforePath="$PROJECT_DIR$/dane.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dane.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/TournamentLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TournamentLogin.java" afterDir="false" />
 >>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />

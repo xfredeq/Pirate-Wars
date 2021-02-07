@@ -231,7 +231,7 @@ public class Panels extends JFrame implements ActionListener {
         else if (source == startPane.guest)
         {
             cards.show(cardPane, "Home Pane");
-            users.setCurrentUsername("Guest");
+            users.setCurrentUsername("Guest1");
             homePane.setUsername(users.getCurrentUsername());
         }
         else if (source == startPane.exit)
@@ -372,6 +372,8 @@ public class Panels extends JFrame implements ActionListener {
             cardPane.add(shipsPane, "Ships Pane");
             shipsPane.back.addActionListener(this);
             shipsPane.start.addActionListener(this);
+            loginPane.clearFields();
+
             loginPane.clearFields();
 
             cards.show(cardPane, "Login Pane");

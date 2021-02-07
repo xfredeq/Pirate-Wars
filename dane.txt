@@ -1,0 +1,17 @@
+PLAYER
+asd asd 12
+PLAYER
+qwe qwe 9
+X
+TOURNAMENT
+Tournament_1 5 10 20 4 0
+Guest Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+Guest Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+true false false false false 
+false true false false false 
+false false true false false 
+false false false true false 
+false false false false true 
+X
