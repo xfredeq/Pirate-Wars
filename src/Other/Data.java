@@ -93,11 +93,10 @@ public class Data implements ActionListener {
                 }
                 write.print("\n");
             }
-
-
+            write.print("X\n");
         }
 
-        write.print("X");
+        write.print("X\n");
         write.close();
     }
 
@@ -118,8 +117,7 @@ public class Data implements ActionListener {
 
         String tName;
         int playersN, fieldSize, shipsSurface, biggestShip, matchesCounter;
-        while(read.hasNextLine())
-        {
+
             while (read.next().equals("PLAYER")) {
                 user = read.next();
                 pass = read.next();
@@ -131,7 +129,6 @@ public class Data implements ActionListener {
                     scores.add(score);
                 }
             }
-        }
         while(read.hasNextLine())
         {
             while(read.next().equals("TOURNAMENT"))

@@ -1,6 +1,28 @@
 PLAYER
-qwe qwe 18
-PLAYER
-asd asd 12
+qwe qwe 1
+X
+TOURNAMENT
+Tournament_1 5 10 20 4 0
+Guest1 Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+Guest1 Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+true false false false false 
+false true false false false 
+false false true false false 
+false false false true false 
+false false false false true 
+X
+TOURNAMENT
+Tournament_2 5 10 20 4 0
+Guest1 Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+Guest1 Guest1 Guest2 Guest3 Guest4 
+0 0 0 0 0 
+true false false false false 
+false true false false false 
+false false true false false 
+false false false true false 
+false false false false true 
 X
 X

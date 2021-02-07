@@ -9,13 +9,7 @@
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dane.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dane.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Sign.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Sign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Sign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Other/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Data.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
