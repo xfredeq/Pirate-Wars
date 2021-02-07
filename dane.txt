@@ -1,6 +1,6 @@
 PLAYER
 asd asd 12
 PLAYER
-qwe qwe 9
+qwe qwe 15
 X
 X

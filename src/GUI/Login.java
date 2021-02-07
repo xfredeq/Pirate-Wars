@@ -99,6 +99,7 @@ public class Login extends JPanel
     {
         loginField.setText("");
         passField.setText("");
+        login.setBackground(new Color(76, 165, 9, 255));
     }
 
 

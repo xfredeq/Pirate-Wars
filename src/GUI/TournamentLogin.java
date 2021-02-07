@@ -37,6 +37,18 @@ public class TournamentLogin extends JPanel
         loginField.setMaximumSize(new Dimension(200,1));
         passField.setMaximumSize(new Dimension(200,1));
 
+        login.setPreferredSize(new Dimension(300, 80));
+        login.setBackground(new Color(76, 165, 9, 255));
+        login.setFont(new Font("Arial", Font.BOLD, 25));
+
+        guest.setPreferredSize(new Dimension(200, 80));
+        guest.setBackground(new Color(203, 183, 6, 255));
+        guest.setFont(new Font("Arial", Font.BOLD, 25));
+
+        cancel.setPreferredSize(new Dimension(200, 80));
+        cancel.setBackground(new Color(236, 24, 49, 255));
+        cancel.setFont(new Font("Arial", Font.BOLD, 25));
+
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Bradley Hand ITC", Font.BOLD, 100));
         title.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.5f));
@@ -86,7 +98,7 @@ public class TournamentLogin extends JPanel
     {
         loginField.setText("");
         passField.setText("");
-        login.setBackground(null);
+        login.setBackground(new Color(76, 165, 9, 255));
     }
 
 
