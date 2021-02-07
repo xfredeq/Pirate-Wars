@@ -425,7 +425,7 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source == shipsPane.start)
         {
-            if(true)//shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
+            if(shipsPane.getConflicts()==0 && shipsPane.getShipSurface()==0)
             {
                 if (gameMode ==1)
                 {
@@ -478,7 +478,7 @@ public class Panels extends JFrame implements ActionListener {
         }
         else if(source == shipsPane2.start)
         {
-            if(true)//shipsPane2.getConflicts()==0 && shipsPane2.getShipSurface()==0)
+            if(shipsPane2.getConflicts()==0 && shipsPane2.getShipSurface()==0)
             {
                 if(gameMode ==2)
                 {

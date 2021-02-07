@@ -1,5 +1,3 @@
-package com.company;
-
 import GUI.*;
 
 import java.awt.*;

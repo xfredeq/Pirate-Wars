@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Pirate-Wars:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Pirate_Wars_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dane.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dane.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Pirate_Wars$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/com/company/Pirate_Wars.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/TournamentLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TournamentLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Pirate_Wars.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pirate_Wars.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,20 +99,22 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="android.dex.compiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
       <recent name="GUI" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.company.Pirate_Wars" />
+      <option name="MAIN_CLASS_NAME" value="Pirate_Wars" />
       <module name="Pirate-Wars" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
