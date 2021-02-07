@@ -4,13 +4,14 @@
     <list default="true" id="7756209d-38f8-4d73-9603-1f50d13eafff" name="Default Changelist" comment="2.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dane.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dane.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/GUI/Panels.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Tournament.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pirate-Wars/Other/Tournament.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/Panels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Other/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Other/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Other/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Other/Users.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

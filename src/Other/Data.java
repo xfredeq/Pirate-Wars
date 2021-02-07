@@ -53,6 +53,8 @@ public class Data implements ActionListener {
             write.print(users.get(i) + " "+passes.get(i)+" "+scores.get(i)+"\n");
         }
 
+        write.print("X\n");
+
         for (Tournament tournament : tournaments)
         {
             write.print("TOURNAMENT\n");
@@ -62,6 +64,12 @@ public class Data implements ActionListener {
             for(int j=0;j<tournament.getPlayersOrder().size();j++)
             {
                 write.print(tournament.getPlayersOrder().get(j) + " ");
+            }
+            write.print("\n");
+
+            for(int j=0;j<tournament.getMatches().size();j++)
+            {
+                write.print(tournament.getMatches().get(j) + " ");
             }
             write.print("\n");
 
@@ -105,15 +113,13 @@ public class Data implements ActionListener {
         ArrayList<String> passes = this.users.getPasses();
         ArrayList<Integer> scores = this.users.getScores();
 
-        String user, pass;
+        String user="", pass;
         int score;
 
         String tName;
         int playersN, fieldSize, shipsSurface, biggestShip, matchesCounter;
 
-        while(read.hasNextLine())
-        {
-            while(read.nextLine().equals("PLAYER"))
+            while(read.next().equals("PLAYER"))
             {
                 user=read.next();
                 pass=read.next();
@@ -126,10 +132,10 @@ public class Data implements ActionListener {
                     scores.add(score);
                 }
             }
-
-            while(read.nextLine().equals("TOURNAMENT"))
+        while(read.hasNextLine())
+        {
+            while(read.next().equals("TOURNAMENT"))
             {
-
                 this.tHomePages.add(new TournamentHome("tHome Pane "+ this.tHomePages.size()));
                 cardPane.add(this.getLastTHomePage(), "tHome Pane "+ (this.tHomePages.size() - 1));
                 this.getLastTHomePage().back.addActionListener( this);
@@ -145,10 +151,29 @@ public class Data implements ActionListener {
 
                 this.addTournament(new Tournament(this.users, tName, playersN, fieldSize, shipsSurface, biggestShip));
                 this.getLastTournament().setMatchesCounter(matchesCounter);
+
+                for(int i=0;i<playersN;i++)
+                {
+                    this.getLastTournament().getPlayersOrder().add(read.next());
+                }
+
+                for(int i=0;i<playersN;i++)
+                {
+                    this.getLastTournament().getMatches().add(read.nextInt());
+                }
+
+                for(int i=0;i<playersN;i++)
+                {
+                    this.getLastTournament().getPlayers().add(read.next());
+                }
+
+                for(int i=0;i<playersN;i++)
+                {
+                    this.getLastTournament().getPoints().add(read.nextInt());
+                }
+
             }
-
         }
-
     }
 
     public ArrayList<Tournament> getTournaments ( ) { return this.tournaments; }
@@ -194,6 +219,9 @@ public class Data implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent e)
     {
+
+
+
 
     }
 }

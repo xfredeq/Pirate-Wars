@@ -366,6 +366,11 @@ public class Tournament implements ActionListener {
         return playersOrder.get(nextMatch.p2);
     }
 
+    public ArrayList<Integer> getMatches ( )
+    {
+        return matches;
+    }
+
     public void setPlayersCounter (int x)
     {
         this.playersCounter = x;

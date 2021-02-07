@@ -208,6 +208,8 @@ public class Panels extends JFrame implements ActionListener {
         {
             if(source == tLoadPane.getButtons()[i])
             {
+                data.getTHomePage(i).back.addActionListener(this);
+                data.getTHomePage(i).start.addActionListener(this);
                 currTournamentPointer=i;
                 tLoadLoginPane.clearFields();
                 tLoadPane.getButtons()[i].setBackground(Color.RED);
@@ -226,6 +228,7 @@ public class Panels extends JFrame implements ActionListener {
         else if (source == startPane.guest)
         {
             cards.show(cardPane, "Home Pane");
+            users.setCurrentUsername("Guest");
             homePane.setUsername(users.getCurrentUsername());
         }
         else if (source == startPane.exit)
@@ -254,7 +257,9 @@ public class Panels extends JFrame implements ActionListener {
                         homePane.setUsername(users.getCurrentUsername());
                         loginPane.clearFields();
                         if(gameMode ==1)
+                        {
                             cards.show(cardPane, "Ships Pane");
+                        }
                         else
                             cards.show(cardPane, "Home Pane");
                     } else

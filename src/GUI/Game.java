@@ -455,7 +455,7 @@ public class Game extends JPanel implements ActionListener
 
         victory.setText("VICTORY!");
         time.setText(clk.getTime());
-        if(!winner.equals("Guest1") && !winner.equals("Guest2"))
+        if(!winner.contains("Guest"))
         {
             winn.setText("Winner: " + winner + "(" + users.getScore(winner) + "+" + "3" + ")");
             users.addScore(winner,3);
@@ -467,7 +467,7 @@ public class Game extends JPanel implements ActionListener
         back.setVisible(true);
 
 
-        if(!loser.equals("Guest1") && !loser.equals("Guest2"))
+        if(!loser.contains("Guest"))
         {
             users.addScore(loser,-1);
             if(users.getScore(loser)<0)

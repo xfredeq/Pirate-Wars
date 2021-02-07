@@ -39,7 +39,8 @@ public class Users {
         String pass = "";
         for (char c : password) pass += c;
 
-        if (i >= 0 && passes.get(i).equals(pass)) {
+        if (i >= 0 && passes.get(i).equals(pass))
+        {
             if (currentUsername.equals(""))
                 currentUsername = name;
             else
@@ -90,6 +91,11 @@ public class Users {
         this.currentUsername = currentUsername;
     }
 
+    public void setSecondUsername (String secondUsername)
+    {
+        this.secondUsername = secondUsername;
+    }
+
     public String getCurrentUsername ( )
     {
         return currentUsername;
@@ -126,6 +132,7 @@ public class Users {
     {
         Integer tmp1;
         String tmp2;
+        String tmp3;
         for(int i=0;i<users.size();i++)
         {
             for(int j=i+1;j<users.size();j++)
@@ -139,6 +146,10 @@ public class Users {
                     tmp2=users.get(i);
                     users.set(i,users.get(j));
                     users.set(j,tmp2);
+
+                    tmp3=passes.get(i);
+                    passes.set(i,passes.get(j));
+                    passes.set(j,tmp3);
                 }
             }
         }
