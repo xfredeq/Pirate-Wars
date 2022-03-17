@@ -1,4 +1,0 @@
-PLAYER
-qwe qwe 1
-X
-X
